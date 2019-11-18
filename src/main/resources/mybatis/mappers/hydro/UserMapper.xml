@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.UserMapper">
+    <!--mapper接口所在包-->
+
+    <select id="findAllUsers" resultType="com.hust.hydroelectric_backend.Entity.User">
+        SELECT
+          *
+        FROM
+          t_user
+        where
+          enprNo = #{enprNo}
+    </select>
+
+    <select id="findByUid" resultType="com.hust.hydroelectric_backend.Entity.User">
+        SELECT
+          u_name
+        FROM
+          t_user
+        where
+          u_id = #{uid}
+    </select>
+
+</mapper>

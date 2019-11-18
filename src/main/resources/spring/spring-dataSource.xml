@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <tx:annotation-driven />
+
+
+    <!-- est基础数据 -->
+    <bean id="hydroElectricDataSource" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="hydroDataSource"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath*:mybatis/mappers/hydro/*Mapper.xml" />
+    </bean>
+
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="hydroElectricDataSource"/>
+        <property name="basePackage" value="com.hust.hydroelectric_backend.Dao.hydro"/>
+    </bean>
+
+    <bean name="hydroElectricTransactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="hydroDataSource"></property>
+    </bean>
+
+</beans>
