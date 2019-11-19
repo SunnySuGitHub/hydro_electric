@@ -1,6 +1,7 @@
 package com.hust.hydroelectric_backend.Dao.hydro;
 
 import com.hust.hydroelectric_backend.Entity.User;
+import com.hust.hydroelectric_backend.Ex.UserInfoVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +19,7 @@ public interface UserMapper {
     Set<String> findAllUserNo(String enprNo);
     int saveUser(User user);
     int findUidByUnoAndEnprno(@Param("uNo")String uNo,@Param("enprNo")String enprNo);
+    int delUserByUid(@Param("uid") int uid);
+    int uptUser(User user);
+    List<UserInfoVo>
 }

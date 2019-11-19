@@ -62,4 +62,30 @@
           and enprNo = #{enprNo}
     </select>
 
+    <update id="delUserByUid" parameterType="java.lang.Integer">
+        update
+          t_user
+        set
+          is_delete = 1
+        where
+          u_id = #{uid}
+    </update>
+
+    <update id="uptUser" parameterType="com.hust.hydroelectric_backend.Entity.User">
+        update
+          t_user
+        <set>
+            <if test="uName !=null"> ,u_name = #{uName}</if>
+            <if test="uTel !=null"> ,u_tel = #{uTel}</if>
+            <if test="bId !=null"> ,b_id = #{bId}</if>
+            <if test="address !=null"> ,address = #{address}</if>
+            <if test="accountBalance !=null"> ,account_balance = #{accountBalance}</if>
+            <if test="uNo !=null"> ,u_no = #{uNo}</if>
+            <if test="enprNo !=null"> ,enprNo = #{enprNo}</if>
+        </set>
+        where
+          u_id = #{uId}
+          and is_delete = 0
+    </update>
+
 </mapper>

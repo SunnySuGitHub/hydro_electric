@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.WaterMeterMapper">
+    <!--mapper接口所在包-->
+
+    <select id="getDetails" resultType="com.hust.hydroelectric_backend.Entity.WaterMeterUseDetail">
+        select
+          sum(day_amount) as daily_use,
+          FROM_UNIXTIME(read_time,'%Y-%m-%d') as dateline
+        from
+          t_watermeter
+        <where>
+          c_id = #{cId}
+            <![CDATA[
+                and read_time >= #{startLine}
+                AND read_time <= #{endLine}
+            ]]>
+        </where>
+        group by
+          FROM_UNIXTIME(read_time,'%Y-%m-%d')
+    </select>
+</mapper>
