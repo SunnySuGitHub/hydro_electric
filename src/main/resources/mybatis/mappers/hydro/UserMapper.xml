@@ -88,4 +88,14 @@
           and is_delete = 0
     </update>
 
+    <select id="findUidsByBid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select
+          u_id
+        from
+          t_user
+        where
+          b_id = #{bId}
+          and is_delete = 0
+    </select>
+
 </mapper>

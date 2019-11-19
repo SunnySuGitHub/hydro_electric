@@ -37,7 +37,7 @@ public class UserController {
      */
     @GetMapping("/GetUserInfoByBlockId")
     public ResultData getUserInfoByBlockId(@RequestParam(value = "bId", defaultValue = "-1") int bId){
-        return ResponseHandler.doHandle(() -> userService)
+        return ResponseHandler.doHandle(() -> userService.getUserInfoByBlockId(bId));
     }
 
 }

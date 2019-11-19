@@ -1,12 +1,16 @@
 package com.hust.hydroelectric_backend.Service;
 
+import com.hust.hydroelectric_backend.Dao.hydro.BlockMapper;
 import com.hust.hydroelectric_backend.Dao.hydro.UserMapper;
 import com.hust.hydroelectric_backend.Entity.User;
+import com.hust.hydroelectric_backend.Entity.UserInfoVo;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: suxinyu
@@ -30,6 +34,11 @@ public class UserService {
     }
 
     public ResultData getUserInfoByBlockId(int bId){
-        return Result.success()
+        List<Integer> uids = userMapper.findUidsByBid(bId);
+        List<UserInfoVo> res = new ArrayList<>();
+        for(int uid : uids){
+            res.add(userMapper.findUserInfoVoByUid(uid));
+        }
+        return Result.success(res);
     }
 }
