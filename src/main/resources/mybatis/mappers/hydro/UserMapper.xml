@@ -22,4 +22,44 @@
           u_id = #{uid}
     </select>
 
+    <select id="findAllUserNo" resultType="java.lang.String">
+        select
+          user_no
+        from
+          t_user
+        where
+          enprNo = #{enprNo}
+    </select>
+
+    <insert id="saveUser" parameterType="com.hust.hydroelectric_backend.Entity.User">
+        insert into
+          t_user(
+            u_name,
+            u_tel,
+            b_id,
+            address,
+            account_balance,
+            u_no,
+            enprNo
+          ) values (
+            #{uName},
+            #{uTel},
+            #{bId},
+            #{address},
+            #{accountBalance},
+            #{uNo},
+            #{enprNo}
+          )
+    </insert>
+
+    <select id="findUidByUnoAndEnprno" resultType="java.lang.Integer">
+        select
+          u_id
+        from
+          t_user
+        where
+          u_no = #{uNo}
+          and enprNo = #{enprNo}
+    </select>
+
 </mapper>

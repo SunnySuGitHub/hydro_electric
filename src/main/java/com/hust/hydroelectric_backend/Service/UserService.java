@@ -6,13 +6,17 @@ import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * @author: suxinyu
  * @DateTme: 2019/11/18 15:43
  */
 @Service
 public class UserService {
-    @Autowired
+    @Resource
     UserMapper userMapper;
 
     public ResultData findByUserId(int userId){

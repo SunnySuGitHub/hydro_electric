@@ -38,14 +38,13 @@
             operator_tel,
             enprNo,
             operator_type
-          )
-        values(
-          #{operatorName},
-          #{account},
-          #{password},
-          #{operatorTel},
-          #{enprNo},
-          #{operatorType}
+          ) values (
+            #{operatorName},
+            #{account},
+            #{password},
+            #{operatorTel},
+            #{enprNo},
+            #{operatorType}
         )
     </insert>
 
@@ -65,10 +64,12 @@
     </update>
 
     <delete id="delOperator" parameterType="java.lang.Integer">
-        delete
+        update
           t_operator
+        set
+          is_delete = 1
         where
-          operator_id = #{id}
+          operator_id = #{operatorId}
     </delete>
 
 </mapper>

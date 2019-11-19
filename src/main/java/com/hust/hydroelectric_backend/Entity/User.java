@@ -16,6 +16,7 @@ public class User {
     private BigDecimal accountBalance;
     private Integer uNo;
     private String enprNo;
+    private Integer isDelete;
 
     public Integer getuId() {
         return uId;
@@ -79,5 +80,13 @@ public class User {
 
     public void setEnprNo(String enprNo) {
         this.enprNo = enprNo;
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 }

@@ -13,6 +13,7 @@ public class Operator {
     private String enprNo;
     private String password;
     private Integer operatorType;
+    private Integer isDelete;
 
     public Integer getOperatorId() {
         return operatorId;
@@ -68,5 +69,13 @@ public class Operator {
 
     public void setOperatorType(Integer operatorType) {
         this.operatorType = operatorType;
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 }

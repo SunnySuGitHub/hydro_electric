@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author: suxinyu
@@ -14,4 +15,7 @@ import java.util.List;
 public interface UserMapper {
     List<User> findAllUsers(@Param("enprNo") String enprNo);
     User findByUid(@Param("uid") int uid);
+    Set<String> findAllUserNo(String enprNo);
+    int saveUser(User user);
+    int findUidByUnoAndEnprno(@Param("uNo")String uNo,@Param("enprNo")String enprNo);
 }

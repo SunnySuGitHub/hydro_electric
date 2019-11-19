@@ -41,4 +41,5 @@ public class PageQuery {
     public void setNoPage(boolean noPage) {
         this.noPage = noPage;
     }
+
 }

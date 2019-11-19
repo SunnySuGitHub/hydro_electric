@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.CommunityMapper">
+    <!--mapper接口所在包-->
+
+    <insert id="addCommunity" parameterType="com.hust.hydroelectric_backend.Entity.Community">
+        insert into
+          t_community(
+            c_name,
+            enprNo
+          ) values (
+            #{cName},
+            #{enprNo}
+          )
+    </insert>
+
+    <select id="getCommunity" resultType="com.hust.hydroelectric_backend.Entity.Community">
+        select
+          *
+        from
+          t_community
+        where
+          c_id = #{cId}
+    </select>
+
+    <update id="uptCommunity" parameterType="com.hust.hydroelectric_backend.Entity.Community">
+        update
+          t_community
+        <set>
+            <if test="cName !=null"> ,c_name = #{cName}</if>
+            <if test="enprNo !=null"> ,enprNo = #{enprNo}</if>
+        </set>
+        where
+          c_id = #{cId}
+    </update>
+
+    <update id="delCommunity" parameterType="java.lang.Integer">
+        update
+          t_community
+        set
+          is_delete = 1
+        where
+          c_id = #{cId}
+    </update>
+
+</mapper>

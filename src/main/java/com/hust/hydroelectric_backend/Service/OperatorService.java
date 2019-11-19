@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * @author: suxinyu
  * @DateTme: 2019/11/18 20:13
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OperatorService {
 
-    @Autowired
+    @Resource
     OperatorMapper operatorMapper;
 
     public ResultData login(String account, String password, String enprNo){
