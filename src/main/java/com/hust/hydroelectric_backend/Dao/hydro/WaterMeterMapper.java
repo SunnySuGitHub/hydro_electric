@@ -1,6 +1,7 @@
 package com.hust.hydroelectric_backend.Dao.hydro;
 
-import com.hust.hydroelectric_backend.Entity.WaterMeterUseDetail;
+import com.hust.hydroelectric_backend.Entity.MeterUseDetail;
+import com.hust.hydroelectric_backend.Entity.Watermeter;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +13,8 @@ import java.util.List;
  */
 @Repository
 public interface WaterMeterMapper {
-    List<WaterMeterUseDetail> getDetails(@Param("cId") int cId, @Param("startLine") long startLine, @Param("endLine") long endLine);
+    List<MeterUseDetail> getDailyUseDetails(@Param("cId") int cId, @Param("startLine") long startLine, @Param("endLine") long endLine);
+    Watermeter getWaterMeterDetail(@Param("meterNo") String meterNo, @Param("enprNo") String enprNo);
+    List<Watermeter> findAll();
+    int uptWatermeterValue(Watermeter watermeter);
 }

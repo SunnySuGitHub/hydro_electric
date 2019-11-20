@@ -1,6 +1,5 @@
 package com.hust.hydroelectric_backend.Entity;
 
-import lombok.Data;
 
 /**
  * @author: suxinyu

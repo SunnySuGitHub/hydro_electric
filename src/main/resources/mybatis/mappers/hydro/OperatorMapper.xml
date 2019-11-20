@@ -61,6 +61,7 @@
         </set>
         where
           operator_id = #{operatorId}
+          and is_delete = 0
     </update>
 
     <delete id="delOperator" parameterType="java.lang.Integer">

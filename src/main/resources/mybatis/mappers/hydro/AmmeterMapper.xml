@@ -4,4 +4,52 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.AmmeterMapper">
     <!--mapper接口所在包-->
 
+    <select id="getDailyUseDetails" resultType="com.hust.hydroelectric_backend.Entity.MeterUseDetail">
+        select
+          sum(day_amount) as daily_use,
+          FROM_UNIXTIME(read_time,'%Y-%m-%d') as dateline
+        from
+          t_ammeter
+        <where>
+            c_id = #{cId}
+            <![CDATA[
+                and read_time >= #{startLine}
+                AND read_time <= #{endLine}
+            ]]>
+        </where>
+        group by
+          FROM_UNIXTIME(read_time,'%Y-%m-%d')
+    </select>
+
+    <select id="getAmmeterDetail" resultType="com.hust.hydroelectric_backend.Entity.Ammeter">
+        select
+          *
+        from
+          t_ammeter
+        where
+          ammeter_no = #{ammeterNo}
+          and enprNo = #[enprNo]
+    </select>
+
+    <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Ammeter">
+        select
+          *
+        from
+          t_ammeter
+    </select>
+
+    <update id="uptAmmeterValue" parameterType="com.hust.hydroelectric_backend.Entity.Ammeter">
+        update
+          t_ammeter
+        set
+          read_time = #{readTime},
+          read_value = #{readValue},
+          pre_read_time = #{preReadTime},
+          pre_read_value = #{preReadValue},
+          day_amount = #{dayAmount},
+          month_amount = #{monthAmount},
+          state = #{state}
+        where
+          ammeter_id = #{ammeterId}
+    </update>
 </mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.DailyUseMapper">
+    <!--mapper接口所在包-->
+    <insert id="saveDailyUse" parameterType="com.hust.hydroelectric_backend.Entity.DailyUse">
+        insert into
+          t_daily_use(
+            meter_no,
+            daily_amount,
+            meter_type,
+            dateline,
+            c_id,
+            enprNo
+          ) values (
+            #{meterNo},
+            #{dailyAmount},
+            #{meterType},
+            #{dateline},
+            #{cId},
+            #{enprNo}
+          )
+    </insert>
+
+</mapper>

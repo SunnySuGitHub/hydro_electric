@@ -18,6 +18,10 @@ public class WaterMeterService {
     WaterMeterMapper waterMeterMapper;
 
     public ResultData getWateMeterDailyUseDetail(int cId, long startLine, long endLine){
-        return Result.success(waterMeterMapper.getDetails(cId, startLine, endLine));
+        return Result.success(waterMeterMapper.getDailyUseDetails(cId, startLine, endLine));
+    }
+
+    public ResultData getWaterMeterDetail(String meterNo, String enprNo) {
+        return Result.success(waterMeterMapper.getWaterMeterDetail(meterNo, enprNo));
     }
 }

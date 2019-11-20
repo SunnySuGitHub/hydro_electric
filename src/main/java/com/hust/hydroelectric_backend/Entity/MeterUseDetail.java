@@ -1,6 +1,5 @@
 package com.hust.hydroelectric_backend.Entity;
 
-import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,7 +8,7 @@ import java.util.Date;
  * @author: suxinyu
  * @DateTme: 2019/11/19 20:10
  */
-public class WaterMeterUseDetail {
+public class MeterUseDetail {
     private Date dateline;
     private BigDecimal dailyUse;
 
