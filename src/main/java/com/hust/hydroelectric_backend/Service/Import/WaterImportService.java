@@ -1,8 +1,6 @@
 package com.hust.hydroelectric_backend.Service.Import;
 
-import com.hust.hydroelectric_backend.Dao.hydro.BlockMapper;
-import com.hust.hydroelectric_backend.Dao.hydro.DeviceMapper;
-import com.hust.hydroelectric_backend.Dao.hydro.UserMapper;
+import com.hust.hydroelectric_backend.Dao.hydro.*;
 import com.hust.hydroelectric_backend.Entity.Block;
 import com.hust.hydroelectric_backend.Entity.User;
 import com.hust.hydroelectric_backend.Entity.Watermeter;
@@ -10,7 +8,6 @@ import com.hust.hydroelectric_backend.utils.ExcelImportUtil;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -37,7 +32,13 @@ public class WaterImportService extends ImportBase {
     BlockMapper blockMapper;
 
     @Resource
-    DeviceMapper deviceMapper;
+    CommonMeterMapper commonMeterMapper;
+
+    @Resource
+    AmmeterMapper ammeterMapper;
+
+    @Resource
+    WaterMeterMapper waterMeterMapper;
 
     @Override
     @Transactional
@@ -92,7 +93,7 @@ public class WaterImportService extends ImportBase {
                         /**
                          * 插入水表
                          */
-                        Watermeter device = deviceMapper.findByMeternoAndEnprNo(cellList.get(6), enprNo);
+                        Watermeter device = waterMeterMapper.getWaterMeterDetail(cellList.get(6), enprNo);
                         if (device == null) {
                             int uid = userMapper.findUidByUnoAndEnprno(cellList.get(0), enprNo);
                             Watermeter meter = new Watermeter();
@@ -104,7 +105,7 @@ public class WaterImportService extends ImportBase {
                             meter.setDayAmount(BigDecimal.ZERO);
                             meter.setMonthAmount(BigDecimal.ZERO);
                             try {
-                                deviceMapper.saveMeter(meter);
+                                waterMeterMapper.saveMeter(meter);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -125,7 +126,7 @@ public class WaterImportService extends ImportBase {
         List<List<String>>[] data = (List<List<String>>[]) obs[0];
         try {
             //查询当前公司所有表编号
-            Set<String> meterNoSet = deviceMapper.findAllMeterNoByEnprNo(enprNo);
+            Set<String> meterNoSet = waterMeterMapper.findAllMeterNoByEnprNo(enprNo);
             StringBuffer errstr = new StringBuffer();
             for (int i = 0; i < data.length; i++) {
                 List<List<String>> list = data[i];

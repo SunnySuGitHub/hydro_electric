@@ -17,11 +17,15 @@ public class WaterMeterService {
     @Resource
     WaterMeterMapper waterMeterMapper;
 
-    public ResultData getWateMeterDailyUseDetail(int cId, long startLine, long endLine){
-        return Result.success(waterMeterMapper.getDailyUseDetails(cId, startLine, endLine));
-    }
-
     public ResultData getWaterMeterDetail(String meterNo, String enprNo) {
         return Result.success(waterMeterMapper.getWaterMeterDetail(meterNo, enprNo));
+    }
+
+    public ResultData getFailedWaterMeters(int cid){
+        return Result.success(waterMeterMapper.findFailedWatermeter(cid));
+    }
+
+    public ResultData getWatermeterByUnoAndEnprNo(String uNo, String enprNo){
+        return Result.success(waterMeterMapper.findWatermeterByUnoAndEnprNo(uNo, enprNo));
     }
 }

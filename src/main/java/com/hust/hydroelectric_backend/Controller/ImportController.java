@@ -28,11 +28,8 @@ public class ImportController {
         return ResponseHandler.doHandle(() -> waterImportService.checkAndRead(request));
     }
 
-    @PostMapping("ammeter")
+    @PostMapping("/ammeter")
     public ResultData ammeterImport(HttpServletRequest request){
         return ResponseHandler.doHandle(() -> ammeterImportService.checkAndRead(request));
     }
-
-
-
 }

@@ -17,11 +17,15 @@ public class AmmeterService {
     @Resource
     AmmeterMapper ammeterMapper;
 
-    public ResultData getAmmeterDailyUseDetail(int cId, long startLine, long endLine){
-        return Result.success(ammeterMapper.getDailyUseDetails(cId, startLine, endLine));
-    }
-
     public ResultData getAmmeterDetail(String ammeterNo, String enprNo){
         return Result.success(ammeterMapper.getAmmeterDetail(ammeterNo, enprNo));
+    }
+
+    public ResultData getFailedAmmeters(int cid){
+        return Result.success(ammeterMapper.findFailedAmmeters(cid));
+    }
+
+    public ResultData getAmmeterByUnoAndEnprNo(String uNo, String enprNo){
+        return Result.success(ammeterMapper.findAmmeterByUnoAndEnprNo(uNo, enprNo));
     }
 }

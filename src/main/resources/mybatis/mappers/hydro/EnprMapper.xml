@@ -23,4 +23,26 @@
           t_enterprise
     </select>
 
+    <select id="findByEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Enpr">
+        select
+          *
+        from
+          t_enterprise
+        where
+          enprNo = #{enprNo}
+    </select>
+
+    <update id="uptByEnprNo" parameterType="com.hust.hydroelectric_backend.Entity.Enpr">
+        update
+          t_enterprise
+        <set>
+            <if test="enprName !=null"> ,enpr_name = #{enprName}</if>
+            <if test="appId !=null"> ,app_id = #{appId}</if>
+            <if test="wxKey !=null"> ,wx_key = #{wxKey}</if>
+            <if test="mchId !=null"> ,mch_id = #{mchId}</if>
+        </set>
+        where
+          enprNo = #{enprNo}
+    </update>
+
 </mapper>

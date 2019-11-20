@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Service;
 
-import com.hust.hydroelectric_backend.Dao.hydro.DeviceMapper;
+import com.hust.hydroelectric_backend.Dao.hydro.CommonMeterMapper;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;
@@ -12,13 +12,13 @@ import javax.annotation.Resource;
  * @DateTme: 2019/11/19 9:32
  */
 @Service
-public class DeviceService {
+public class CommonMeterService {
 
     @Resource
-    DeviceMapper deviceMapper;
+    CommonMeterMapper commonMeterMapper;
 
     public ResultData getRunningCnt(int cId){
-        return Result.success(deviceMapper.getRunningCnt(cId));
+        return Result.success(commonMeterMapper.getRunningCnt(cId));
     }
 
 

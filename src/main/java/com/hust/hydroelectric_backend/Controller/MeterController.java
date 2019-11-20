@@ -1,8 +1,10 @@
 package com.hust.hydroelectric_backend.Controller;
 
 import com.hust.hydroelectric_backend.Service.AmmeterService;
-import com.hust.hydroelectric_backend.Service.DeviceService;
+import com.hust.hydroelectric_backend.Service.DailyUseService;
+import com.hust.hydroelectric_backend.Service.CommonMeterService;
 import com.hust.hydroelectric_backend.Service.WaterMeterService;
+import com.hust.hydroelectric_backend.utils.Constants;
 import com.hust.hydroelectric_backend.utils.ResponseHandler;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MeterController {
 
     @Autowired
-    DeviceService deviceService;
+    CommonMeterService commonMeterService;
 
     @Autowired
     WaterMeterService waterMeterService;
@@ -26,50 +28,61 @@ public class MeterController {
     @Autowired
     AmmeterService ammeterService;
 
+    @Autowired
+    DailyUseService dailyUseService;
+
     /**
      * 运行设备统计
      */
     @GetMapping("/RunningCnt")
     public ResultData getRunningCnt(@RequestParam("cid") Integer cId){
-        return ResponseHandler.doHandle(() -> deviceService.getRunningCnt(cId));
+        return ResponseHandler.doHandle(() -> commonMeterService.getRunningCnt(cId));
     }
 
     /**
-     * 水表近日使用量展示
+     * 表计近日使用量展示
+     * 0为水表  1为电表
      */
-    @GetMapping("/GetWateMeterDailyUseDetail")
+    @GetMapping("/GetMeterDailyUseDetail")
     public ResultData getWateMeterDailyUseDetail(@RequestParam("cid") Integer cId,
                                                  @RequestParam("startDateLine") Long startDateLine,
-                                                 @RequestParam("endDateLine") Long endDateLine){
-        return ResponseHandler.doHandle(() -> waterMeterService.getWateMeterDailyUseDetail(cId, startDateLine, endDateLine));
+                                                 @RequestParam("endDateLine") Long endDateLine,
+                                                 @RequestParam(value = "meterType", defaultValue = "1") Integer meterType){
+        return ResponseHandler.doHandle(() -> dailyUseService.getDailuUseDatail(cId, startDateLine, endDateLine, meterType));
     }
 
     /**
-     * 电表近日使用量展示
+     * 根据表编号和公司编码查看表计信息
+     * 0为水表  1为电表
      */
-    @GetMapping("/GetAmmeterDailyUseDetail")
-    public ResultData getAmmeterDailyUseDetail(@RequestParam(value = "cid", defaultValue = "-1") Integer cid,
-                                               @RequestParam("startDateLine") Long startLine,
-                                               @RequestParam("endDateLine") Long endLine) {
-        return ResponseHandler.doHandle(() -> ammeterService.getAmmeterDailyUseDetail(cid, startLine, endLine));
+    @GetMapping("/GetMeterDetailByMeterNoAndEnprNo")
+    public ResultData getMeterDetail(@RequestParam("meterNo") String meterNo,
+                                     @RequestParam("enprNo") String enprNo,
+                                     @RequestParam(value = "meterType", defaultValue = "1") int meterType) {
+        if(meterType == Constants.TYPE_WATERMETER) return ResponseHandler.doHandle(() -> waterMeterService.getWaterMeterDetail(meterNo, enprNo));
+        return ResponseHandler.doHandle(() -> ammeterService.getAmmeterDetail(meterNo, enprNo));
     }
 
     /**
-     * 水表信息查看
+     * 查看小区故障表
+     * 0为水表  1为电表
      */
-    @GetMapping("GetWateMeterDetail")
-    public ResultData getWaterMeterDetail(@RequestParam("meterNo") String meterNo,
-                                          @RequestParam("enprNo") String enprNo) {
-        return ResponseHandler.doHandle(() -> waterMeterService.getWaterMeterDetail(meterNo, enprNo));
+    @GetMapping("/GetFailedMeters")
+    public ResultData getFailedMeters(@RequestParam(value = "cid", defaultValue = "1") int cid,
+                                      @RequestParam(value = "meterType", defaultValue = "1") int meterType){
+        if(meterType == Constants.TYPE_WATERMETER) return ResponseHandler.doHandle(() -> waterMeterService.getFailedWaterMeters(cid));
+        return ResponseHandler.doHandle(() -> ammeterService.getFailedAmmeters(cid));
     }
 
     /**
-     * 电表信息查看
+     * 根据用户编号查询表信息
      */
-    @GetMapping("GetAmmeterDetail")
-    public ResultData getAmmeterDetail(@RequestParam("meterNo") String ammeterNo,
-                                       @RequestParam("enprNo") String enprNo) {
-        return ResponseHandler.doHandle(() -> ammeterService.getAmmeterDetail(ammeterNo, enprNo));
+    @GetMapping("/GetMeterDetailByUsernameAndEnprNo")
+    public ResultData getMeterDetailByUsernameAndEnprNo(@RequestParam(value = "userNo", defaultValue = "张三") String uNo,
+                                                        @RequestParam(value = "meterType", defaultValue = "1") int meterType,
+                                                        @RequestParam("enprNo") String enprNo){
+        if(meterType == Constants.TYPE_WATERMETER) return ResponseHandler.doHandle(() -> waterMeterService.getWatermeterByUnoAndEnprNo(uNo, enprNo));
+        return ResponseHandler.doHandle(() -> ammeterService.getAmmeterByUnoAndEnprNo(uNo, enprNo));
     }
 
 

@@ -4,23 +4,6 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.WaterMeterMapper">
     <!--mapper接口所在包-->
 
-    <select id="getDailyUseDetails" resultType="com.hust.hydroelectric_backend.Entity.MeterUseDetail">
-        select
-          sum(day_amount) as daily_use,
-          FROM_UNIXTIME(read_time,'%Y-%m-%d') as dateline
-        from
-          t_watermeter
-        <where>
-          c_id = #{cId}
-            <![CDATA[
-                and read_time >= #{startLine}
-                AND read_time <= #{endLine}
-            ]]>
-        </where>
-        group by
-          FROM_UNIXTIME(read_time,'%Y-%m-%d')
-    </select>
-
     <select id="getWaterMeterDetail" resultType="com.hust.hydroelectric_backend.Entity.Watermeter">
         select
           *
@@ -52,4 +35,92 @@
         where
           watermeter_id = #{watermeterId}
     </update>
+
+    <insert id="saveMeter" parameterType="com.hust.hydroelectric_backend.Entity.Watermeter">
+        insert into
+          t_watermeter(
+            meter_no,
+            u_id,
+            c_id,
+            caliber,
+            install_time,
+            read_time,
+            read_value,
+            pre_read_time,
+            pre_read_value,
+            day_amount,
+            month_amount,
+            state,
+            enprNo
+          ) values (
+            #{meterNo},
+            #{uId},
+            #{cId},
+            #{caliber},
+            #{installTime},
+            #{readTime},
+            #{readValue},
+            #{preReadTime},
+            #{preReadValue},
+            #{dayAmount},
+            #{monthAmount},
+            #{state},
+            #{enprNo}
+          )
+    </insert>
+
+    <select id="findAllMeterNoByEnprNo" resultType="java.lang.String">
+        select
+          distinct meter_no
+        from
+          t_watermeter
+        where
+          enprNo = #{enprNo}
+    </select>
+
+    <select id="findFailedWatermeter" resultType="com.hust.hydroelectric_backend.Entity.Watermeter">
+        select
+          *
+        from
+          t_watermeter
+        where
+          is_delete = 0
+          and c_id = #{cid}
+          and state = 1
+    </select>
+
+    <select id="findWatermeterByUnoAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Watermeter">
+        select
+            meter.watermeter_id,
+            meter.meter_no,
+            meter.u_id,
+            meter.c_id,
+            meter.caliber,
+            meter.install_time,
+            meter.read_time,
+            meter.read_value,
+            meter.pre_read_time,
+            meter.pre_read_value,
+            meter.day_amount,
+            meter.month_amount,
+            meter.state,
+            meter.enprNo
+        from (
+            select
+              u_id
+            from
+              t_user
+            where
+              u_no = #{uNo}
+              and enprNo = #{enprNo}
+              and is_delete = 0
+        ) u
+        left join
+          t_watermeter meter
+        on
+          u.u_id = meter.u_id
+        where
+          meter.is_delete = 0
+    </select>
+
 </mapper>

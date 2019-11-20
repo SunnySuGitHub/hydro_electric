@@ -1,7 +1,7 @@
 package com.hust.hydroelectric_backend.Dao.hydro;
 
 import com.hust.hydroelectric_backend.Entity.User;
-import com.hust.hydroelectric_backend.Entity.UserInfoVo;
+import com.hust.hydroelectric_backend.Entity.VO.UserInfoVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

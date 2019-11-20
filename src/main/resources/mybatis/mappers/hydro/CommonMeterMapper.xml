@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.DeviceMapper">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.CommonMeterMapper">
     <!--mapper接口所在包-->
+
     <select id="getRunningCnt" resultType="com.hust.hydroelectric_backend.Entity.RunningDevice">
         select
           a.water_total as water_meter_cnt,
@@ -57,58 +58,6 @@
                   and is_delete = 0
             ) d
             on a.c_id = d.c_id
-    </select>
-
-    <select id="findByMeternoAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Watermeter">
-        select
-          *
-        from
-          t_watermeter
-        where
-          meter_no = #{meterNo}
-          and enprNo = #{enprNo}
-    </select>
-
-    <insert id="saveMeter" parameterType="com.hust.hydroelectric_backend.Entity.Watermeter">
-        insert into
-          t_watermeter(
-            meter_no,
-            u_id,
-            c_id,
-            caliber,
-            install_time,
-            read_time,
-            read_value,
-            pre_read_time,
-            pre_read_value,
-            day_amount,
-            month_amount,
-            state,
-            enprNo
-          ) values (
-            #{meterNo},
-            #{uId},
-            #{cId},
-            #{caliber},
-            #{installTime},
-            #{readTime},
-            #{readValue},
-            #{preReadTime},
-            #{preReadValue},
-            #{dayAmount},
-            #{monthAmount},
-            #{state},
-            #{enprNo}
-          )
-    </insert>
-
-    <select id="findAllMeterNoByEnprNo" resultType="java.lang.String">
-        select
-          distinct meter_no
-        from
-          t_watermeter
-        where
-          enprNo = #{enprNo}
     </select>
 
 </mapper>

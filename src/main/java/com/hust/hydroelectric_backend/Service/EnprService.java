@@ -45,4 +45,12 @@ public class EnprService {
     public ResultData findAll(){
         return Result.success(enprMapper.findAll());
     }
+
+    public ResultData getByEnprNo(String enprNo) {
+        return Result.success(enprMapper.findByEnprNo(enprNo));
+    }
+
+    public ResultData uptByEnprNo(String enprNo) {
+        return Result.success(enprMapper.uptByEnprNo(enprNo));
+    }
 }

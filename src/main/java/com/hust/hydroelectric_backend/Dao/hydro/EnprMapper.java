@@ -13,4 +13,6 @@ import java.util.List;
 public interface EnprMapper {
     int addEnpr(Enpr enpr);
     List<Enpr> findAll();
+    Enpr findByEnprNo(String enprNo);
+    int uptByEnprNo(String enprNo);
 }

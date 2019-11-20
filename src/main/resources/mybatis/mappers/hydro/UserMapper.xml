@@ -98,7 +98,7 @@
           and is_delete = 0
     </select>
 
-    <select id="findUserInfoVoByUid" resultType="com.hust.hydroelectric_backend.Entity.UserInfoVo">
+    <select id="findUserInfoVoByUid" resultType="com.hust.hydroelectric_backend.Entity.VO.UserInfoVo">
         select
           u.u_id as u_id,
           u.u_name as u_name,

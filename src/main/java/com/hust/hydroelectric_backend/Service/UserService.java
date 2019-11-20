@@ -1,9 +1,8 @@
 package com.hust.hydroelectric_backend.Service;
 
-import com.hust.hydroelectric_backend.Dao.hydro.BlockMapper;
 import com.hust.hydroelectric_backend.Dao.hydro.UserMapper;
 import com.hust.hydroelectric_backend.Entity.User;
-import com.hust.hydroelectric_backend.Entity.UserInfoVo;
+import com.hust.hydroelectric_backend.Entity.VO.UserInfoVo;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;

@@ -6,6 +6,7 @@ import com.hust.hydroelectric_backend.Dao.hydro.WaterMeterMapper;
 import com.hust.hydroelectric_backend.Entity.Ammeter;
 import com.hust.hydroelectric_backend.Entity.DailyUse;
 import com.hust.hydroelectric_backend.Entity.Watermeter;
+import com.hust.hydroelectric_backend.utils.Constants;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +21,6 @@ import java.util.List;
  */
 @Component
 public class DailyUseSchedule {
-
-    private static int TYPE_WATERMETER = 0;
-    private static int TYPE_AMMETER = 1;
 
     @Resource
     AmmeterMapper ammeterMapper;
@@ -42,7 +40,7 @@ public class DailyUseSchedule {
         ammeterList.parallelStream().forEach(ammeter -> ammeterProcess(ammeter));
     }
 
-    private void watermeterProcess(Watermeter watermeter){
+    private void watermeterProcess(Watermeter watermeter) {
         BigDecimal curReadValue = watermeter.getReadValue();
         long curReadTime = watermeter.getReadTime();
         BigDecimal preReadValue = watermeter.getPreReadValue();
@@ -68,14 +66,14 @@ public class DailyUseSchedule {
         DailyUse newDailyUse = new DailyUse();
         newDailyUse.setMeterNo(watermeter.getMeterNo());
         newDailyUse.setDailyAmount(dailyUse);
-        newDailyUse.setMeterType(TYPE_WATERMETER);
+        newDailyUse.setMeterType(Constants.TYPE_WATERMETER);
         newDailyUse.setDateline(watermeter.getPreReadTime());
         newDailyUse.setcId(watermeter.getcId());
         newDailyUse.setEnprNo(watermeter.getEnprNo());
         dailyUseMapper.saveDailyUse(newDailyUse);
     }
 
-    private void ammeterProcess(Ammeter ammeter){
+    private void ammeterProcess(Ammeter ammeter) {
         BigDecimal curReadValue = ammeter.getReadValue();
         long curReadTime = ammeter.getReadTime();
         BigDecimal preReadValue = ammeter.getPreReadValue();
@@ -101,16 +99,10 @@ public class DailyUseSchedule {
         DailyUse newDailyUse = new DailyUse();
         newDailyUse.setMeterNo(ammeter.getAmmeterNo());
         newDailyUse.setDailyAmount(dailyUse);
-        newDailyUse.setMeterType(TYPE_AMMETER);
+        newDailyUse.setMeterType(Constants.TYPE_AMMETER);
         newDailyUse.setDateline(ammeter.getPreReadTime());
         newDailyUse.setcId(ammeter.getcId());
         newDailyUse.setEnprNo(ammeter.getEnprNo());
         dailyUseMapper.saveDailyUse(newDailyUse);
     }
-
-
-
-
-
-
 }

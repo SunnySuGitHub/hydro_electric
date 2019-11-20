@@ -4,23 +4,6 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.AmmeterMapper">
     <!--mapper接口所在包-->
 
-    <select id="getDailyUseDetails" resultType="com.hust.hydroelectric_backend.Entity.MeterUseDetail">
-        select
-          sum(day_amount) as daily_use,
-          FROM_UNIXTIME(read_time,'%Y-%m-%d') as dateline
-        from
-          t_ammeter
-        <where>
-            c_id = #{cId}
-            <![CDATA[
-                and read_time >= #{startLine}
-                AND read_time <= #{endLine}
-            ]]>
-        </where>
-        group by
-          FROM_UNIXTIME(read_time,'%Y-%m-%d')
-    </select>
-
     <select id="getAmmeterDetail" resultType="com.hust.hydroelectric_backend.Entity.Ammeter">
         select
           *
@@ -52,4 +35,48 @@
         where
           ammeter_id = #{ammeterId}
     </update>
+
+    <select id="findFailedAmmeters" resultType="com.hust.hydroelectric_backend.Entity.Ammeter">
+        select
+          *
+        from
+          t_ammeter
+        where
+          id_delete = 0
+          and c_id =#{cid}
+          and state = 1
+    </select>
+
+    <select id="findAmmeterByUnoAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Ammeter">
+        select
+            meter.ammeter_id,
+            meter.ammeter_no,
+            meter.u_id,
+            meter.c_id,
+            meter.install_time,
+            meter.read_time,
+            meter.read_value,
+            meter.pre_read_time,
+            meter.pre_read_value,
+            meter.day_amount,
+            meter.month_amount,
+            meter.state,
+            meter.enprNo
+        from (
+            select
+              u_id
+            from
+              t_user
+            where
+              u_no = #{uNo}
+              and enprNo = #{enprNo}
+              and is_delete = 0
+        ) u
+        left join
+          t_ammeter meter
+        on
+          u.u_id = meter.u_id
+        where
+          meter.is_delete = 0
+    </select>
 </mapper>

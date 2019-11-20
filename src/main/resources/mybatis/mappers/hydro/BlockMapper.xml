@@ -27,4 +27,14 @@
         )
     </insert>
 
+    <select id="findAllByCid" resultType="com.hust.hydroelectric_backend.Entity.Block">
+        select
+          *
+        from
+          t_block
+        where
+          c_id = #{cid}
+          and is_delete = 0
+    </select>
+
 </mapper>

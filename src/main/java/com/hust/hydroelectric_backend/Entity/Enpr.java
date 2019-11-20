@@ -8,6 +8,9 @@ public class Enpr {
     private String enprNo;
     private String enprName;
     private Long createTime;
+    private String appId;
+    private String wxKey;
+    private Integer mchId;
 
     public String getEnprNo() {
         return enprNo;
@@ -31,5 +34,29 @@ public class Enpr {
 
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getWxKey() {
+        return wxKey;
+    }
+
+    public void setWxKey(String wxKey) {
+        this.wxKey = wxKey;
+    }
+
+    public Integer getMchId() {
+        return mchId;
+    }
+
+    public void setMchId(Integer mchId) {
+        this.mchId = mchId;
     }
 }
