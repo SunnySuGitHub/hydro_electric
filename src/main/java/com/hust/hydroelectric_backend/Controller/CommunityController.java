@@ -19,7 +19,7 @@ public class CommunityController {
     CommunityService communityService;
 
     @GetMapping("/community")
-    public ResultData getCommunity(@RequestParam(value = "cId", defaultValue = "-1") int id){
+    public ResultData getCommunity(@RequestParam(value = "cid", defaultValue = "-1") int id){
         return ResponseHandler.doHandle(() -> communityService.getCommunity(id));
     }
 
@@ -29,7 +29,7 @@ public class CommunityController {
     }
 
     @DeleteMapping("/community")
-    public ResultData delCommunity(@RequestParam(value = "cId", defaultValue = "-1") int id){
+    public ResultData delCommunity(@RequestParam(value = "cid", defaultValue = "-1") int id){
         return ResponseHandler.doHandle(() -> communityService.delCommunity(id));
     }
 

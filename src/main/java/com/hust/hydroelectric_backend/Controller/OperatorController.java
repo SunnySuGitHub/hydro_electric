@@ -29,7 +29,7 @@ public class OperatorController {
     public ResultData getOprator(@RequestParam(value = "operatorId", defaultValue = "-1") int id){
         return ResponseHandler.doHandle(() -> operatorService.getOperator(id));
     }
-
+s
     @PostMapping("/operator")
     public ResultData addOperator(@RequestBody Operator operator){
         return ResponseHandler.doHandle(() -> operatorService.addOperator(operator));

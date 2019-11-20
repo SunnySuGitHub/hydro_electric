@@ -26,7 +26,7 @@ public class MeterController {
      * 运行设备统计
      */
     @GetMapping("/RunningCnt")
-    public ResultData getRunningCnt(@RequestParam("cId") Integer cId){
+    public ResultData getRunningCnt(@RequestParam("cid") Integer cId){
         return ResponseHandler.doHandle(() -> deviceService.getRunningCnt(cId));
     }
 
@@ -34,7 +34,7 @@ public class MeterController {
      * 水表近日使用量展示
      */
     @GetMapping("/GetWateMeterDailyUseDetail")
-    public ResultData getWateMeterDailyUseDetail(@RequestParam("cId") Integer cId,
+    public ResultData getWateMeterDailyUseDetail(@RequestParam("cid") Integer cId,
                                                  @RequestParam("startDateLine") Long startDateLine,
                                                  @RequestParam("endDateLine") Long endDateLine){
         return ResponseHandler.doHandle(() -> waterMeterService.getWateMeterDailyUseDetail(cId, startDateLine, endDateLine));

@@ -22,5 +22,5 @@ public interface UserMapper {
     int delUserByUid(@Param("uid") int uid);
     int uptUser(User user);
     List<Integer> findUidsByBid(@Param("bId") int bId);
-    UserInfoVo findUserInfoVoByUid(int uid);
+    List<UserInfoVo> findUserInfoVoByUid(int uid);
 }

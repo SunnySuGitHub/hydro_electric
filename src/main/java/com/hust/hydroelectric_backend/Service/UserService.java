@@ -37,8 +37,12 @@ public class UserService {
         List<Integer> uids = userMapper.findUidsByBid(bId);
         List<UserInfoVo> res = new ArrayList<>();
         for(int uid : uids){
-            res.add(userMapper.findUserInfoVoByUid(uid));
+            res.addAll(userMapper.findUserInfoVoByUid(uid));
         }
         return Result.success(res);
+    }
+
+    public ResultData getUserInfoByUid(int uid){
+        return Result.success(userMapper.findUserInfoVoByUid(uid));
     }
 }
