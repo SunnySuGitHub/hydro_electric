@@ -4,7 +4,7 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.CommonMeterMapper">
     <!--mapper接口所在包-->
 
-    <select id="getRunningCnt" resultType="com.hust.hydroelectric_backend.Entity.RunningDevice">
+    <select id="getRunningCnt" resultType="com.hust.hydroelectric_backend.Entity.VO.RunningDevice">
         select
           a.water_total as water_meter_cnt,
           b.water_suc_total as water_meter_suc_cnt,

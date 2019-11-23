@@ -1,4 +1,4 @@
-package com.hust.hydroelectric_backend.Service.Import;
+package com.hust.hydroelectric_backend.Service.ExcelImport;
 
 import com.hust.hydroelectric_backend.Dao.hydro.*;
 import com.hust.hydroelectric_backend.Entity.Block;
@@ -102,8 +102,6 @@ public class WaterImportService extends ImportBase {
                             meter.setInstallTime(System.currentTimeMillis() / 1000);
                             meter.setReadTime(System.currentTimeMillis() / 1000);
                             meter.setReadValue(BigDecimal.ZERO);
-                            meter.setDayAmount(BigDecimal.ZERO);
-                            meter.setMonthAmount(BigDecimal.ZERO);
                             try {
                                 waterMeterMapper.saveMeter(meter);
                             } catch (Exception e) {

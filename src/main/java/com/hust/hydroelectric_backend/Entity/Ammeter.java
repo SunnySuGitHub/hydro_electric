@@ -17,8 +17,6 @@ public class Ammeter {
     private BigDecimal readValue;
     private Long preReadTime;
     private BigDecimal preReadValue;
-    private BigDecimal dayAmount;
-    private BigDecimal monthAmount;
     private Integer state;
     private String enprNo;
     private Integer isDelete;
@@ -93,22 +91,6 @@ public class Ammeter {
 
     public void setPreReadValue(BigDecimal preReadValue) {
         this.preReadValue = preReadValue;
-    }
-
-    public BigDecimal getDayAmount() {
-        return dayAmount;
-    }
-
-    public void setDayAmount(BigDecimal dayAmount) {
-        this.dayAmount = dayAmount;
-    }
-
-    public BigDecimal getMonthAmount() {
-        return monthAmount;
-    }
-
-    public void setMonthAmount(BigDecimal monthAmount) {
-        this.monthAmount = monthAmount;
     }
 
     public Integer getState() {

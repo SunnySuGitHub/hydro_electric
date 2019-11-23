@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Dao.hydro;
 
-import com.hust.hydroelectric_backend.Entity.RunningDevice;
+import com.hust.hydroelectric_backend.Entity.VO.RunningDevice;
 import org.springframework.stereotype.Repository;
 
 /**

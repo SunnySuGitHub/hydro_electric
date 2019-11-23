@@ -8,7 +8,7 @@ import java.util.Date;
  * @author: suxinyu
  * @DateTme: 2019/11/19 20:10
  */
-public class MeterUseDetail {
+public class MeterDailyUsage {
     private Date dateline;
     private BigDecimal dailyUse;
 

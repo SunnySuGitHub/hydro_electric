@@ -1,4 +1,4 @@
-package com.hust.hydroelectric_backend.Entity;
+package com.hust.hydroelectric_backend.Entity.VO;
 
 
 /**
