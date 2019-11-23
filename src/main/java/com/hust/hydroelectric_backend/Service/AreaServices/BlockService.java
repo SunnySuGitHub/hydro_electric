@@ -1,4 +1,4 @@
-package com.hust.hydroelectric_backend.Service;
+package com.hust.hydroelectric_backend.Service.AreaServices;
 
 import com.hust.hydroelectric_backend.Dao.hydro.BlockMapper;
 import com.hust.hydroelectric_backend.utils.result.Result;

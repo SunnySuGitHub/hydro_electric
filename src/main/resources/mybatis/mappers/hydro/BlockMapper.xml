@@ -4,7 +4,7 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.BlockMapper">
     <!--mapper接口所在包-->
 
-    <select id="findByBlockNameAndCid" resultType="com.hust.hydroelectric_backend.Entity.Block">
+    <select id="findByBlockNameAndCid" resultType="com.hust.hydroelectric_backend.Entity.Areas.Block">
         select
           b_id,
           b_name,
@@ -16,7 +16,7 @@
           and c_id = #{cId}
     </select>
 
-    <insert id="saveBlock" parameterType="com.hust.hydroelectric_backend.Entity.Block">
+    <insert id="saveBlock" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Block">
         insert into
           t_block(
             b_name,
@@ -27,7 +27,7 @@
         )
     </insert>
 
-    <select id="findAllByCid" resultType="com.hust.hydroelectric_backend.Entity.Block">
+    <select id="findAllByCid" resultType="com.hust.hydroelectric_backend.Entity.Areas.Block">
         select
           *
         from

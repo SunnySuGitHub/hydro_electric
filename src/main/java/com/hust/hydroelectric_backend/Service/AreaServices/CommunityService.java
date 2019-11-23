@@ -1,8 +1,7 @@
-package com.hust.hydroelectric_backend.Service;
+package com.hust.hydroelectric_backend.Service.AreaServices;
 
 import com.hust.hydroelectric_backend.Dao.hydro.CommunityMapper;
-import com.hust.hydroelectric_backend.Entity.Community;
-import com.hust.hydroelectric_backend.Entity.Operator;
+import com.hust.hydroelectric_backend.Entity.Areas.Community;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.http.HttpStatus;

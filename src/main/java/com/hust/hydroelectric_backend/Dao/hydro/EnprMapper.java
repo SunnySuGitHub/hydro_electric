@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Dao.hydro;
 
-import com.hust.hydroelectric_backend.Entity.Enpr;
+import com.hust.hydroelectric_backend.Entity.Areas.Enpr;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

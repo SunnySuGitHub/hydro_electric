@@ -4,7 +4,7 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.WaterMeterMapper">
     <!--mapper接口所在包-->
 
-    <select id="getWaterMeterDetail" resultType="com.hust.hydroelectric_backend.Entity.Watermeter">
+    <select id="getWaterMeterDetail" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
         select
           *
         from
@@ -14,14 +14,14 @@
           and enprNo = #{enprNo}
     </select>
 
-    <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Watermeter">
+    <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
         select
           *
         from
           t_watermeter
     </select>
 
-    <update id="uptWatermeterValue" parameterType="com.hust.hydroelectric_backend.Entity.Watermeter">
+    <update id="uptWatermeterValue" parameterType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
         update
           t_watermeter
         set
@@ -36,7 +36,7 @@
           watermeter_id = #{watermeterId}
     </update>
 
-    <insert id="saveMeter" parameterType="com.hust.hydroelectric_backend.Entity.Watermeter">
+    <insert id="saveMeter" parameterType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
         insert into
           t_watermeter(
             meter_no,
@@ -69,16 +69,17 @@
           )
     </insert>
 
-    <select id="findAllMeterNoByEnprNo" resultType="java.lang.String">
+    <select id="findAllWatermeterNoByEnprNo" resultType="java.lang.String">
         select
           distinct meter_no
         from
           t_watermeter
         where
           enprNo = #{enprNo}
+          and is_delete = 0
     </select>
 
-    <select id="findFailedWatermeter" resultType="com.hust.hydroelectric_backend.Entity.Watermeter">
+    <select id="findFailedWatermeter" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
         select
           *
         from
@@ -89,7 +90,7 @@
           and state = 1
     </select>
 
-    <select id="findWatermeterByUnoAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Watermeter">
+    <select id="findWatermeterByUnoAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
         select
             meter.watermeter_id,
             meter.meter_no,

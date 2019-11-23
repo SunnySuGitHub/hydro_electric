@@ -2,8 +2,7 @@ package com.hust.hydroelectric_backend.ScheduledJob;
 
 import com.hust.hydroelectric_backend.Dao.hydro.AmmeterMapper;
 import com.hust.hydroelectric_backend.Dao.hydro.WaterMeterMapper;
-import com.hust.hydroelectric_backend.Entity.Watermeter;
-import com.hust.hydroelectric_backend.utils.Constants;
+import com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

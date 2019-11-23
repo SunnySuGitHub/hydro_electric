@@ -1,4 +1,4 @@
-package com.hust.hydroelectric_backend.Service;
+package com.hust.hydroelectric_backend.Service.AmmeterServices;
 
 import com.hust.hydroelectric_backend.Dao.hydro.AmmeterUsageMapper;
 import com.hust.hydroelectric_backend.utils.result.Result;

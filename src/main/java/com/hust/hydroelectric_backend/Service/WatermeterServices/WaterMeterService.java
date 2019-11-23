@@ -1,4 +1,4 @@
-package com.hust.hydroelectric_backend.Service;
+package com.hust.hydroelectric_backend.Service.WatermeterServices;
 
 import com.hust.hydroelectric_backend.Dao.hydro.WaterMeterMapper;
 import com.hust.hydroelectric_backend.utils.result.Result;

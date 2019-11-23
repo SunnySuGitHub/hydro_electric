@@ -4,7 +4,7 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.AmmeterMapper">
     <!--mapper接口所在包-->
 
-    <select id="getAmmeterDetail" resultType="com.hust.hydroelectric_backend.Entity.Ammeter">
+    <select id="getAmmeterDetail" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
         select
           *
         from
@@ -14,14 +14,14 @@
           and enprNo = #[enprNo]
     </select>
 
-    <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Ammeter">
+    <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
         select
           *
         from
           t_ammeter
     </select>
 
-    <update id="uptAmmeterValue" parameterType="com.hust.hydroelectric_backend.Entity.Ammeter">
+    <update id="uptAmmeterValue" parameterType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
         update
           t_ammeter
         set
@@ -36,7 +36,7 @@
           ammeter_id = #{ammeterId}
     </update>
 
-    <select id="findFailedAmmeters" resultType="com.hust.hydroelectric_backend.Entity.Ammeter">
+    <select id="findFailedAmmeters" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
         select
           *
         from
@@ -47,7 +47,7 @@
           and state = 1
     </select>
 
-    <select id="findAmmeterByUnoAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Ammeter">
+    <select id="findAmmeterByUnoAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
         select
             meter.ammeter_id,
             meter.ammeter_no,

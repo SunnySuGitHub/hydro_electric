@@ -1,8 +1,8 @@
 package com.hust.hydroelectric_backend.Controller;
 
-import com.hust.hydroelectric_backend.Entity.Community;
-import com.hust.hydroelectric_backend.Service.BlockService;
-import com.hust.hydroelectric_backend.Service.CommunityService;
+import com.hust.hydroelectric_backend.Entity.Areas.Community;
+import com.hust.hydroelectric_backend.Service.AreaServices.BlockService;
+import com.hust.hydroelectric_backend.Service.AreaServices.CommunityService;
 import com.hust.hydroelectric_backend.utils.ResponseHandler;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;

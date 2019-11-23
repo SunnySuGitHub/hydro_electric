@@ -1,9 +1,9 @@
 package com.hust.hydroelectric_backend.Service.ExcelImport;
 
 import com.hust.hydroelectric_backend.Dao.hydro.*;
-import com.hust.hydroelectric_backend.Entity.Block;
+import com.hust.hydroelectric_backend.Entity.Areas.Block;
 import com.hust.hydroelectric_backend.Entity.User;
-import com.hust.hydroelectric_backend.Entity.Watermeter;
+import com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter;
 import com.hust.hydroelectric_backend.utils.ExcelImportUtil;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
@@ -118,18 +118,61 @@ public class WaterImportService extends ImportBase {
         return Result.success("导入成功");
     }
 
+    /**
+     * 需要检查的有：
+     *      各个字段是否存在漏填情况
+     *      表编号是否数据库中已存在、导入数据中是否存在重复
+     *      根据姓名和手机查询数据库中是否存在用户，如果出现重复判断用户编号是否一致
+     *      导入数据中姓名和手机号是否存在相同用户，如果出现判断用户编号是否一致
+     *
+     *      在判断导入数据中是否存在时，需要边添加边判断
+     */
     @Override
     public ResultData check(InputStream is, boolean isExcel2003, String enprNo, int communityId) {
         Object[] obs = ExcelImportUtil.readSheets(is, isExcel2003);
         List<List<String>>[] data = (List<List<String>>[]) obs[0];
         try {
             //查询当前公司所有表编号
-            Set<String> meterNoSet = waterMeterMapper.findAllMeterNoByEnprNo(enprNo);
+            Set<String> meterNoSet = waterMeterMapper.findAllWatermeterNoByEnprNo(enprNo);
             StringBuffer errstr = new StringBuffer();
-            for (int i = 0; i < data.length; i++) {
+            for (int i = 0; i < data.length; i++) {         //遍历每一个sheet
                 List<List<String>> list = data[i];
-                for (int k = 2; k < list.size(); k++) {
-                    List<String> cellList = list.get(k);
+                for (int j = 1; j < list.size(); j++) {     //遍历sheet的每一行数据
+                    List<String> cellList = list.get(j);
+                    boolean hasError = false;
+                    if(StringUtils.isBlank(cellList.get(0))) {
+                        errstr.append("第"+(i+1)+"个sheet的第"+j+"个用户" + "用户名为空");
+                        hasError = true;
+                    }
+                    if(StringUtils.isBlank(cellList.get(1))) {
+                        errstr.append("第"+(i+1)+"个sheet的第"+j+"个用户" + "用户电话为空");
+                        hasError = true;
+                    }
+                    if(StringUtils.isBlank(cellList.get(2))) {
+                        errstr.append("第"+(i+1)+"个sheet的第"+j+"个用户" + "水表类型为空");
+                        hasError = true;
+                    }
+                    if(StringUtils.isBlank(cellList.get(4))) {
+                        errstr.append("第"+(i+1)+"个sheet的第"+j+"个用户" + "用户详细地址为空");
+                        hasError = true;
+                    }
+                    if(StringUtils.isBlank(cellList.get(5))) {
+                        errstr.append("第"+(i+1)+"个sheet的第"+j+"个用户" + "表编号为空");
+                        hasError = true;
+                    }
+                    if(StringUtils.isBlank(cellList.get(6))) {
+                        errstr.append("第"+(i+1)+"个sheet的第"+j+"个用户" + "口径为空");
+                        hasError = true;
+                    }
+                    if(StringUtils.isBlank(cellList.get(7))) {
+                        errstr.append("第"+(i+1)+"个sheet的第"+j+"个用户" + "阀门状态为空");
+                        hasError = true;
+                    }
+                    if(StringUtils.isBlank(cellList.get(8))) {
+                        errstr.append("第"+(i+1)+"个sheet的第"+j+"个用户" + "水表初始读数为空");
+                        hasError = true;
+                    }
+                    if(hasError) continue;
 
                 }
             }

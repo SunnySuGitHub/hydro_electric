@@ -4,7 +4,7 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.WatermeterHistoryMapper">
     <!--mapper接口所在包-->
 
-    <select id="getWatermeterHistoryByMeterNo" resultType="com.hust.hydroelectric_backend.Entity.WatermeterHistorydata">
+    <select id="getWatermeterHistoryByMeterNo" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.WatermeterHistorydata">
         select
           meter_no,
           read_value,

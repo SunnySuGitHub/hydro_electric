@@ -25,11 +25,11 @@ public class ImportController {
 
     @PostMapping("/watermeter")
     public ResultData watermeterImport(HttpServletRequest request){
-        return ResponseHandler.doHandle(() -> waterImportService.checkAndRead(request));
+        return ResponseHandler.doHandle(() -> waterImportService.checkOrRead(request));
     }
 
     @PostMapping("/ammeter")
     public ResultData ammeterImport(HttpServletRequest request){
-        return ResponseHandler.doHandle(() -> ammeterImportService.checkAndRead(request));
+        return ResponseHandler.doHandle(() -> ammeterImportService.checkOrRead(request));
     }
 }

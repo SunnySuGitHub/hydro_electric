@@ -1,14 +1,14 @@
-package com.hust.hydroelectric_backend.Entity;
+package com.hust.hydroelectric_backend.Entity.Watermeters;
 
 import java.math.BigDecimal;
 
 /**
  * @author: suxinyu
- * @DateTme: 2019/11/23 19:51
+ * @DateTme: 2019/11/23 17:06
  */
-public class AmmeterHistorydata {
+public class WatermeterHistorydata {
     private Integer id;
-    private String ammeterNo;
+    private String meterNo;
     private BigDecimal readValue;
     private Long readTime;
     private String enprNo;
@@ -21,12 +21,12 @@ public class AmmeterHistorydata {
         this.id = id;
     }
 
-    public String getAmmeterNo() {
-        return ammeterNo;
+    public String getMeterNo() {
+        return meterNo;
     }
 
-    public void setAmmeterNo(String ammeterNo) {
-        this.ammeterNo = ammeterNo;
+    public void setMeterNo(String meterNo) {
+        this.meterNo = meterNo;
     }
 
     public BigDecimal getReadValue() {

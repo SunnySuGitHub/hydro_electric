@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.EnprMapper">
     <!--mapper接口所在包-->
-    <insert id="addEnpr" parameterType="com.hust.hydroelectric_backend.Entity.Enpr">
+    <insert id="addEnpr" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Enpr">
         insert into
           t_enterprise(
             enprNo,
@@ -16,14 +16,14 @@
           )
     </insert>
 
-    <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Enpr">
+    <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Areas.Enpr">
         select
           *
         from
           t_enterprise
     </select>
 
-    <select id="findByEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Enpr">
+    <select id="findByEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Areas.Enpr">
         select
           *
         from
@@ -32,7 +32,7 @@
           enprNo = #{enprNo}
     </select>
 
-    <update id="uptByEnprNo" parameterType="com.hust.hydroelectric_backend.Entity.Enpr">
+    <update id="uptByEnprNo" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Enpr">
         update
           t_enterprise
         <set>

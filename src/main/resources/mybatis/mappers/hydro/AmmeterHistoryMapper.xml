@@ -4,7 +4,7 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.AmmeterHistoryMapper">
     <!--mapper接口所在包-->
 
-    <select id="getAmmeterHistorydata" resultType="com.hust.hydroelectric_backend.Entity.AmmeterHistorydata">
+    <select id="getAmmeterHistorydata" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterHistorydata">
         select
           ammeter_no,
           read_value,

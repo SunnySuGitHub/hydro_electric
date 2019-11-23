@@ -15,7 +15,7 @@ import java.io.InputStream;
  */
 public abstract class ImportBase {
 
-    public ResultData checkAndRead(HttpServletRequest request){
+    public ResultData checkOrRead(HttpServletRequest request){
         MultipartHttpServletRequest params = ((MultipartHttpServletRequest) request);
         MultipartFile file = params.getFile("file");
         String enprNo = params.getParameter("enprNo");

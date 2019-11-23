@@ -4,7 +4,7 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.CommunityMapper">
     <!--mapper接口所在包-->
 
-    <insert id="addCommunity" parameterType="com.hust.hydroelectric_backend.Entity.Community">
+    <insert id="addCommunity" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Community">
         insert into
           t_community(
             c_name,
@@ -15,7 +15,7 @@
           )
     </insert>
 
-    <select id="getCommunity" resultType="com.hust.hydroelectric_backend.Entity.Community">
+    <select id="getCommunity" resultType="com.hust.hydroelectric_backend.Entity.Areas.Community">
         select
           *
         from
@@ -24,7 +24,7 @@
           c_id = #{cId}
     </select>
 
-    <update id="uptCommunity" parameterType="com.hust.hydroelectric_backend.Entity.Community">
+    <update id="uptCommunity" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Community">
         update
           t_community
         <set>

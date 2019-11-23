@@ -1,18 +1,17 @@
-package com.hust.hydroelectric_backend.Entity;
+package com.hust.hydroelectric_backend.Entity.Ammeters;
 
 import java.math.BigDecimal;
 
 /**
  * @author: suxinyu
  * @DateTme: 2019/11/19 11:54
- * 水表
+ * 电表
  */
-public class Watermeter {
-    private Integer watermeterId;
-    private String meterNo;
+public class Ammeter {
+    private Integer ammeterId;
+    private String ammeterNo;
     private Integer uId;
     private Integer cId;
-    private Integer caliber;
     private Long installTime;
     private Long readTime;
     private BigDecimal readValue;
@@ -22,20 +21,20 @@ public class Watermeter {
     private String enprNo;
     private Integer isDelete;
 
-    public Integer getWatermeterId() {
-        return watermeterId;
+    public Integer getAmmeterId() {
+        return ammeterId;
     }
 
-    public void setWatermeterId(Integer watermeterId) {
-        this.watermeterId = watermeterId;
+    public void setAmmeterId(Integer ammeterId) {
+        this.ammeterId = ammeterId;
     }
 
-    public String getMeterNo() {
-        return meterNo;
+    public String getAmmeterNo() {
+        return ammeterNo;
     }
 
-    public void setMeterNo(String meterNo) {
-        this.meterNo = meterNo;
+    public void setAmmeterNo(String ammeterNo) {
+        this.ammeterNo = ammeterNo;
     }
 
     public Integer getuId() {
@@ -52,14 +51,6 @@ public class Watermeter {
 
     public void setcId(Integer cId) {
         this.cId = cId;
-    }
-
-    public Integer getCaliber() {
-        return caliber;
-    }
-
-    public void setCaliber(Integer caliber) {
-        this.caliber = caliber;
     }
 
     public Long getInstallTime() {

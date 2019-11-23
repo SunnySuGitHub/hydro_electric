@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Dao.hydro;
 
-import com.hust.hydroelectric_backend.Entity.AmmeterHistorydata;
+import com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterHistorydata;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

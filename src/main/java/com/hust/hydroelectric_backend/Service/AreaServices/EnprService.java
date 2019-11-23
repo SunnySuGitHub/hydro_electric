@@ -1,8 +1,8 @@
-package com.hust.hydroelectric_backend.Service;
+package com.hust.hydroelectric_backend.Service.AreaServices;
 
 import com.hust.hydroelectric_backend.Dao.hydro.EnprMapper;
 import com.hust.hydroelectric_backend.Dao.hydro.OperatorMapper;
-import com.hust.hydroelectric_backend.Entity.Enpr;
+import com.hust.hydroelectric_backend.Entity.Areas.Enpr;
 import com.hust.hydroelectric_backend.Entity.Operator;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;

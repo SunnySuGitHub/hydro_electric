@@ -4,7 +4,7 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.hydro.AmmeterUsageMapper">
     <!--mapper接口所在包-->
 
-    <select id="getAmmeterDailyUsage" resultType="com.hust.hydroelectric_backend.Entity.MeterDailyUsage">
+    <select id="getAmmeterDailyUsage" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage">
         select
           sum(ammeter_usage) as daily_use,
           FROM_UNIXTIME(end_time,'%Y-%m-%d') as dateline
@@ -17,7 +17,7 @@
           FROM_UNIXTIME(end_time,'%Y-%m-%d')
     </select>
 
-    <select id="getAmmeterUsageDetail" resultType="com.hust.hydroelectric_backend.Entity.AmmeterUsage">
+    <select id="getAmmeterUsageDetail" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterUsage">
         select
           *
         from

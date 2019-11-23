@@ -1,7 +1,7 @@
 package com.hust.hydroelectric_backend.Controller;
 
-import com.hust.hydroelectric_backend.Entity.Enpr;
-import com.hust.hydroelectric_backend.Service.EnprService;
+import com.hust.hydroelectric_backend.Entity.Areas.Enpr;
+import com.hust.hydroelectric_backend.Service.AreaServices.EnprService;
 import com.hust.hydroelectric_backend.utils.ResponseHandler;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;
