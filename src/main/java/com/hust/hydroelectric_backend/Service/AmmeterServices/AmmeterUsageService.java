@@ -24,4 +24,8 @@ public class AmmeterUsageService {
     public ResultData getAmmeterUsageDetail(String ammeterNo, String enprNo, long startLine, long endLine) {
         return Result.success(ammeterUsageMapper.getAmmeterUsageDetail(ammeterNo, enprNo, startLine, endLine));
     }
+
+    public ResultData getCommunityUsage(int cid, long startLine, long endLine, String enprNo) {
+        return Result.success(ammeterUsageMapper.getCommunityUsage(cid, startLine, endLine, enprNo));
+    }
 }

@@ -31,4 +31,25 @@
         ]]>
     </select>
 
+    <select id="getCommunityUsage" resultType="java.math.BigDecimal">
+        select
+          sum(ammeter_usage)
+        from
+          t_ammeter_usage
+        where
+          ammeter_no in(
+            select
+              ammeter_no
+            from
+              t_ammeter
+            where
+              c_id = #{cid}
+          )
+          and enprNo = #{enprNo}
+          <![CDATA[
+            and end_time >= #{startLine}
+            and end_time <= #{endLine}
+          ]]>
+    </select>
+
 </mapper>

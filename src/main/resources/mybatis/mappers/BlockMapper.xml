@@ -37,4 +37,34 @@
           and is_delete = 0
     </select>
 
+    <select id="getBlock" resultType="com.hust.hydroelectric_backend.Entity.Areas.Block">
+        select
+          *
+        from
+          t_block
+        where
+          b_id = #{bid}
+          and is_delete = 0
+    </select>
+
+    <update id="delBlock" parameterType="java.lang.Integer">
+        update
+          t_block
+        set
+          is_delete = 1
+        where
+          b_id = #{bid}
+    </update>
+
+    <update id="uptBlock" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Block">
+        update
+          t_block
+        <set>
+            <if test="bName !=null"> ,b_name = #{bName}</if>
+            <if test="cId !=null"> ,c_id = #{cId}</if>
+        </set>
+        where
+          b_id = #{bId}
+    </update>
+
 </mapper>

@@ -4,6 +4,8 @@ import com.hust.hydroelectric_backend.Entity.Areas.Community;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author: suxinyu
  * @DateTme: 2019/11/19 16:33
@@ -18,5 +20,7 @@ public interface CommunityMapper {
     Community getCommunity(@Param("cId") int id);
 
     int uptCommunity(Community community);
+
+    List<Community> communityList(@Param("enprNo") String enprNo);
 
 }

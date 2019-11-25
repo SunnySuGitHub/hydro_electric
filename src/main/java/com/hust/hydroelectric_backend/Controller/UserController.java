@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author: suxinyu
  * @DateTme: 2019/11/18 15:42
+ * 用户相关操作
  */
 @RestController
 public class UserController {

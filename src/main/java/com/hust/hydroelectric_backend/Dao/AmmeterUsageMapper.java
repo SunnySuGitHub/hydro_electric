@@ -5,6 +5,7 @@ import com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -16,4 +17,5 @@ public interface AmmeterUsageMapper {
     List<MeterDailyUsage> getAmmeterDailyUsage(@Param("ammeterNo") String ammeterNo, @Param("enprNo") String enprNo);
     List<AmmeterUsage> getAmmeterUsageDetail(@Param("ammeterNo") String ammeterNo, @Param("enprNo") String enprNo,
                                              @Param("startLine") long startLine, @Param("endLine") long endLine);
+    BigDecimal getCommunityUsage(@Param("cid") int cid, @Param("startLine") long startLine, @Param("endLine") long endLine, @Param("enprNo") String enprNo);
 }

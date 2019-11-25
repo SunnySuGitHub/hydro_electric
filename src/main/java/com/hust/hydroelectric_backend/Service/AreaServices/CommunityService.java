@@ -20,11 +20,7 @@ public class CommunityService {
     CommunityMapper communityMapper;
 
     public ResultData getCommunity(int id){
-        if(id == -1){
-            return Result.error(HttpStatus.BAD_REQUEST, "参数不规范");
-        } else {
-            return Result.success(communityMapper.getCommunity(id));
-        }
+        return Result.success(communityMapper.getCommunity(id));
     }
 
     public ResultData addCommunity(Community community){
@@ -36,14 +32,11 @@ public class CommunityService {
     }
 
     public ResultData delCommunity(int id){
-        if(id == -1){
-            return Result.error(HttpStatus.BAD_REQUEST, "参数不规范");
-        } else {
-            int res = communityMapper.delCommunity(id);
-            if(res == 1) return Result.success("删除成功");
-            return Result.error(HttpStatus.INTERNAL_SERVER_ERROR, "删除失败");
+        return Result.success(communityMapper.delCommunity(id));
+    }
 
-        }
+    public ResultData communityList(String enprNo){
+        return Result.success(communityMapper);
     }
 
 }

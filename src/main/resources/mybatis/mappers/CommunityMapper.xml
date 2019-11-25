@@ -22,6 +22,7 @@
           t_community
         where
           c_id = #{cId}
+          and is_delete = 0
     </select>
 
     <update id="uptCommunity" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Community">
@@ -33,6 +34,7 @@
         </set>
         where
           c_id = #{cId}
+          and is_delete = 0
     </update>
 
     <update id="delCommunity" parameterType="java.lang.Integer">
@@ -43,5 +45,15 @@
         where
           c_id = #{cId}
     </update>
+
+    <select id="communityList" resultType="com.hust.hydroelectric_backend.Entity.Areas.Community">
+        select
+          *
+        from
+          t_community
+        where
+          enprNo = #{enprNo}
+          and is_delete = 0
+    </select>
 
 </mapper>

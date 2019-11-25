@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author: suxinyu
  * @DateTme: 2019/11/18 20:13
+ * 管理员相关
  */
 @RestController
 public class OperatorController {

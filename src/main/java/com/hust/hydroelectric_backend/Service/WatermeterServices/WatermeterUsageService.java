@@ -21,5 +21,9 @@ public class WatermeterUsageService {
         return Result.success(watermeterUsageMapper.getWatemeterDailyUsage(meterNo, enprNo));
     }
 
+    public ResultData getCommunityUsage(int cid, long startLine, long endLine, String enprNo) {
+        return Result.success(watermeterUsageMapper.getCommunityUsage(cid, startLine, endLine, enprNo));
+    }
+
 
 }

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author: suxinyu
  * @DateTme: 2019/11/19 9:29
+ * 表计相关操作
  */
 @RestController
 public class MeterController {
@@ -59,8 +60,21 @@ public class MeterController {
      * 运行设备统计
      */
     @GetMapping("/RunningCnt")
-    public ResultData getRunningCnt(@RequestParam("cid") Integer cId){
+    public ResultData getRunningCnt(@RequestParam("cid") int cId){
         return ResponseHandler.doHandle(() -> commonMeterService.getRunningCnt(cId));
+    }
+
+    /**
+     * 小区表计近日使用总量统计
+     */
+    @GetMapping("/GetCommunityUsage")
+    public ResultData getCommunityUsage(@RequestParam("cid") int cId,
+                                        @RequestParam(value = "meterType", defaultValue = "1") int meterType,
+                                        @RequestParam("startDateLine") long startLine,
+                                        @RequestParam("endDateLine") long endLine,
+                                        @RequestParam("enprNo") String enprNo){
+        if(meterType == Constants.TYPE_WATERMETER) return ResponseHandler.doHandle(() -> watermeterUsageService.getCommunityUsage(cId, startLine, endLine, enprNo));
+        return ResponseHandler.doHandle(() -> ammeterUsageService.getCommunityUsage(cId, startLine, endLine, enprNo));
     }
 
     /**
@@ -111,8 +125,8 @@ public class MeterController {
     @GetMapping("/GetMeterHistorydata")
     public ResultData getMeterHistorydata(@RequestParam("ammeterNo") String meterNo,
                                           @RequestParam("enprNo") String enprNo,
-                                          @RequestParam("startDateLine") Long startDateLine,
-                                          @RequestParam("endDateLine") Long endDateLine,
+                                          @RequestParam("startDateLine") long startDateLine,
+                                          @RequestParam("endDateLine") long endDateLine,
                                           @RequestParam(value = "meterType", defaultValue = "1") Integer meterType){
         if(meterType == Constants.TYPE_WATERMETER)
             return ResponseHandler.doHandle(()-> watermeterHistorydataService.getWatermeterHistorydata(meterNo, enprNo, startDateLine, endDateLine));
