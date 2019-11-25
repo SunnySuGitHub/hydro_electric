@@ -71,11 +71,10 @@ public class MeterController {
      * 根据用户编号查询表信息
      */
     @GetMapping("/GetMeterDetailByUsernameAndEnprNo")
-    public ResultData getMeterDetailByUsernameAndEnprNo(@RequestParam(value = "userNo", defaultValue = "001") String uNo,
-                                                        @RequestParam(value = "meterType", defaultValue = "1") int meterType,
-                                                        @RequestParam("enprNo") String enprNo){
-        if(meterType == Constants.TYPE_WATERMETER) return ResponseHandler.doHandle(() -> waterMeterService.getWatermeterByUnoAndEnprNo(uNo, enprNo));
-        return ResponseHandler.doHandle(() -> ammeterService.getAmmeterByUnoAndEnprNo(uNo, enprNo));
+    public ResultData getMeterDetailByUsernameAndEnprNo(@RequestParam(value = "uid", defaultValue = "1") int uid,
+                                                        @RequestParam(value = "meterType", defaultValue = "1") int meterType){
+        if(meterType == Constants.TYPE_WATERMETER) return ResponseHandler.doHandle(() -> waterMeterService.getWatermeterByUid(uid));
+        return ResponseHandler.doHandle(() -> ammeterService.getAmmeterByUid(uid));
     }
 
     /**

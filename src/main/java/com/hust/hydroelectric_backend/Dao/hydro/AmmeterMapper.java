@@ -16,5 +16,5 @@ public interface AmmeterMapper {
     List<Ammeter> findAll();
     int uptAmmeterValue(Ammeter ammeter);
     List<Ammeter> findFailedAmmeters(@Param("cid") int cid);
-    List<Ammeter> findAmmeterByUnoAndEnprNo(@Param("uNo") String uno, @Param("enprNo") String enprNo);
+    List<Ammeter> findAmmeterByUid(@Param("uid") int uid);
 }

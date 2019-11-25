@@ -16,11 +16,10 @@ import java.util.Set;
 public interface UserMapper {
     List<User> findAllUsers(@Param("enprNo") String enprNo);
     User findByUid(@Param("uid") int uid);
-    Set<String> findAllUserNo(String enprNo);
     int saveUser(User user);
-    int findUidByUnoAndEnprno(@Param("uNo")String uNo,@Param("enprNo")String enprNo);
     int delUserByUid(@Param("uid") int uid);
     int uptUser(User user);
     List<Integer> findUidsByBid(@Param("bId") int bId);
     List<UserInfoVo> findUserInfoVoByUid(int uid);
+    User findByUnameAndTelAndEnprNo(@Param("uName") String uname, @Param("tel") String tel, @Param("enprNo") String enprNo);
 }

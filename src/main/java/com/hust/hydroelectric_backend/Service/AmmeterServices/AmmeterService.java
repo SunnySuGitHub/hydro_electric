@@ -25,7 +25,7 @@ public class AmmeterService {
         return Result.success(ammeterMapper.findFailedAmmeters(cid));
     }
 
-    public ResultData getAmmeterByUnoAndEnprNo(String uNo, String enprNo){
-        return Result.success(ammeterMapper.findAmmeterByUnoAndEnprNo(uNo, enprNo));
+    public ResultData getAmmeterByUid(int uid){
+        return Result.success(ammeterMapper.findAmmeterByUid(uid));
     }
 }

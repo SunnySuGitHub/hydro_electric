@@ -25,7 +25,7 @@ public class WaterMeterService {
         return Result.success(waterMeterMapper.findFailedWatermeter(cid));
     }
 
-    public ResultData getWatermeterByUnoAndEnprNo(String uNo, String enprNo){
-        return Result.success(waterMeterMapper.findWatermeterByUnoAndEnprNo(uNo, enprNo));
+    public ResultData getWatermeterByUid(int uid){
+        return Result.success(waterMeterMapper.findWatermeterByUid(uid));
     }
 }

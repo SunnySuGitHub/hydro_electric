@@ -22,16 +22,7 @@
           u_id = #{uid}
     </select>
 
-    <select id="findAllUserNo" resultType="java.lang.String">
-        select
-          user_no
-        from
-          t_user
-        where
-          enprNo = #{enprNo}
-    </select>
-
-    <insert id="saveUser" parameterType="com.hust.hydroelectric_backend.Entity.User">
+    <insert id="saveUser" parameterType="com.hust.hydroelectric_backend.Entity.User" useGeneratedKeys="true" keyProperty="u_id">
         insert into
           t_user(
             u_name,
@@ -39,7 +30,6 @@
             b_id,
             address,
             account_balance,
-            u_no,
             enprNo
           ) values (
             #{uName},
@@ -47,20 +37,9 @@
             #{bId},
             #{address},
             #{accountBalance},
-            #{uNo},
             #{enprNo}
           )
     </insert>
-
-    <select id="findUidByUnoAndEnprno" resultType="java.lang.Integer">
-        select
-          u_id
-        from
-          t_user
-        where
-          u_no = #{uNo}
-          and enprNo = #{enprNo}
-    </select>
 
     <update id="delUserByUid" parameterType="java.lang.Integer">
         update
@@ -80,7 +59,6 @@
             <if test="bId !=null"> ,b_id = #{bId}</if>
             <if test="address !=null"> ,address = #{address}</if>
             <if test="accountBalance !=null"> ,account_balance = #{accountBalance}</if>
-            <if test="uNo !=null"> ,u_no = #{uNo}</if>
             <if test="enprNo !=null"> ,enprNo = #{enprNo}</if>
         </set>
         where
@@ -105,7 +83,6 @@
           u.u_tel as u_tel,
           u.address as address,
           u.account_balance as account_balance,
-          u.u_no as u_no,
           tmp.meter_no as meter_no,
           tmp.read_time as read_time,
           tmp.read_value as read_value,
@@ -117,8 +94,7 @@
             u_name,
             u_tel,
             address,
-            account_balance,
-            u_no
+            account_balance
           from
             t_user u
           where
@@ -150,6 +126,18 @@
             u_id = #{uid}
         ) tmp
         on u.u_id = tmp.u_id
+    </select>
+
+    <select id="findByUnameAndTelAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.User">
+        select
+          *
+        from
+          t_user
+        where
+          u_name = #{uName}
+          and u_tel = #{tel}
+          and enprNo = #{enprNo}
+          and is_delete = 0
     </select>
 
 </mapper>

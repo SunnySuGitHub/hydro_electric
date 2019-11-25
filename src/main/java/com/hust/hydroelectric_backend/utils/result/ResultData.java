@@ -1,6 +1,5 @@
 package com.hust.hydroelectric_backend.utils.result;
 
-import com.hust.hydroelectric_backend.Entity.User;
 
 /**
  * @author: suxinyu

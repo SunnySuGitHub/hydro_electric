@@ -12,6 +12,7 @@
         where
           meter_no = #{meterNo}
           and enprNo = #{enprNo}
+          and is_delete = 0
     </select>
 
     <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
@@ -19,6 +20,8 @@
           *
         from
           t_watermeter
+        where
+          is_delete = 0
     </select>
 
     <update id="uptWatermeterValue" parameterType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
@@ -29,11 +32,10 @@
           read_value = #{readValue},
           pre_read_time = #{preReadTime},
           pre_read_value = #{preReadValue},
-          day_amount = #{dayAmount},
-          month_amount = #{monthAmount},
           state = #{state}
         where
           watermeter_id = #{watermeterId}
+          and is_delete = 0
     </update>
 
     <insert id="saveMeter" parameterType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
@@ -48,8 +50,8 @@
             read_value,
             pre_read_time,
             pre_read_value,
-            day_amount,
-            month_amount,
+            meter_type,
+            valve,
             state,
             enprNo
           ) values (
@@ -62,8 +64,8 @@
             #{readValue},
             #{preReadTime},
             #{preReadValue},
-            #{dayAmount},
-            #{monthAmount},
+            #{meterType},
+            #{valve},
             #{state},
             #{enprNo}
           )
@@ -90,38 +92,14 @@
           and state = 1
     </select>
 
-    <select id="findWatermeterByUnoAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
+    <select id="findWatermeterByUid" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
         select
-            meter.watermeter_id,
-            meter.meter_no,
-            meter.u_id,
-            meter.c_id,
-            meter.caliber,
-            meter.install_time,
-            meter.read_time,
-            meter.read_value,
-            meter.pre_read_time,
-            meter.pre_read_value,
-            meter.day_amount,
-            meter.month_amount,
-            meter.state,
-            meter.enprNo
-        from (
-            select
-              u_id
-            from
-              t_user
-            where
-              u_no = #{uNo}
-              and enprNo = #{enprNo}
-              and is_delete = 0
-        ) u
-        left join
-          t_watermeter meter
-        on
-          u.u_id = meter.u_id
+          *
+        from
+          t_watermeter
         where
-          meter.is_delete = 0
+          is_delete = 0
+          and u_id = #{uid}
     </select>
 
 </mapper>

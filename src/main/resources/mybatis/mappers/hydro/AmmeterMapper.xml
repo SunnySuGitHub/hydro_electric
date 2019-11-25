@@ -29,8 +29,6 @@
           read_value = #{readValue},
           pre_read_time = #{preReadTime},
           pre_read_value = #{preReadValue},
-          day_amount = #{dayAmount},
-          month_amount = #{monthAmount},
           state = #{state}
         where
           ammeter_id = #{ammeterId}
@@ -47,36 +45,13 @@
           and state = 1
     </select>
 
-    <select id="findAmmeterByUnoAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
+    <select id="findAmmeterByUid" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
         select
-            meter.ammeter_id,
-            meter.ammeter_no,
-            meter.u_id,
-            meter.c_id,
-            meter.install_time,
-            meter.read_time,
-            meter.read_value,
-            meter.pre_read_time,
-            meter.pre_read_value,
-            meter.day_amount,
-            meter.month_amount,
-            meter.state,
-            meter.enprNo
-        from (
-            select
-              u_id
-            from
-              t_user
-            where
-              u_no = #{uNo}
-              and enprNo = #{enprNo}
-              and is_delete = 0
-        ) u
-        left join
-          t_ammeter meter
-        on
-          u.u_id = meter.u_id
+          *
+        from
+          t_ammeter
         where
-          meter.is_delete = 0
+          is_delete = 0
+          and u_id = #{uid}
     </select>
 </mapper>

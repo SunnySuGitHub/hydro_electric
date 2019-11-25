@@ -7,7 +7,6 @@ package com.hust.hydroelectric_backend.Entity;
 public class Repair {
     private Integer repairId;
     private Integer uId;
-    private String uNo;
     private String uTel;
     private String uName;
     private String uAddr;
@@ -33,14 +32,6 @@ public class Repair {
 
     public void setuId(Integer uId) {
         this.uId = uId;
-    }
-
-    public String getuNo() {
-        return uNo;
-    }
-
-    public void setuNo(String uNo) {
-        this.uNo = uNo;
     }
 
     public String getuTel() {

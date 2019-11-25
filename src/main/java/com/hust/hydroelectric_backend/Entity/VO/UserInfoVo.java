@@ -12,7 +12,6 @@ public class UserInfoVo {
     private String uTel;
     private String address;
     private BigDecimal accountBalance;
-    private Integer uNo;
     private Integer meterType;
     private String meterNo;
     private Long readTime;
@@ -57,14 +56,6 @@ public class UserInfoVo {
 
     public void setAccountBalance(BigDecimal accountBalance) {
         this.accountBalance = accountBalance;
-    }
-
-    public Integer getuNo() {
-        return uNo;
-    }
-
-    public void setuNo(Integer uNo) {
-        this.uNo = uNo;
     }
 
     public Integer getMeterType() {

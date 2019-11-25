@@ -7,7 +7,6 @@
         insert into
           t_repair(
             u_id,
-            u_no,
             u_tel,
             u_name,
             u_addr,
@@ -16,7 +15,6 @@
             c_id
           ) values (
             #{uId},
-            #{uNo},
             #{uTel},
             #{uName},
             #{uAddr},
@@ -41,7 +39,6 @@
           t_repair
         <set>
             <if test="uId !=null"> ,u_id = #{uId}</if>
-            <if test="uNo !=null"> ,u_tel = #{uNo}</if>
             <if test="uTel !=null"> ,u_tel = #{uTel}</if>
             <if test="uName !=null"> ,u_name = #{uName}</if>
             <if test="uAddr !=null"> ,u_addr = #{uAddr}</if>

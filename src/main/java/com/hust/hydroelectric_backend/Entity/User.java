@@ -14,7 +14,6 @@ public class User {
     private Integer bId;
     private String address;
     private BigDecimal accountBalance;
-    private Integer uNo;
     private String enprNo;
     private Integer isDelete;
 
@@ -64,14 +63,6 @@ public class User {
 
     public void setAccountBalance(BigDecimal accountBalance) {
         this.accountBalance = accountBalance;
-    }
-
-    public Integer getuNo() {
-        return uNo;
-    }
-
-    public void setuNo(Integer uNo) {
-        this.uNo = uNo;
     }
 
     public String getEnprNo() {

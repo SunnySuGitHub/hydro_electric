@@ -18,6 +18,8 @@ public class Watermeter {
     private BigDecimal readValue;
     private Long preReadTime;
     private BigDecimal preReadValue;
+    private Integer meterType;
+    private Integer valve;
     private Integer state;
     private String enprNo;
     private Integer isDelete;
@@ -124,5 +126,21 @@ public class Watermeter {
 
     public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public Integer getMeterType() {
+        return meterType;
+    }
+
+    public void setMeterType(Integer meterType) {
+        this.meterType = meterType;
+    }
+
+    public Integer getValve() {
+        return valve;
+    }
+
+    public void setValve(Integer valve) {
+        this.valve = valve;
     }
 }
