@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Service.AreaServices;
 
-import com.hust.hydroelectric_backend.Dao.hydro.CommunityMapper;
+import com.hust.hydroelectric_backend.Dao.CommunityMapper;
 import com.hust.hydroelectric_backend.Entity.Areas.Community;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;

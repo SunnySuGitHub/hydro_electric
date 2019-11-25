@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Service;
 
-import com.hust.hydroelectric_backend.Dao.hydro.CommonMeterMapper;
+import com.hust.hydroelectric_backend.Dao.CommonMeterMapper;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;

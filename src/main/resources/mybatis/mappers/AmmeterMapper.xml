@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.AmmeterMapper">
+    <!--mapper接口所在包-->
+
+    <select id="getAmmeterDetail" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
+        select
+          *
+        from
+          t_ammeter
+        where
+          ammeter_no = #{ammeterNo}
+          and enprNo = #[enprNo]
+    </select>
+
+    <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
+        select
+          *
+        from
+          t_ammeter
+    </select>
+
+    <update id="uptAmmeterValue" parameterType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
+        update
+          t_ammeter
+        set
+          read_time = #{readTime},
+          read_value = #{readValue},
+          pre_read_time = #{preReadTime},
+          pre_read_value = #{preReadValue},
+          state = #{state}
+        where
+          ammeter_id = #{ammeterId}
+    </update>
+
+    <select id="findFailedAmmeters" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
+        select
+          *
+        from
+          t_ammeter
+        where
+          id_delete = 0
+          and c_id =#{cid}
+          and state = 1
+    </select>
+
+    <select id="findAmmeterByUid" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
+        select
+          *
+        from
+          t_ammeter
+        where
+          is_delete = 0
+          and u_id = #{uid}
+    </select>
+</mapper>

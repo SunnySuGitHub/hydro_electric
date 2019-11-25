@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.WatermeterCostMapper">
+    <!--mapper接口所在包-->
+
+    <select id="getWatermeterDailyCost" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost">
+        select
+          sum(cost_money) as daily_cost,
+          FROM_UNIXTIME(cost_time,'%Y-%m-%d') as dateline
+        from
+          t_watermeter_cost
+        where
+          watermeter_no = #{meterNo}
+          and enprNo = #{enprNo}
+        group by
+          FROM_UNIXTIME(cost_time,'%Y-%m-%d')
+    </select>
+
+</mapper>

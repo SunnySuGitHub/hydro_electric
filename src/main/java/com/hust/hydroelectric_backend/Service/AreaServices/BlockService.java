@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Service.AreaServices;
 
-import com.hust.hydroelectric_backend.Dao.hydro.BlockMapper;
+import com.hust.hydroelectric_backend.Dao.BlockMapper;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.http.HttpStatus;

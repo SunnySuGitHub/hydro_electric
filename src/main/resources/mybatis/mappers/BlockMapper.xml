@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.BlockMapper">
+    <!--mapper接口所在包-->
+
+    <select id="findByBlockNameAndCid" resultType="com.hust.hydroelectric_backend.Entity.Areas.Block">
+        select
+          b_id,
+          b_name,
+          c_id
+        from
+          t_block
+        where
+          b_name = #{blockName}
+          and c_id = #{cId}
+    </select>
+
+    <insert id="saveBlock" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Block" useGeneratedKeys="true" keyProperty="b_id">
+        insert into
+          t_block(
+            b_name,
+            c_id
+          ) values (
+            #{bName},
+            #{cId}
+        )
+    </insert>
+
+    <select id="findAllByCid" resultType="com.hust.hydroelectric_backend.Entity.Areas.Block">
+        select
+          *
+        from
+          t_block
+        where
+          c_id = #{cid}
+          and is_delete = 0
+    </select>
+
+</mapper>

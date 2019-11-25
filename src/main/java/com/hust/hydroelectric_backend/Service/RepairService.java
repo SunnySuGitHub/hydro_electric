@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Service;
 
-import com.hust.hydroelectric_backend.Dao.hydro.RepairMapper;
+import com.hust.hydroelectric_backend.Dao.RepairMapper;
 import com.hust.hydroelectric_backend.Entity.Repair;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;

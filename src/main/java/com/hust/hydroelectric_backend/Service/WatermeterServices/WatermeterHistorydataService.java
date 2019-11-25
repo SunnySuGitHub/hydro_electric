@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Service.WatermeterServices;
 
-import com.hust.hydroelectric_backend.Dao.hydro.WatermeterHistoryMapper;
+import com.hust.hydroelectric_backend.Dao.WatermeterHistoryMapper;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +22,7 @@ public class WatermeterHistorydataService {
 
 
     public ResultData getWatermeterHistorydata(String meterNo, String enprNo, long startLine, long endLine){
-        if(StringUtils.isNotEmpty(meterNo) && StringUtils.isNotEmpty(enprNo)) {
+        if(StringUtils.isNotBlank(meterNo) && StringUtils.isNotBlank(enprNo)) {
             return Result.success(watermeterHistoryMapper.getWatermeterHistoryByMeterNo(meterNo, enprNo, startLine, endLine));
         } else {
             return Result.error(HttpStatus.BAD_REQUEST, "参数错误");

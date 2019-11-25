@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.EnprMapper">
+    <!--mapper接口所在包-->
+    <insert id="addEnpr" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Enpr">
+        insert into
+          t_enterprise(
+            enprNo,
+            enpr_name,
+            create_time
+          ) values (
+            #{enprNo},
+            #{enprName},
+            #{createTime}
+          )
+    </insert>
+
+    <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Areas.Enpr">
+        select
+          *
+        from
+          t_enterprise
+    </select>
+
+    <select id="findByEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Areas.Enpr">
+        select
+          *
+        from
+          t_enterprise
+        where
+          enprNo = #{enprNo}
+    </select>
+
+    <update id="uptByEnprNo" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Enpr">
+        update
+          t_enterprise
+        <set>
+            <if test="enprName !=null"> ,enpr_name = #{enprName}</if>
+            <if test="appId !=null"> ,app_id = #{appId}</if>
+            <if test="wxKey !=null"> ,wx_key = #{wxKey}</if>
+            <if test="mchId !=null"> ,mch_id = #{mchId}</if>
+        </set>
+        where
+          enprNo = #{enprNo}
+    </update>
+
+</mapper>

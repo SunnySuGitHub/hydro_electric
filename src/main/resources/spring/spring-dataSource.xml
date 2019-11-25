@@ -12,13 +12,13 @@
     <!-- est基础数据 -->
     <bean id="hydroElectricDataSource" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="hydroDataSource"/>
-        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
-        <property name="mapperLocations" value="classpath*:mybatis/mappers/hydro/*Mapper.xml" />
+        <property name="configLocation" value="classpath:mybatis/mappers/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath*:mybatis/mappers/*Mapper.xml" />
     </bean>
 
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="hydroElectricDataSource"/>
-        <property name="basePackage" value="com.hust.hydroelectric_backend.Dao.hydro"/>
+        <property name="basePackage" value="com.hust.hydroelectric_backend.Dao"/>
     </bean>
 
     <bean name="hydroElectricTransactionManager"

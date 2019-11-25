@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Service;
 
-import com.hust.hydroelectric_backend.Dao.hydro.UserMapper;
+import com.hust.hydroelectric_backend.Dao.UserMapper;
 import com.hust.hydroelectric_backend.Entity.User;
 import com.hust.hydroelectric_backend.Entity.VO.UserInfoVo;
 import com.hust.hydroelectric_backend.utils.result.Result;

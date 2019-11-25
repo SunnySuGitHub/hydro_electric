@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.AmmeterHistoryMapper">
+    <!--mapper接口所在包-->
+
+    <select id="getAmmeterHistorydata" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterHistorydata">
+        select
+          ammeter_no,
+          read_value,
+          read_time,
+          enprNo
+        from
+          t_ammeter_historydata
+        where
+          meter_no = #{meterNo}
+          and enprNo = #{enprNo}
+        <![CDATA[
+            and read_time >= #{startLine}
+            and read_time <= #{endLine}
+        ]]>
+    </select>
+
+</mapper>

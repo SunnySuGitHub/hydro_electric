@@ -1,10 +1,9 @@
 package com.hust.hydroelectric_backend.Service;
 
-import com.hust.hydroelectric_backend.Dao.hydro.OperatorMapper;
+import com.hust.hydroelectric_backend.Dao.OperatorMapper;
 import com.hust.hydroelectric_backend.Entity.Operator;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 

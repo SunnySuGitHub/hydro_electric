@@ -1,6 +1,6 @@
 package com.hust.hydroelectric_backend.Service.WatermeterServices;
 
-import com.hust.hydroelectric_backend.Dao.hydro.WaterMeterMapper;
+import com.hust.hydroelectric_backend.Dao.WaterMeterMapper;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;
