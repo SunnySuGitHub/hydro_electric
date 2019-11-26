@@ -105,6 +105,7 @@ public class WaterImportService extends ImportBase {
                 meter.setReadValue(readValue);
                 meter.setPreReadTime(curUnixTime);
                 meter.setPreReadValue(readValue);
+                meter.setMonthAmount(BigDecimal.ZERO);
                 meter.setState(0);
                 meter.setMeterType(meterType);
                 meter.setValve(valve);

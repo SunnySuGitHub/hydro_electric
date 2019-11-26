@@ -17,4 +17,23 @@
           FROM_UNIXTIME(cost_time,'%Y-%m-%d')
     </select>
 
+    <insert id="save" parameterType="com.hust.hydroelectric_backend.Entity.Watermeters.WatermeterCost">
+        insert into
+          t_watermeter_cost(
+            u_id,
+            watermeter_usage,
+            cost_money,
+            cost_time,
+            watermeter_no,
+            enprNo
+          ) values (
+            #{uId},
+            #{watermeterUsage},
+            #{costMoney},
+            #{costTime},
+            #{watermeterNo},
+            #{enprNo}
+          )
+    </insert>
+
 </mapper>

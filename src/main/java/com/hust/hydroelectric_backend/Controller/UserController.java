@@ -65,7 +65,7 @@ public class UserController {
     /**
      * 查看小区报修单
      */
-    @GetMapping("/repairShow")
+    @GetMapping("/repair/list")
     public ResultData repair(@RequestParam("cid") int cid,
                              @RequestParam(value = "state", defaultValue = "-1") int state){
         return ResponseHandler.doHandle(() -> repairService.list(cid, state));

@@ -38,4 +38,21 @@
           ]]>
     </select>
 
+    <insert id="save" parameterType="com.hust.hydroelectric_backend.Entity.Watermeters.WatermeterUsage">
+        insert into
+          t_watermeter_usage(
+            watermeter_no,
+            watermeter_usage,
+            end_time,
+            end_value,
+            enprNo
+          ) values (
+            #{watermeterNo},
+            #{watermeterUsaga},
+            #{endTime},
+            #{endValue},
+            #{enprNo}
+          )
+    </insert>
+
 </mapper>

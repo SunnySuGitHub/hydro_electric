@@ -18,6 +18,7 @@ public class Watermeter {
     private BigDecimal readValue;
     private Long preReadTime;
     private BigDecimal preReadValue;
+    private BigDecimal monthAmount;
     private Integer meterType;
     private Integer valve;
     private Integer state;
@@ -142,5 +143,13 @@ public class Watermeter {
 
     public void setValve(Integer valve) {
         this.valve = valve;
+    }
+
+    public BigDecimal getMonthAmount() {
+        return monthAmount;
+    }
+
+    public void setMonthAmount(BigDecimal monthAmount) {
+        this.monthAmount = monthAmount;
     }
 }

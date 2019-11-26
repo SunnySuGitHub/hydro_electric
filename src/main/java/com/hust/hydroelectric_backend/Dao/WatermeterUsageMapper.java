@@ -1,6 +1,7 @@
 package com.hust.hydroelectric_backend.Dao;
 
 import com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage;
+import com.hust.hydroelectric_backend.Entity.Watermeters.WatermeterUsage;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,5 @@ import java.util.List;
 public interface WatermeterUsageMapper {
     List<MeterDailyUsage> getWatemeterDailyUsage(@Param("meterNo") String meterNo, @Param("enprNo") String enprNo);
     BigDecimal getCommunityUsage(@Param("cid") int cid, @Param("startLine") long startLine, @Param("endLine") long endLine, @Param("enprNo") String enprNo);
+    int save(WatermeterUsage watermeterUsage);
 }

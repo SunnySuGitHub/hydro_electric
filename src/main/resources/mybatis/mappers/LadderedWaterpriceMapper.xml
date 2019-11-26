@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.LadderedWaterpriceMapper">
+    <!--mapper接口所在包-->
+    <select id="getLevels" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.LadderedWaterprice">
+        select
+          *
+        from
+          t_laddered_waterprice
+        order by cost_level asc
+    </select>
+
+</mapper>

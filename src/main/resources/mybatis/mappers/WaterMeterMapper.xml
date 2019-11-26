@@ -32,6 +32,7 @@
           read_value = #{readValue},
           pre_read_time = #{preReadTime},
           pre_read_value = #{preReadValue},
+          month_amount = #{monthAmount},
           state = #{state}
         where
           watermeter_id = #{watermeterId}
@@ -50,6 +51,7 @@
             read_value,
             pre_read_time,
             pre_read_value,
+            month_amount,
             meter_type,
             valve,
             state,
@@ -64,6 +66,7 @@
             #{readValue},
             #{preReadTime},
             #{preReadValue},
+            #{monthAmount},
             #{meterType},
             #{valve},
             #{state},
