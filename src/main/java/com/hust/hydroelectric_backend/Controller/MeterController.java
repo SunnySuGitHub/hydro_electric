@@ -123,7 +123,7 @@ public class MeterController {
      * 0为水表  1为电表
      */
     @GetMapping("/GetMeterHistorydata")
-    public ResultData getMeterHistorydata(@RequestParam("ammeterNo") String meterNo,
+    public ResultData getMeterHistorydata(@RequestParam("meterNo") String meterNo,
                                           @RequestParam("enprNo") String enprNo,
                                           @RequestParam("startDateLine") long startDateLine,
                                           @RequestParam("endDateLine") long endDateLine,

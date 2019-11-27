@@ -10,6 +10,7 @@ import java.util.Date;
 public class MeterDailyCost {
     private Date dateline;
     private BigDecimal dailyCost;
+    private Integer waterType;
 
     public Date getDateline() {
         return dateline;
@@ -25,5 +26,13 @@ public class MeterDailyCost {
 
     public void setDailyCost(BigDecimal dailyCost) {
         this.dailyCost = dailyCost;
+    }
+
+    public Integer getWaterType() {
+        return waterType;
+    }
+
+    public void setWaterType(Integer waterType) {
+        this.waterType = waterType;
     }
 }

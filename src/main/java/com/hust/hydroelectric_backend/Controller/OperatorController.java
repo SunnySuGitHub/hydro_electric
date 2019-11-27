@@ -3,8 +3,11 @@ package com.hust.hydroelectric_backend.Controller;
 import com.hust.hydroelectric_backend.Entity.Operator;
 import com.hust.hydroelectric_backend.Service.OperatorService;
 import com.hust.hydroelectric_backend.utils.ResponseHandler;
+import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -44,6 +47,15 @@ public class OperatorController {
     @PutMapping("/operator")
     public ResultData uptOperator(@RequestBody Operator operator){
         return ResponseHandler.doHandle(() -> operatorService.uptOperator(operator));
+    }
+
+    @GetMapping("/operator/list")
+    public ResultData operatorList(@RequestParam("enprNo") String enprNo){
+        if(StringUtils.isNotBlank(enprNo)) {
+            return ResponseHandler.doHandle(() -> operatorService.operatorList(enprNo));
+        } else {
+            return Result.error(HttpStatus.BAD_REQUEST, "公司信息缺失");
+        }
     }
 
 }

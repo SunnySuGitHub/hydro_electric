@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.PayhistoryMapper">
+    <!--mapper接口所在包-->
+    <insert id="save" parameterType="com.hust.hydroelectric_backend.Entity.Payhistory" useGeneratedKeys="true" keyProperty="id">
+        insert into
+          t_payhistory(
+            u_id,
+            pay_time,
+            pay_amount,
+            pay_method,
+            pay_status
+          ) values (
+            #{uId},
+            #{payTime},
+            #{payAmount},
+            #{payMethod},
+            #{payStatus}
+          )
+    </insert>
+
+    <insert id="update" parameterType="com.hust.hydroelectric_backend.Entity.Payhistory">
+        update
+          t_payhistory
+        <set>
+            <if test="uId !=null"> ,u_id = #{uId}</if>
+            <if test="payTime !=null"> ,pay_time = #{payTime}</if>
+            <if test="payAmount !=null"> ,pay_amount = #{payAmount}</if>
+            <if test="payMethod !=null"> ,pay_method = #{payMethod}</if>
+            <if test="payStatus !=null"> ,pay_status = #{payStatus}</if>
+        </set>
+        where
+          id = #{id}
+    </insert>
+
+    <select id="findById" resultType="com.hust.hydroelectric_backend.Entity.Payhistory">
+        select
+          *
+        from
+          t_payhistory
+        where
+          id = #{id}
+    </select>
+
+
+</mapper>

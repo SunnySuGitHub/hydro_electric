@@ -110,7 +110,7 @@ public class AreaController {
     /**
      * 获取小区下的所有楼栋信息
      */
-    @GetMapping("/GetBlockList")
+    @GetMapping("/block/list")
     public ResultData getBlockList(@RequestParam(value = "cid", defaultValue = "-1") int cid) {
         return ResponseHandler.doHandle(() -> blockService.getBlockByCid(cid));
     }

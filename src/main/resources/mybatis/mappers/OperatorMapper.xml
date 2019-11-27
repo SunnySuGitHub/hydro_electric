@@ -73,4 +73,14 @@
           operator_id = #{operatorId}
     </delete>
 
+    <select id="operatorList" resultType="com.hust.hydroelectric_backend.Entity.Operator">
+        select
+          *
+        from
+          t_operator
+        where
+          enprNo = #{enprNo}
+          and is_delete = 0
+    </select>
+
 </mapper>

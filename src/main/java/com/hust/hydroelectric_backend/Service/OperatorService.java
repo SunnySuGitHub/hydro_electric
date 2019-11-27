@@ -63,5 +63,9 @@ public class OperatorService {
         }
     }
 
+    public ResultData operatorList(String enprNo){
+        return Result.success(operatorMapper.operatorList(enprNo));
+    }
+
 
 }
