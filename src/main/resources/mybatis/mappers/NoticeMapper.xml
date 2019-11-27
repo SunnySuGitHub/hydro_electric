@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.NoticeMapper">
+    <!--mapper接口所在包-->
+    <insert id="addNotice" parameterType="com.hust.hydroelectric_backend.Entity.Notice">
+        insert into
+          t_notice(
+            title,
+            content,
+            publish_time,
+            enprNo
+          ) values (
+            #{title},
+            #{content},
+            #{publishTime},
+            #{enprNo}
+          )
+    </insert>
+
+    <select id="noticeList" resultType="com.hust.hydroelectric_backend.Entity.Notice">
+        select
+          *
+        from
+          t_notice
+        where
+          enprNo = #{enprNo}
+          and is_delete = 0
+    </select>
+
+    <update id="uptNotice" parameterType="com.hust.hydroelectric_backend.Entity.Notice">
+        update
+          t_notice
+        <set>
+            <if test="title !=null"> ,title = #{title}</if>
+            <if test="content !=null"> ,content = #{content}</if>
+            <if test="publishTime !=null"> ,publish_time = #{publishTime}</if>
+            <if test="enprNo !=null"> ,enprNo = #{enprNo}</if>
+            <if test="isDelete !=null"> ,is_delete = #{isDelete}</if>
+        </set>
+        where
+          id = #{id}
+    </update>
+
+
+</mapper>

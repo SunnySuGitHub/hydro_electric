@@ -13,6 +13,7 @@ public class Payhistory {
     private BigDecimal payAmount;
     private Integer payMethod;
     private Integer payStatus;
+    private String transactionId;
 
     public Integer getId() {
         return id;
@@ -60,5 +61,13 @@ public class Payhistory {
 
     public void setPayStatus(Integer payStatus) {
         this.payStatus = payStatus;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 }

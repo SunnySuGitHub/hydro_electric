@@ -29,6 +29,7 @@
             <if test="payAmount !=null"> ,pay_amount = #{payAmount}</if>
             <if test="payMethod !=null"> ,pay_method = #{payMethod}</if>
             <if test="payStatus !=null"> ,pay_status = #{payStatus}</if>
+            <if test="transactionId !=null"> ,transaction_id = #{transactionId}</if>
         </set>
         where
           id = #{id}

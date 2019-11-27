@@ -10,7 +10,7 @@ public class Enpr {
     private Long createTime;
     private String appId;
     private String wxKey;
-    private Integer mchId;
+    private String mchId;
 
     public String getEnprNo() {
         return enprNo;
@@ -52,11 +52,11 @@ public class Enpr {
         this.wxKey = wxKey;
     }
 
-    public Integer getMchId() {
+    public String getMchId() {
         return mchId;
     }
 
-    public void setMchId(Integer mchId) {
+    public void setMchId(String mchId) {
         this.mchId = mchId;
     }
 }
