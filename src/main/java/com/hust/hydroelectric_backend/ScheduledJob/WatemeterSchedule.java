@@ -40,12 +40,13 @@ public class WatemeterSchedule {
 
 
     @Scheduled(cron = "0 0 0 1 * ?")
+    public void monthlyRefresh(){
+        meterMapper.monthlyRefresh();
+    }
+
+    @Scheduled(cron = "0 0 0 * * ?")
     public void refreshMonthAmount(){
-        List<Watermeter> watermeterList = meterMapper.findAll();
-        for(Watermeter watermeter : watermeterList) {
-            watermeter.setMonthAmount(BigDecimal.ZERO);
-            meterMapper.uptWatermeterValue(watermeter);
-        }
+        meterMapper.dailyRefresh();
     }
 
 
@@ -57,35 +58,49 @@ public class WatemeterSchedule {
 
     @Transactional
     public void watermeterProcess(Watermeter watermeter) {
-        BigDecimal dayUsage = watermeter.getReadValue().subtract(watermeter.getPreReadValue());
-        dayUsage = dayUsage.compareTo(BigDecimal.ZERO) == -1 ? BigDecimal.ZERO : dayUsage;
-        watermeter.setMonthAmount(watermeter.getMonthAmount().add(dayUsage));
         watermeter.setPreReadValue(watermeter.getReadValue());
         watermeter.setPreReadTime(watermeter.getReadTime());
+        watermeter.setState(0);
+
         WatermeterUsage watermeterUsage = new WatermeterUsage();
         watermeterUsage.setWatermeterNo(watermeter.getMeterNo());
-        watermeterUsage.setWatermeterUsaga(dayUsage);
-        watermeterUsage.setEndTime(watermeter.getReadTime());
+        watermeterUsage.setEndTime(System.currentTimeMillis()/1000);
         watermeterUsage.setEndValue(watermeter.getReadValue());
         watermeterUsage.setEnprNo(watermeter.getEnprNo());
-        usageMapper.save(watermeterUsage);
 
         int uid = watermeter.getuId();
         WatermeterCost watermeterCost = new WatermeterCost();
         watermeterCost.setuId(uid);
-        watermeterCost.setWatermeterUsage(dayUsage);
         watermeterCost.setCostTime(System.currentTimeMillis()/1000);
         watermeterCost.setWatermeterNo(watermeter.getMeterNo());
         watermeterCost.setEnprNo(watermeter.getEnprNo());
-        int waterType = watermeter.getMeterType();
-        List<LadderedWaterprice> levels = ladderedWaterpriceMapper.getLevels(watermeter.getEnprNo(), waterType);
-        BigDecimal cost = getCost(levels, dayUsage, watermeter.getMonthAmount());
-        watermeterCost.setCostMoney(cost);
-        costMapper.save(watermeterCost);
+        if(watermeter.getIsUpdate() == 1) {
+            BigDecimal dayUsage = watermeter.getReadValue().subtract(watermeter.getPreReadValue());
+            dayUsage = dayUsage.compareTo(BigDecimal.ZERO) == -1 ? BigDecimal.ZERO : dayUsage;
+            watermeter.setMonthAmount(watermeter.getMonthAmount().add(dayUsage));
 
-        User user = userMapper.findByUid(uid);
-        user.setAccountBalance(user.getAccountBalance().subtract(cost));
-        userMapper.saveUser(user);
+            watermeterUsage.setWatermeterUsaga(dayUsage);
+
+            watermeterCost.setWatermeterUsage(dayUsage);
+            int waterType = watermeter.getMeterType();
+            List<LadderedWaterprice> levels = ladderedWaterpriceMapper.getLevels(watermeter.getEnprNo(), waterType);
+            BigDecimal cost = getCost(levels, dayUsage, watermeter.getMonthAmount());
+            watermeterCost.setCostMoney(cost);
+
+            User user = userMapper.findByUid(uid);
+            user.setAccountBalance(user.getAccountBalance().subtract(cost));
+            userMapper.saveUser(user);
+        } else {
+            if((System.currentTimeMillis()/1000 - watermeter.getReadTime())/24*3600 >= 2){
+                watermeter.setState(1);
+            }
+            watermeterUsage.setWatermeterUsaga(BigDecimal.ZERO);
+            watermeterCost.setCostMoney(BigDecimal.ZERO);
+            watermeterCost.setWatermeterUsage(BigDecimal.ZERO);
+        }
+        meterMapper.uptWatermeterValue(watermeter);
+        usageMapper.save(watermeterUsage);
+        costMapper.save(watermeterCost);
     }
 
     private BigDecimal getCost(List<LadderedWaterprice> list, BigDecimal dayUsage, BigDecimal monthAmount){

@@ -20,4 +20,6 @@ public interface WaterMeterMapper {
     Set<String> findAllWatermeterNoByEnprNo(@Param("enprNo") String enprNo);
     List<Watermeter> findFailedWatermeter(int cid);
     List<Watermeter> findWatermeterByUid(@Param("uid") int uid);
+    void monthlyRefresh();
+    void dailyRefresh();
 }

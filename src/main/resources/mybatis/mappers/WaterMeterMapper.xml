@@ -33,7 +33,8 @@
           pre_read_time = #{preReadTime},
           pre_read_value = #{preReadValue},
           month_amount = #{monthAmount},
-          state = #{state}
+          state = #{state},
+          is_update = #{isUpdate}
         where
           watermeter_id = #{watermeterId}
           and is_delete = 0
@@ -104,5 +105,19 @@
           is_delete = 0
           and u_id = #{uid}
     </select>
+
+    <update id="monthlyRefresh">
+        update
+          t_watermeter
+        set
+          month_amount = 0
+    </update>
+
+    <update id="dailyRefresh">
+        update
+          t_watermeter
+        set
+          is_update = 0;
+    </update>
 
 </mapper>

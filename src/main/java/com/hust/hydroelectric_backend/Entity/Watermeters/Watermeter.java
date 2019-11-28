@@ -24,6 +24,7 @@ public class Watermeter {
     private Integer state;
     private String enprNo;
     private Integer isDelete;
+    private Integer isUpdate;
 
     public Integer getWatermeterId() {
         return watermeterId;
@@ -151,5 +152,13 @@ public class Watermeter {
 
     public void setMonthAmount(BigDecimal monthAmount) {
         this.monthAmount = monthAmount;
+    }
+
+    public Integer getIsUpdate() {
+        return isUpdate;
+    }
+
+    public void setIsUpdate(Integer isUpdate) {
+        this.isUpdate = isUpdate;
     }
 }
