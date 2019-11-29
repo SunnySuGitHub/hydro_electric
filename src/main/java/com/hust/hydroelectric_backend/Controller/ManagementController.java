@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * 日常小区/公司管理相关
  */
 @RestController
+@CrossOrigin("*")
 public class ManagementController {
 
     @Autowired
@@ -35,7 +36,7 @@ public class ManagementController {
      * 查看小区报修单
      */
     @GetMapping("/repair/list")
-    public ResultData list(@RequestParam("cid") int cid,
+    public ResultData list(@RequestParam("cId") int cid,
                              @RequestParam(value = "state", defaultValue = "-1") int state){
         return ResponseHandler.doHandle(() -> repairService.list(cid, state));
     }
@@ -67,9 +68,17 @@ public class ManagementController {
     /**
      * 编辑公告
      */
-    @PutMapping("notice")
+    @PutMapping("/notice")
     public ResultData noticeList(@RequestBody Notice notice){
         return ResponseHandler.doHandle(() -> noticeService.uptNotice(notice));
+    }
+
+    /**
+     * 删除公告
+     */
+    @DeleteMapping("/notice")
+    public ResultData delNotice(@RequestParam("id") int id){
+        return ResponseHandler.doHandle(() -> noticeService.delNotice(id));
     }
 
 

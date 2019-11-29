@@ -19,6 +19,7 @@ public class NoticeService {
     NoticeMapper noticeMapper;
 
     public ResultData addNotice(Notice notice){
+        notice.setPublishTime(System.currentTimeMillis()/1000);
         return Result.success(noticeMapper.addNotice(notice));
     }
 
@@ -28,6 +29,10 @@ public class NoticeService {
 
     public ResultData uptNotice(Notice notice){
         return Result.success(noticeMapper.uptNotice(notice));
+    }
+
+    public ResultData delNotice(int id){
+        return Result.success(noticeMapper.delNotice(id));
     }
 
 

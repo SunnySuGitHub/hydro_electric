@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * 管理员相关
  */
 @RestController
+@CrossOrigin("*")
 public class OperatorController {
 
     @Autowired

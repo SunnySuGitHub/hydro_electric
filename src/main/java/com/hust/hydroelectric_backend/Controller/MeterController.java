@@ -16,6 +16,7 @@ import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 表计相关操作
  */
 @RestController
+@CrossOrigin("*")
 public class MeterController {
 
     @Autowired
@@ -60,15 +62,15 @@ public class MeterController {
      * 运行设备统计
      */
     @GetMapping("/RunningCnt")
-    public ResultData getRunningCnt(@RequestParam("cid") int cId){
+    public ResultData getRunningCnt(@RequestParam("cId") int cId){
         return ResponseHandler.doHandle(() -> commonMeterService.getRunningCnt(cId));
     }
 
     /**
-     * 小区表计近日使用总量统计
+     * 小区表计时间段内使用总量统计
      */
     @GetMapping("/GetCommunityUsage")
-    public ResultData getCommunityUsage(@RequestParam("cid") int cId,
+    public ResultData getCommunityUsage(@RequestParam("cId") int cId,
                                         @RequestParam(value = "meterType", defaultValue = "1") int meterType,
                                         @RequestParam("startDateLine") long startLine,
                                         @RequestParam("endDateLine") long endLine,
@@ -98,8 +100,8 @@ public class MeterController {
     /**
      * 根据用户id查询表信息
      */
-    @GetMapping("/GetMeterDetailByUsernameAndEnprNo")
-    public ResultData getMeterDetailByUsernameAndEnprNo(@RequestParam(value = "uid", defaultValue = "1") int uid,
+    @GetMapping("/GetMeterDetailByUid")
+    public ResultData getMeterDetailByUsernameAndEnprNo(@RequestParam(value = "uId", defaultValue = "1") int uid,
                                                         @RequestParam(value = "meterType", defaultValue = "1") int meterType){
         if(meterType == Constants.TYPE_WATERMETER)
             return ResponseHandler.doHandle(() -> waterMeterService.getWatermeterByUid(uid));
@@ -111,7 +113,7 @@ public class MeterController {
      * 0为水表  1为电表
      */
     @GetMapping("/GetFailedMeters")
-    public ResultData getFailedMeters(@RequestParam(value = "cid", defaultValue = "1") int cid,
+    public ResultData getFailedMeters(@RequestParam(value = "cId", defaultValue = "1") int cid,
                                       @RequestParam(value = "meterType", defaultValue = "1") int meterType){
         if(meterType == Constants.TYPE_WATERMETER)
             return ResponseHandler.doHandle(() -> waterMeterService.getFailedWaterMeters(cid));
@@ -154,13 +156,13 @@ public class MeterController {
      * 查询表计扣费记录 天维度
      */
     @GetMapping("/GetAmmeterDailyCost")
-    public ResultData getAmmeterDailyCost(@RequestParam("ammeterNo") String ammeterNo,
+    public ResultData getAmmeterDailyCost(@RequestParam("meterNo") String meterNo,
                                           @RequestParam("enprNo") String enprNo,
                                           @RequestParam(value = "meterType", defaultValue = "1") int meterType){
-        if(StringUtils.isNotBlank(ammeterNo) && StringUtils.isNotBlank(enprNo)) {
+        if(StringUtils.isNotBlank(meterNo) && StringUtils.isNotBlank(enprNo)) {
             if(meterType == Constants.TYPE_WATERMETER)
-                return ResponseHandler.doHandle(() -> watermeterCostService.getWatermeterDailyCost(ammeterNo, enprNo));
-            return ResponseHandler.doHandle(() -> ammeterCostService.getAmmeterDailyCost(ammeterNo, enprNo));
+                return ResponseHandler.doHandle(() -> watermeterCostService.getWatermeterDailyCost(meterNo, enprNo));
+            return ResponseHandler.doHandle(() -> ammeterCostService.getAmmeterDailyCost(meterNo, enprNo));
         } else {
             return Result.error(HttpStatus.BAD_REQUEST, "参数缺失");
         }

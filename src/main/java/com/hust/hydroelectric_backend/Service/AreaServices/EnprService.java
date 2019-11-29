@@ -50,7 +50,7 @@ public class EnprService {
         return Result.success(enprMapper.findByEnprNo(enprNo));
     }
 
-    public ResultData uptByEnprNo(String enprNo) {
-        return Result.success(enprMapper.uptByEnprNo(enprNo));
+    public ResultData uptByEnprNo(Enpr enpr) {
+        return Result.success(enprMapper.uptByEnprNo(enpr));
     }
 }

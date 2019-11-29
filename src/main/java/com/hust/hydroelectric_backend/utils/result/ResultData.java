@@ -7,22 +7,22 @@ package com.hust.hydroelectric_backend.utils.result;
  * 结果类基类
  */
 public class ResultData<T> {
-    private int error;
+    private int code;
     private String msg;
     private T data;
 
-    public ResultData(int error, String msg, T data) {
-        this.error = error;
+    public ResultData(int code, String msg, T data) {
+        this.code = code;
         this.msg = msg;
         this.data = data;
     }
 
-    public int getError() {
-        return this.error;
+    public int getCode() {
+        return this.code;
     }
 
-    public void setError(int error) {
-        this.error = error;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMsg() {

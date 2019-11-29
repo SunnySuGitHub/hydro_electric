@@ -5,6 +5,7 @@ import com.hust.hydroelectric_backend.Service.ExcelImport.WaterImportService;
 import com.hust.hydroelectric_backend.utils.ResponseHandler;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * 导入操作
  */
 @RestController("/import")
+@CrossOrigin("*")
 public class ImportController {
 
     @Autowired

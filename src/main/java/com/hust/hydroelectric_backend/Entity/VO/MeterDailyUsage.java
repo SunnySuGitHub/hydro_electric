@@ -11,6 +11,7 @@ import java.util.Date;
 public class MeterDailyUsage {
     private Date dateline;
     private BigDecimal dailyUse;
+    private Integer meterType;
 
     public Date getDateline() {
         return dateline;
@@ -26,5 +27,13 @@ public class MeterDailyUsage {
 
     public void setDailyUse(BigDecimal dailyUse) {
         this.dailyUse = dailyUse;
+    }
+
+    public Integer getMeterType() {
+        return meterType;
+    }
+
+    public void setMeterType(Integer meterType) {
+        this.meterType = meterType;
     }
 }

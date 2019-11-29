@@ -7,7 +7,7 @@ package com.hust.hydroelectric_backend.Entity.VO;
  */
 public class RunningDevice {
     private Integer waterMeterCnt;
-    private Integer WaterMeterSucCnt;
+    private Integer waterMeterSucCnt;
     private Integer ammeterCnt;
     private Integer ammeterSucCnt;
 
@@ -20,11 +20,11 @@ public class RunningDevice {
     }
 
     public Integer getWaterMeterSucCnt() {
-        return WaterMeterSucCnt;
+        return waterMeterSucCnt;
     }
 
     public void setWaterMeterSucCnt(Integer waterMeterSucCnt) {
-        WaterMeterSucCnt = waterMeterSucCnt;
+        this.waterMeterSucCnt = waterMeterSucCnt;
     }
 
     public Integer getAmmeterCnt() {

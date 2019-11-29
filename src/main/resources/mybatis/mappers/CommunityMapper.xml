@@ -17,7 +17,9 @@
 
     <select id="getCommunity" resultType="com.hust.hydroelectric_backend.Entity.Areas.Community">
         select
-          *
+          c_id,
+          c_name,
+          enprNo
         from
           t_community
         where
@@ -48,7 +50,9 @@
 
     <select id="communityList" resultType="com.hust.hydroelectric_backend.Entity.Areas.Community">
         select
-          *
+          c_id,
+          c_name,
+          enprNo
         from
           t_community
         where

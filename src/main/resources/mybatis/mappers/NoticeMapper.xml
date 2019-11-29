@@ -36,8 +36,16 @@
             <if test="content !=null"> ,content = #{content}</if>
             <if test="publishTime !=null"> ,publish_time = #{publishTime}</if>
             <if test="enprNo !=null"> ,enprNo = #{enprNo}</if>
-            <if test="isDelete !=null"> ,is_delete = #{isDelete}</if>
         </set>
+        where
+          id = #{id}
+    </update>
+
+    <update id="delNotice" parameterType="java.lang.Integer">
+        update
+          t_notice
+        set
+          is_delete = 1
         where
           id = #{id}
     </update>

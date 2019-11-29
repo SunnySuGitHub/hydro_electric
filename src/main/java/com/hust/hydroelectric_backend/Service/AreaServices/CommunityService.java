@@ -36,7 +36,7 @@ public class CommunityService {
     }
 
     public ResultData communityList(String enprNo){
-        return Result.success(communityMapper);
+        return Result.success(communityMapper.communityList(enprNo));
     }
 
 }

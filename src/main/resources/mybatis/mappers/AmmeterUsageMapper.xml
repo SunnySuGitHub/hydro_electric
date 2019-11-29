@@ -7,7 +7,8 @@
     <select id="getAmmeterDailyUsage" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage">
         select
           sum(ammeter_usage) as daily_use,
-          FROM_UNIXTIME(end_time,'%Y-%m-%d') as dateline
+          FROM_UNIXTIME(end_time,'%Y-%m-%d') as dateline,
+          1 as water_type
         from
           t_ammeter_usage
         where

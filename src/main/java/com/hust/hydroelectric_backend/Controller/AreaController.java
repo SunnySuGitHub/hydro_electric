@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  * 区域相关操作
  */
 @RestController
+@CrossOrigin("*")
 public class AreaController {
 
     @Autowired
@@ -53,8 +54,8 @@ public class AreaController {
      * 修改公司信息
      */
     @PutMapping("/enpr")
-    public ResultData uptEnprMsg(@RequestParam("enprNo") String enprNo){
-        return ResponseHandler.doHandle(() -> enprService.uptByEnprNo(enprNo));
+    public ResultData uptEnprMsg(@RequestBody Enpr enpr){
+        return ResponseHandler.doHandle(() -> enprService.uptByEnprNo(enpr));
     }
 
     /**
@@ -69,7 +70,7 @@ public class AreaController {
      * 获取小区信息
      */
     @GetMapping("/community")
-    public ResultData getCommunity(@RequestParam(value = "cid", defaultValue = "-1") int id) {
+    public ResultData getCommunity(@RequestParam(value = "cId", defaultValue = "-1") int id) {
         return ResponseHandler.doHandle(() -> communityService.getCommunity(id));
     }
 
@@ -85,7 +86,7 @@ public class AreaController {
      * 删除小区信息
      */
     @DeleteMapping("/community")
-    public ResultData delCommunity(@RequestParam(value = "cid", defaultValue = "-1") int id) {
+    public ResultData delCommunity(@RequestParam(value = "cId", defaultValue = "-1") int id) {
         return ResponseHandler.doHandle(() -> communityService.delCommunity(id));
     }
 
@@ -100,7 +101,7 @@ public class AreaController {
     /**
      * 获取公司下所有小区信息
      */
-    @PutMapping("/community/list")
+    @GetMapping("/community/list")
     public ResultData communityList(@RequestParam("enprNo") String enprNo) {
         if(StringUtils.isNotBlank(enprNo))
             return ResponseHandler.doHandle(() -> communityService.communityList(enprNo));
@@ -111,7 +112,7 @@ public class AreaController {
      * 获取小区下的所有楼栋信息
      */
     @GetMapping("/block/list")
-    public ResultData getBlockList(@RequestParam(value = "cid", defaultValue = "-1") int cid) {
+    public ResultData getBlockList(@RequestParam(value = "cId", defaultValue = "-1") int cid) {
         return ResponseHandler.doHandle(() -> blockService.getBlockByCid(cid));
     }
 
@@ -119,7 +120,7 @@ public class AreaController {
      * 获取楼栋信息
      */
     @GetMapping("/block")
-    public ResultData getBlock(@RequestParam(value = "bid", defaultValue = "-1") int bid) {
+    public ResultData getBlock(@RequestParam(value = "bId", defaultValue = "-1") int bid) {
         return ResponseHandler.doHandle(() -> blockService.getBlock(bid));
     }
 
@@ -127,7 +128,7 @@ public class AreaController {
      * 删除楼栋信息
      */
     @DeleteMapping("/block")
-    public ResultData delBlock(@RequestParam(value = "bid", defaultValue = "-1") int bid) {
+    public ResultData delBlock(@RequestParam(value = "bId", defaultValue = "-1") int bid) {
         return ResponseHandler.doHandle(() -> blockService.delBlock(bid));
     }
 
