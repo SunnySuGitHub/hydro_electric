@@ -15,6 +15,7 @@ import java.util.Set;
 @Repository
 public interface UserMapper {
     List<User> findAllUsers(@Param("enprNo") String enprNo);
+    List<User> findTotalUser();
     User findByUid(@Param("uid") int uid);
     int saveUser(User user);
     int delUserByUid(@Param("uid") int uid);

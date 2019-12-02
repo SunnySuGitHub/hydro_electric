@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author: suxinyu
@@ -19,17 +20,18 @@ public class RepairService {
     @Resource
     RepairMapper repairMapper;
 
-    public ResultData add(Repair repair){
-        repair.setSubmitTime(System.currentTimeMillis()/1000);
+    public ResultData add(Repair repair) {
+        repair.setSubmitTime(System.currentTimeMillis() / 1000);
         return Result.success(repairMapper.save(repair));
     }
 
-    public ResultData list(int cid, int state){
-        return Result.success(repairMapper.list(cid, state));
+    public ResultData list(String enprNo, int state) {
+        List<Repair> repairList = repairMapper.list(enprNo, state);
+        return Result.success(repairList);
     }
 
-    public ResultData upt(Repair repair){
-        if(repair.getRepairId() == null){
+    public ResultData upt(Repair repair) {
+        if (repair.getRepairId() == null) {
             return Result.error(HttpStatus.BAD_REQUEST, "参数不规范");
         } else {
             return Result.success(repairMapper.uptRepair(repair));

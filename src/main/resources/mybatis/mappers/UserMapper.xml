@@ -11,6 +11,7 @@
           t_user
         where
           enprNo = #{enprNo}
+          and is_delete = 0
     </select>
 
     <select id="findByUid" resultType="com.hust.hydroelectric_backend.Entity.User">
@@ -20,6 +21,16 @@
           t_user
         where
           u_id = #{uid}
+          and is_delete = 0
+    </select>
+
+    <select id="findTotalUser" resultType="com.hust.hydroelectric_backend.Entity.User">
+        SELECT
+          *
+        FROM
+          t_user
+        where
+          is_delete = 0
     </select>
 
     <insert id="saveUser" parameterType="com.hust.hydroelectric_backend.Entity.User" useGeneratedKeys="true" keyProperty="uId">

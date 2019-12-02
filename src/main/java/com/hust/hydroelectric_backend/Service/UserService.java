@@ -43,25 +43,25 @@ public class UserService {
     JedisUtil jedisUtil;
 
     public ResultData findByUserId(int uid, String enprNo){
-        if(jedisUtil.hGet(enprNo, "uid"+uid) == null) {
+        if(jedisUtil.hGet(enprNo, "Uid"+uid) == null) {
             User user = userMapper.findByUid(uid);
-            jedisUtil.hSet(enprNo, "uid"+uid, JSON.toJSONString(uid));
+            jedisUtil.hSet(enprNo, "Uid"+uid, JSON.toJSONString(uid));
             return Result.success(user);
         } else {
-            User user = JSON.parseObject(jedisUtil.hGet(enprNo, "uid"+uid), User.class);
+            User user = JSON.parseObject(jedisUtil.hGet(enprNo, "Uid"+uid), User.class);
             return Result.success(user);
         }
     }
 
     public ResultData delUserById(int uid, String enprNo){
-        jedisUtil.hDel(enprNo, "uid"+uid);
+        jedisUtil.hDel(enprNo, "Uid"+uid);
         jedisUtil.hDel(enprNo, "UserInfoUid"+uid);
         return Result.success(userMapper.delUserByUid(uid));
     }
 
     public ResultData uptUser(User user){
         String enprNo = user.getEnprNo();
-        jedisUtil.hDel(enprNo, "uid"+user.getuId());
+        jedisUtil.hDel(enprNo, "Uid"+user.getuId());
         jedisUtil.hDel(enprNo, "UserInfoUid"+user.getuId());
         return Result.success(userMapper.uptUser(user));
     }
@@ -93,16 +93,24 @@ public class UserService {
         }
     }
 
-    public ResultData userDailyCost(int uid) {
-        List<Watermeter> meters = waterMeterMapper.findWatermeterByUid(uid);
-        List<Ammeter> ammeters = ammeterMapper.findAmmeterByUid(uid);
-        List<MeterDailyCost> personalCost = new ArrayList<>();
-        for(Watermeter watermeter : meters) {
-            personalCost.addAll(watermeterCostMapper.getWatermeterDailyCost(watermeter.getMeterNo(), watermeter.getEnprNo()));
+    public ResultData userDailyCost(int uid, String enprNo) {
+        //每天定时一点半清空redis记录
+        if(jedisUtil.hGet(enprNo, "MeterDailyCost"+uid) == null) {
+            List<Watermeter> meters = waterMeterMapper.findWatermeterByUid(uid);
+            List<Ammeter> ammeters = ammeterMapper.findAmmeterByUid(uid);
+            List<MeterDailyCost> personalCost = new ArrayList<>();
+            for(Watermeter watermeter : meters) {
+                personalCost.addAll(watermeterCostMapper.getWatermeterDailyCost(watermeter.getMeterNo(), watermeter.getEnprNo()));
+            }
+            for(Ammeter ammeter : ammeters) {
+                personalCost.addAll(ammeterCostMapper.getAmmeterDailyCost(ammeter.getAmmeterNo(), ammeter.getEnprNo()));
+            }
+            jedisUtil.hSet(enprNo, "MeterDailyCost"+uid, JSONArray.toJSONString(personalCost));
+            return Result.success(personalCost);
+        } else {
+            List<MeterDailyCost> personalCost = JSONArray.parseArray(
+                    jedisUtil.hGet(enprNo, "MeterDailyCost"+uid), MeterDailyCost.class);
+            return Result.success(personalCost);
         }
-        for(Ammeter ammeter : ammeters) {
-            personalCost.addAll(ammeterCostMapper.getAmmeterDailyCost(ammeter.getAmmeterNo(), ammeter.getEnprNo()));
-        }
-        return Result.success(personalCost);
     }
 }

@@ -68,8 +68,9 @@ public class UserController {
      * 查看用户的水费、电费每天扣费记录
      */
     @GetMapping("/user/dailyCost")
-    public ResultData userDailyCost(@RequestParam("uId") int uid) {
-        return ResponseHandler.doHandle(() -> userService.userDailyCost(uid));
+    public ResultData userDailyCost(@RequestParam("uId") int uid,
+                                    @RequestParam("enprNo") String enprNo) {
+        return ResponseHandler.doHandle(() -> userService.userDailyCost(uid, enprNo));
     }
 
     /**

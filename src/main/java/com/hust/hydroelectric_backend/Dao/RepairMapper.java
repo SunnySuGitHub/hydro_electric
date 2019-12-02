@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface RepairMapper {
     int save(Repair repair);
-    List<Repair> list(@Param("cid") int cid, @Param("state") int state);
+    List<Repair> list(@Param("enprNo") String enprNo, @Param("state") int state);
     int uptRepair(Repair repair);
 }

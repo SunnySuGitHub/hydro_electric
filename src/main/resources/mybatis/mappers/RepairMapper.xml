@@ -12,7 +12,7 @@
             u_addr,
             submit_time,
             problem,
-            c_id
+            enprNo
           ) values (
             #{uId},
             #{uTel},
@@ -20,7 +20,7 @@
             #{uAddr},
             #{submitTime},
             #{problem},
-            #{cId}
+            #{enprNo}
           )
     </insert>
 
@@ -30,7 +30,7 @@
         from
           t_repair
         where
-          c_id = #{cid}
+          enprNo = #{enprNo}
           <if test="state !=-1"> and state = #{state}</if>
     </select>
 
@@ -47,7 +47,6 @@
             <if test="isFeedback !=null"> ,is_feedback = #{isFeedback}</if>
             <if test="problem !=null"> ,problem = #{problem}</if>
             <if test="state !=null"> ,state = #{state}</if>
-            <if test="cId !=null"> ,c_id = #{cId}</if>
         </set>
         where
           repair_id = #{repairId}

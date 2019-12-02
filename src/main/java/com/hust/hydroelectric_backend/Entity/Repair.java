@@ -16,7 +16,7 @@ public class Repair {
     private Integer isFeedback;
     private String problem;
     private Integer state;
-    private Integer cId;
+    private String enprNo;
 
     public Integer getRepairId() {
         return repairId;
@@ -106,11 +106,11 @@ public class Repair {
         this.state = state;
     }
 
-    public Integer getcId() {
-        return cId;
+    public String getEnprNo() {
+        return enprNo;
     }
 
-    public void setcId(Integer cId) {
-        this.cId = cId;
+    public void setEnprNo(String enprNo) {
+        this.enprNo = enprNo;
     }
 }

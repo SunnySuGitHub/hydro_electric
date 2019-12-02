@@ -36,9 +36,9 @@ public class ManagementController {
      * 查看小区报修单
      */
     @GetMapping("/repair/list")
-    public ResultData list(@RequestParam("cId") int cid,
+    public ResultData list(@RequestParam("enprNo") String enprNo,
                              @RequestParam(value = "state", defaultValue = "-1") int state){
-        return ResponseHandler.doHandle(() -> repairService.list(cid, state));
+        return ResponseHandler.doHandle(() -> repairService.list(enprNo, state));
     }
 
     /**
@@ -77,8 +77,9 @@ public class ManagementController {
      * 删除公告
      */
     @DeleteMapping("/notice")
-    public ResultData delNotice(@RequestParam("id") int id){
-        return ResponseHandler.doHandle(() -> noticeService.delNotice(id));
+    public ResultData delNotice(@RequestParam("id") int id,
+                                @RequestParam("enprNo") String enprNo){
+        return ResponseHandler.doHandle(() -> noticeService.delNotice(id, enprNo));
     }
 
 

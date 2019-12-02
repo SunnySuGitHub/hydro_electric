@@ -41,12 +41,12 @@ public class OperatorService {
         if(id == -1){
             return Result.error(HttpStatus.BAD_REQUEST, "参数不规范");
         }
-        if(jedisUtil.hGet(enprNo, "operatorId"+id) == null) {
+        if(jedisUtil.hGet(enprNo, "OperatorId"+id) == null) {
             Operator operator = operatorMapper.getOperator(id);
-            jedisUtil.hSet(enprNo, "operatorId"+id, JSON.toJSONString(operator));
+            jedisUtil.hSet(enprNo, "OperatorId"+id, JSON.toJSONString(operator));
             return Result.success(operator);
         } else {
-            Operator operator = JSON.parseObject(jedisUtil.hGet(enprNo, "operatorId"+id), Operator.class);
+            Operator operator = JSON.parseObject(jedisUtil.hGet(enprNo, "OperatorId"+id), Operator.class);
             return Result.success(operator);
         }
     }
@@ -56,7 +56,7 @@ public class OperatorService {
             return Result.error(HttpStatus.BAD_REQUEST, "参数不规范");
         } else {
             String enprNo = operator.getEnprNo();
-            jedisUtil.hDel(enprNo, "operatorList");
+            jedisUtil.hDel(enprNo, "OperatorList");
             return Result.success(operatorMapper.addOperator(operator));
         }
     }
@@ -66,8 +66,8 @@ public class OperatorService {
             return Result.error(HttpStatus.BAD_REQUEST, "参数不规范");
         } else {
             String enprNo = operator.getEnprNo();
-            jedisUtil.hDel(enprNo, "operatorId"+operator.getOperatorId());
-            jedisUtil.hDel(enprNo, "operatorList");
+            jedisUtil.hDel(enprNo, "OperatorId"+operator.getOperatorId());
+            jedisUtil.hDel(enprNo, "OperatorList");
             return Result.success(operatorMapper.uptOperator(operator));
         }
     }
@@ -77,8 +77,8 @@ public class OperatorService {
             return Result.error(HttpStatus.BAD_REQUEST, "参数不规范");
         } else {
             int res = operatorMapper.delOperator(id);
-            jedisUtil.hDel(enprNo, "operatorId"+id);
-            jedisUtil.hDel(enprNo, "operatorList");
+            jedisUtil.hDel(enprNo, "OperatorId"+id);
+            jedisUtil.hDel(enprNo, "OperatorList");
             if(res == 1) return Result.success("删除成功");
             return Result.error(HttpStatus.INTERNAL_SERVER_ERROR, "删除失败");
 
@@ -86,13 +86,13 @@ public class OperatorService {
     }
 
     public ResultData operatorList(String enprNo){
-        if(jedisUtil.hGet(enprNo, "operatorList") == null) {
+        if(jedisUtil.hGet(enprNo, "OperatorList") == null) {
             List<Operator> operatorList = operatorMapper.operatorList(enprNo);
             String operatorDetailList = JSONArray.toJSONString(operatorList);
-            jedisUtil.hSet(enprNo, "operatorList", operatorDetailList);
+            jedisUtil.hSet(enprNo, "OperatorList", operatorDetailList);
             return Result.success(operatorList);
         } else {
-            String res = jedisUtil.hGet(enprNo, "operatorList");
+            String res = jedisUtil.hGet(enprNo, "OperatorList");
             List<Operator> operators = JSONArray.parseArray(res, Operator.class);
             return Result.success(operators);
         }
