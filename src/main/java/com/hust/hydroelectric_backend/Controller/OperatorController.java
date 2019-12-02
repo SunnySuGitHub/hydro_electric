@@ -31,8 +31,9 @@ public class OperatorController {
     }
 
     @GetMapping("/operator")
-    public ResultData getOprator(@RequestParam(value = "operatorId", defaultValue = "-1") int id){
-        return ResponseHandler.doHandle(() -> operatorService.getOperator(id));
+    public ResultData getOprator(@RequestParam(value = "operatorId", defaultValue = "-1") int id,
+                                 @RequestParam("enprNo") String enprNo){
+        return ResponseHandler.doHandle(() -> operatorService.getOperator(id, enprNo));
     }
 
     @PostMapping("/operator")
@@ -41,8 +42,9 @@ public class OperatorController {
     }
 
     @DeleteMapping("/operator")
-    public ResultData delOperator(@RequestParam(value = "operatorId", defaultValue = "-1") int id){
-        return ResponseHandler.doHandle(() -> operatorService.delOperator(id));
+    public ResultData delOperator(@RequestParam(value = "operatorId", defaultValue = "-1") int id,
+                                  @RequestParam("enprNo") String enprNo){
+        return ResponseHandler.doHandle(() -> operatorService.delOperator(id, enprNo));
     }
 
     @PutMapping("/operator")

@@ -20,7 +20,7 @@
           and enprNo = #{enprNo}
     </select>
 
-    <select id="getOperator" parameterType="java.lang.String" resultType="com.hust.hydroelectric_backend.Entity.Operator">
+    <select id="getOperator" resultType="com.hust.hydroelectric_backend.Entity.Operator">
         select
           *
         from

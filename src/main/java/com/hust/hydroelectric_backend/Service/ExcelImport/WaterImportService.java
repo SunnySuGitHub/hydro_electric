@@ -56,14 +56,15 @@ public class WaterImportService extends ImportBase {
                 curBlock.setbName(blockName);
                 curBlock.setcId(communityId);
                 try {
-                    bid = blockMapper.saveBlock(curBlock);
+                    blockMapper.saveBlock(curBlock);
+                    bid = curBlock.getbId();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             } else {
                 bid = block.getbId();
             }
-            for (int i = 1; i < dataList.size(); i++) {//循环每一行，即对应单个用户
+            for (int i = 2; i < dataList.size(); i++) {//循环每一行，即对应单个用户
                 List<String> cellList = dataList.get(i);
                 String uname = cellList.get(0);
                 String tel = cellList.get(1);
@@ -86,7 +87,12 @@ public class WaterImportService extends ImportBase {
                     curUser.setAddress(uaddr);
                     curUser.setAccountBalance(BigDecimal.ZERO);
                     curUser.setEnprNo(enprNo);
-                    uid = userMapper.saveUser(curUser);
+                    try{
+                        userMapper.saveUser(curUser);
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    uid = curUser.getuId();
                 } else {
                     uid = user.getuId();
                 }

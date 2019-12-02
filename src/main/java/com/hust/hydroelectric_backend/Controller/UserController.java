@@ -30,13 +30,15 @@ public class UserController {
     WechatpayService wechatpayService;
 
     @GetMapping("/user")
-    public ResultData getUser(@RequestParam(name = "uId", defaultValue = "-1") int id){
-        return ResponseHandler.doHandle(()->userService.findByUserId(id));
+    public ResultData getUser(@RequestParam(name = "uId", defaultValue = "-1") int id,
+                              @RequestParam("enprNo") String enprNo){
+        return ResponseHandler.doHandle(()->userService.findByUserId(id, enprNo));
     }
 
     @DeleteMapping("/user")
-    public ResultData delUser(@RequestParam(name = "uId", defaultValue = "-1") int id){
-        return ResponseHandler.doHandle(()->userService.delUserById(id));
+    public ResultData delUser(@RequestParam(name = "uId", defaultValue = "-1") int id,
+                              @RequestParam("enprNo") String enprNo){
+        return ResponseHandler.doHandle(()->userService.delUserById(id, enprNo));
     }
 
     @PutMapping("/user")
@@ -48,16 +50,18 @@ public class UserController {
      * 根据楼栋获取用户相关信息
      */
     @GetMapping("/GetUserInfoByBlockId")
-    public ResultData getUserInfoByBlockId(@RequestParam(value = "bId", defaultValue = "-1") int bId){
-        return ResponseHandler.doHandle(() -> userService.getUserInfoByBlockId(bId));
+    public ResultData getUserInfoByBlockId(@RequestParam(value = "bId", defaultValue = "-1") int bId,
+                                           @RequestParam("enprNo") String enprNo){
+        return ResponseHandler.doHandle(() -> userService.getUserInfoByBlockId(bId, enprNo));
     }
 
     /**
      * 根据用户id获取用户相关信息
      */
     @GetMapping("/GetUserInfoByUid")
-    public ResultData getUserInfoByUid(@RequestParam(value = "uId", defaultValue = "-1") int uid){
-        return ResponseHandler.doHandle(() -> userService.getUserInfoByUid(uid));
+    public ResultData getUserInfoByUid(@RequestParam(value = "uId", defaultValue = "-1") int uid,
+                                       @RequestParam("enprNo") String enprNo){
+        return ResponseHandler.doHandle(() -> userService.getUserInfoByUid(uid, enprNo));
     }
 
     /**

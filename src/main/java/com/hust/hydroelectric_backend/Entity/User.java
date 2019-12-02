@@ -80,4 +80,6 @@ public class User {
     public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
     }
+
+
 }

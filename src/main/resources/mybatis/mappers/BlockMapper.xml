@@ -16,7 +16,7 @@
           and c_id = #{cId}
     </select>
 
-    <insert id="saveBlock" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Block" useGeneratedKeys="true" keyProperty="b_id">
+    <insert id="saveBlock" parameterType="com.hust.hydroelectric_backend.Entity.Areas.Block" useGeneratedKeys="true" keyProperty="bId">
         insert into
           t_block(
             b_name,

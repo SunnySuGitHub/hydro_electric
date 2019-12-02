@@ -22,7 +22,7 @@
           u_id = #{uid}
     </select>
 
-    <insert id="saveUser" parameterType="com.hust.hydroelectric_backend.Entity.User" useGeneratedKeys="true" keyProperty="u_id">
+    <insert id="saveUser" parameterType="com.hust.hydroelectric_backend.Entity.User" useGeneratedKeys="true" keyProperty="uId">
         insert into
           t_user(
             u_name,
