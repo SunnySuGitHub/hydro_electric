@@ -7,8 +7,11 @@ import com.hust.hydroelectric_backend.Entity.User;
 import com.hust.hydroelectric_backend.Service.PayService;
 import com.hust.hydroelectric_backend.Service.UserService;
 import com.hust.hydroelectric_backend.utils.ResponseHandler;
+import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -62,6 +65,27 @@ public class UserController {
     public ResultData getUserInfoByUid(@RequestParam(value = "uId", defaultValue = "-1") int uid,
                                        @RequestParam("enprNo") String enprNo){
         return ResponseHandler.doHandle(() -> userService.getUserInfoByUid(uid, enprNo));
+    }
+
+    /**
+     * 根据用户姓名获取用户相关信息
+     */
+    @GetMapping("/GetUserInfoByUname")
+    public ResultData getUserInfoByUname(@RequestParam(value = "uName") String uname,
+                                         @RequestParam("enprNo") String enprNo){
+        if(StringUtils.isNotBlank(uname) && StringUtils.isNotBlank(enprNo))
+            return ResponseHandler.doHandle(() -> userService.getUserInfoByUname(uname, enprNo));
+        return Result.error(HttpStatus.BAD_REQUEST, "参数缺失");
+    }
+
+    /**
+     * 根据表地址获取用户相关信息
+     */
+    @GetMapping("/GetUserInfoByMeterNo")
+    public ResultData getUserInfoByMeterNo(@RequestParam(value = "meterNo", defaultValue = "-1") String meterNo,
+                                           @RequestParam("meterType") int meterType,
+                                           @RequestParam("enprNo") String enprNo){
+        return ResponseHandler.doHandle(() -> userService.getUserInfoByMeterNo(meterNo, meterType, enprNo));
     }
 
     /**

@@ -20,7 +20,7 @@
 
     <select id="getCommunityUsage" resultType="java.math.BigDecimal">
         select
-          sum(watermeter_usage)
+          sum(watermeter_usage) as total_usage
         from
           t_watermeter_usage
         where

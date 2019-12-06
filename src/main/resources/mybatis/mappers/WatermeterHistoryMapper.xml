@@ -4,21 +4,28 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.WatermeterHistoryMapper">
     <!--mapper接口所在包-->
 
-    <select id="getWatermeterHistoryByMeterNo" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.WatermeterHistorydata">
+    <select id="getWatermeterHistoryByMeterNo"
+            resultType="com.hust.hydroelectric_backend.Entity.Watermeters.WatermeterHistorydata">
         select
-          meter_no,
-          read_value,
-          read_time,
-          enprNo
+            meter_no,
+            read_value,
+            read_time,
+            enprNo
         from
           t_watermeter_historydata
         where
-          meter_no = #{meterNo}
-          and enprNo = #{enprNo}
-        <![CDATA[
+            meter_no = #{meterNo}
+            and enprNo = #{enprNo}
+        <if test="startLine !=-1">
+            <![CDATA[
             and read_time >= #{startLine}
+            ]]>
+        </if>
+        <if test="endLine !=-1">
+            <![CDATA[
             and read_time <= #{endLine}
-        ]]>
+            ]]>
+        </if>
     </select>
 
     <select id="getLatestRecordByMeterNo" resultType="java.math.BigDecimal">

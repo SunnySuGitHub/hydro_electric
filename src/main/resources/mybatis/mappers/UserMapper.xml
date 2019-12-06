@@ -16,7 +16,7 @@
 
     <select id="findByUid" resultType="com.hust.hydroelectric_backend.Entity.User">
         SELECT
-          u_name
+          *
         FROM
           t_user
         where
@@ -117,7 +117,7 @@
             read_time as read_time,
             read_value as read_value,
             state as state,
-            1 as meter_type,
+            0 as meter_type,
             u_id as u_id
           from
             t_watermeter
@@ -129,7 +129,7 @@
             read_time as read_time,
             read_value as read_value,
             state as state,
-            2 as meter_type,
+            1 as meter_type,
             u_id as u_id
           from
             t_ammeter
@@ -137,6 +137,16 @@
             u_id = #{uid}
         ) tmp
         on u.u_id = tmp.u_id
+    </select>
+
+    <select id="findUidsByUname" resultType="java.lang.Integer">
+        select
+          u_id
+        from
+          t_user
+        where
+          u_name = #{uname}
+          and enprNo = #{enprNo}
     </select>
 
     <select id="findByUnameAndTelAndEnprNo" resultType="com.hust.hydroelectric_backend.Entity.User">

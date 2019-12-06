@@ -11,7 +11,8 @@
             account,
             operator_tel,
             enprNo,
-            operator_type
+            operator_type,
+            password
         FROM
           t_operator
         where

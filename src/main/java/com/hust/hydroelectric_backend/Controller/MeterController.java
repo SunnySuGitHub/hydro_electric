@@ -62,8 +62,8 @@ public class MeterController {
      * 运行设备统计
      */
     @GetMapping("/RunningCnt")
-    public ResultData getRunningCnt(@RequestParam("cId") int cId){
-        return ResponseHandler.doHandle(() -> commonMeterService.getRunningCnt(cId));
+    public ResultData getRunningCnt(@RequestParam("enprNo") String enprNo){
+        return ResponseHandler.doHandle(() -> commonMeterService.getRunningCnt(enprNo));
     }
 
     /**
@@ -127,8 +127,8 @@ public class MeterController {
     @GetMapping("/GetMeterHistorydata")
     public ResultData getMeterHistorydata(@RequestParam("meterNo") String meterNo,
                                           @RequestParam("enprNo") String enprNo,
-                                          @RequestParam("startDateLine") long startDateLine,
-                                          @RequestParam("endDateLine") long endDateLine,
+                                          @RequestParam(value = "startDateLine", defaultValue = "-1") long startDateLine,
+                                          @RequestParam(value = "endDateLine", defaultValue = "-1") long endDateLine,
                                           @RequestParam(value = "meterType", defaultValue = "1") Integer meterType){
         if(meterType == Constants.TYPE_WATERMETER)
             return ResponseHandler.doHandle(()-> watermeterHistorydataService.getWatermeterHistorydata(meterNo, enprNo, startDateLine, endDateLine));

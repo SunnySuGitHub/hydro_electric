@@ -6,58 +6,76 @@
 
     <select id="getRunningCnt" resultType="com.hust.hydroelectric_backend.Entity.VO.RunningDevice">
         select
-          a.water_total as water_meter_cnt,
-          b.water_suc_total as water_meter_suc_cnt,
-          c.ammter_total as ammeter_cnt,
-          d.ammter_total as ammeter_suc_cnt
+          #{cId} as c_id,
+          com.c_name as c_name,
+          tmp.water_meter_cnt as water_meter_cnt,
+          tmp.water_meter_suc_cnt as water_meter_suc_cnt,
+          tmp.ammeter_cnt as ammeter_cnt,
+          tmp.ammeter_suc_cnt as ammeter_suc_cnt
         from(
-                select
-                  count(0) as water_total,
-                  c_id
-                from
-                  t_watermeter
-                where
-                  c_id = #{cId}
-                  and is_delete = 0
-            ) a
-            join
-            (
-                select
-                  count(0) as water_suc_total,
-                  c_id
-                from
-                  t_watermeter
-                where
-                  c_id = #{cId}
-                  and state = 1
-                  and is_delete = 0
-            ) b
-            on a.c_id = b.c_id
-            join
-            (
-                select
-                  count(0) as ammter_total,
-                  c_id
-                from
-                  t_ammeter
-                where
-                  c_id = #{cId}
-                  and is_delete = 0
-            ) c
-            on a.c_id = c.c_id
-            join
-            (
-                select
-                  count(0) as ammter_total,
-                  c_id
-                from
-                  t_ammeter
-                where
-                  c_id = #{cId}
-                  and state = 1
-                  and is_delete = 0
-            ) d
-            on a.c_id = d.c_id
+          select
+            c_id,
+            c_name
+          from
+            t_community
+          where c_id = #{cId}
+        ) com
+        left join (
+             select
+              a.water_total as water_meter_cnt,
+              b.water_suc_total as water_meter_suc_cnt,
+              c.ammter_total as ammeter_cnt,
+              d.ammter_suc_total as ammeter_suc_cnt,
+              #{cId} as c_id
+            from(
+                    select
+                      count(0) as water_total,
+                      #{cId} as c_id
+                    from
+                      t_watermeter
+                    where
+                      c_id = #{cId}
+                      and is_delete = 0
+                ) a
+                join
+                (
+                    select
+                      count(0) as water_suc_total,
+                      #{cId} as c_id
+                    from
+                      t_watermeter
+                    where
+                      c_id = #{cId}
+                      and state = 0
+                      and is_delete = 0
+                ) b
+                on a.c_id = b.c_id
+                join
+                (
+                    select
+                      count(0) as ammter_total,
+                      #{cId} as c_id
+                    from
+                      t_ammeter
+                    where
+                      c_id = #{cId}
+                      and is_delete = 0
+                ) c
+                on a.c_id = c.c_id
+                join
+                (
+                    select
+                      count(0) as ammter_suc_total,
+                      #{cId} as c_id
+                    from
+                      t_ammeter
+                    where
+                      c_id = #{cId}
+                      and state = 0
+                      and is_delete = 0
+                ) d
+                on a.c_id = d.c_id) tmp
+            on com.c_id = tmp.c_id
     </select>
 
 </mapper>

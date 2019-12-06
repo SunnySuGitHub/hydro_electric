@@ -6,10 +6,28 @@ package com.hust.hydroelectric_backend.Entity.VO;
  * @DateTme: 2019/11/19 9:34
  */
 public class RunningDevice {
+    private Integer cId;
+    private String cName;
     private Integer waterMeterCnt;
     private Integer waterMeterSucCnt;
     private Integer ammeterCnt;
     private Integer ammeterSucCnt;
+
+    public Integer getcId() {
+        return cId;
+    }
+
+    public void setcId(Integer cId) {
+        this.cId = cId;
+    }
+
+    public String getcName() {
+        return cName;
+    }
+
+    public void setcName(String cName) {
+        this.cName = cName;
+    }
 
     public Integer getWaterMeterCnt() {
         return waterMeterCnt;

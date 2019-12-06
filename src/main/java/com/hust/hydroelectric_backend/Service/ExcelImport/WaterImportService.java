@@ -39,6 +39,7 @@ public class WaterImportService extends ImportBase {
     @Override
     @Transactional
     public ResultData read(InputStream is, boolean isExcel2003, String enprNo, int communityId) {
+        System.out.println("开始导入");
         Object[] obs = ExcelImportUtil.readSheets(is, isExcel2003);
         List<List<String>>[] data = (List<List<String>>[]) obs[0];
         String[] blockNames = (String[]) obs[1];
@@ -115,6 +116,7 @@ public class WaterImportService extends ImportBase {
                 meter.setState(0);
                 meter.setMeterType(meterType);
                 meter.setValve(valve);
+                meter.setEnprNo(enprNo);
                 try {
                     waterMeterMapper.saveMeter(meter);
                 } catch (Exception e) {
@@ -134,6 +136,7 @@ public class WaterImportService extends ImportBase {
      */
     @Override
     public ResultData check(InputStream is, boolean isExcel2003, String enprNo, int communityId) {
+        System.out.println("开始检测");
         Object[] obs = ExcelImportUtil.readSheets(is, isExcel2003);
         List<List<String>>[] data = (List<List<String>>[]) obs[0];
         //查询当前公司所有表编号
@@ -146,41 +149,41 @@ public class WaterImportService extends ImportBase {
                     List<String> cellList = list.get(j);
                     boolean hasError = false;
                     if (StringUtils.isBlank(cellList.get(0))) {
-                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "用户名为空");
+                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "用户名为空#");
                         hasError = true;
                     }
                     if (StringUtils.isBlank(cellList.get(1))) {
-                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "用户电话为空");
+                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "用户电话为空#");
                         hasError = true;
                     }
                     if (StringUtils.isBlank(cellList.get(2))) {
-                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "水表类型为空");
+                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "水表类型为空#");
                         hasError = true;
                     }
                     if (StringUtils.isBlank(cellList.get(4))) {
-                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "用户详细地址为空");
+                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "用户详细地址为空#");
                         hasError = true;
                     }
                     if (StringUtils.isBlank(cellList.get(5))) {
-                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "表编号为空");
+                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "表编号为空#");
                         hasError = true;
                     }
                     if (StringUtils.isBlank(cellList.get(6))) {
-                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "口径为空");
+                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "口径为空#");
                         hasError = true;
                     }
                     if (StringUtils.isBlank(cellList.get(7))) {
-                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "阀门状态为空");
+                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "阀门状态为空#");
                         hasError = true;
                     }
                     if (StringUtils.isBlank(cellList.get(8))) {
-                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "水表初始读数为空");
+                        errstr.append("第" + (i + 1) + "个sheet的第" + j + "个用户" + "水表初始读数为空#");
                         hasError = true;
                     }
                     if (hasError) continue;
                     String meterNo = cellList.get(5);
                     if (meterNoSet.contains(meterNo)) {
-                        errstr.append("编号为" + meterNo + "的水表出现重复");
+                        errstr.append("编号为" + meterNo + "的水表出现重复#");
                     } else {
                         meterNoSet.add(meterNo);
                     }

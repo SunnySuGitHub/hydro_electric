@@ -8,6 +8,7 @@ import com.hust.hydroelectric_backend.Entity.User;
 import com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost;
 import com.hust.hydroelectric_backend.Entity.VO.UserInfoVo;
 import com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter;
+import com.hust.hydroelectric_backend.utils.Constants;
 import com.hust.hydroelectric_backend.utils.JedisUtil;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
@@ -45,7 +46,7 @@ public class UserService {
     public ResultData findByUserId(int uid, String enprNo){
         if(jedisUtil.hGet(enprNo, "Uid"+uid) == null) {
             User user = userMapper.findByUid(uid);
-            jedisUtil.hSet(enprNo, "Uid"+uid, JSON.toJSONString(uid));
+            jedisUtil.hSet(enprNo, "Uid"+uid, JSON.toJSONString(user));
             return Result.success(user);
         } else {
             User user = JSON.parseObject(jedisUtil.hGet(enprNo, "Uid"+uid), User.class);
@@ -92,6 +93,26 @@ public class UserService {
             return Result.success(infoVos);
         }
     }
+
+    public ResultData getUserInfoByUname(String uname, String enprNo){
+        List<Integer> uids = userMapper.findUidsByUname(uname, enprNo);
+        List<UserInfoVo> res = new ArrayList<>();
+        for(int uid : uids) {
+            res.addAll(userMapper.findUserInfoVoByUid(uid));
+        }
+        return Result.success(res);
+    }
+
+    public ResultData getUserInfoByMeterNo(String meterNo, int meterType, String enprNo){
+        int uid = -1;
+        if(meterType == Constants.TYPE_WATERMETER) {
+            uid = waterMeterMapper.getWaterMeterDetail(meterNo, enprNo).getuId();
+        } else {
+            uid = ammeterMapper.getAmmeterDetail(meterNo, enprNo).getuId();
+        }
+        return Result.success(userMapper.findUserInfoVoByUid(uid));
+    }
+
 
     public ResultData userDailyCost(int uid, String enprNo) {
         //每天定时一点半清空redis记录

@@ -33,7 +33,7 @@ public class ManagementController {
     }
 
     /**
-     * 查看小区报修单
+     * 查看公司报修单
      */
     @GetMapping("/repair/list")
     public ResultData list(@RequestParam("enprNo") String enprNo,
