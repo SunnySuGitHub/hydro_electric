@@ -124,7 +124,7 @@ public class UserService {
                 personalCost.addAll(watermeterCostMapper.getWatermeterDailyCost(watermeter.getMeterNo(), watermeter.getEnprNo()));
             }
             for(Ammeter ammeter : ammeters) {
-                personalCost.addAll(ammeterCostMapper.getAmmeterDailyCost(ammeter.getAmmeterNo(), ammeter.getEnprNo()));
+                personalCost.addAll(ammeterCostMapper.getAmmeterTotalDailyCost(ammeter.getAmmeterNo(), ammeter.getEnprNo()));
             }
             jedisUtil.hSet(enprNo, "MeterDailyCost"+uid, JSONArray.toJSONString(personalCost));
             return Result.success(personalCost);

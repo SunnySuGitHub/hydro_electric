@@ -8,15 +8,15 @@ import java.util.Date;
  * @DateTme: 2019/11/23 23:04
  */
 public class MeterDailyCost {
-    private Date dateline;
+    private String dateline;
     private BigDecimal dailyCost;
     private Integer waterType;
 
-    public Date getDateline() {
+    public String getDateline() {
         return dateline;
     }
 
-    public void setDateline(Date dateline) {
+    public void setDateline(String dateline) {
         this.dateline = dateline;
     }
 

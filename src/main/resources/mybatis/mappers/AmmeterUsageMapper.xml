@@ -4,32 +4,64 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.AmmeterUsageMapper">
     <!--mapper接口所在包-->
 
-    <select id="getAmmeterDailyUsage" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage">
+    <select id="getAmmeterTotalDailyUsage" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage">
         select
-          sum(ammeter_usage) as daily_use,
-          FROM_UNIXTIME(end_time,'%Y-%m-%d') as dateline,
+          ammeter_usage as daily_use,
+          read_date as dateline,
           1 as water_type
         from
           t_ammeter_usage
         where
           ammeter_no = #{ammeterNo}
           and enprNo = #{enprNo}
-        group by
-          FROM_UNIXTIME(end_time,'%Y-%m-%d')
     </select>
 
-    <select id="getAmmeterUsageDetail" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterUsage">
+    <select id="getAmmeterSharpDailyUsage" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage">
         select
-          *
+          sharp_usage as daily_use,
+          read_date as dateline,
+          1 as water_type
         from
           t_ammeter_usage
         where
           ammeter_no = #{ammeterNo}
           and enprNo = #{enprNo}
-        <![CDATA[
-            and end_time >= #{startLine}
-            and end_time <= #{endLine}
-        ]]>
+    </select>
+
+    <select id="getAmmeterPeekDailyUsage" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage">
+        select
+          peek_usage as daily_use,
+          read_date as dateline,
+          1 as water_type
+        from
+          t_ammeter_usage
+        where
+          ammeter_no = #{ammeterNo}
+          and enprNo = #{enprNo}
+    </select>
+
+    <select id="getAmmeterFlatDailyUsage" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage">
+        select
+          flat_usage as daily_use,
+          read_date as dateline,
+          1 as water_type
+        from
+          t_ammeter_usage
+        where
+          ammeter_no = #{ammeterNo}
+          and enprNo = #{enprNo}
+    </select>
+
+    <select id="getAmmeterLowDailyUsage" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage">
+        select
+          low_usage as daily_use,
+          read_date as dateline,
+          1 as water_type
+        from
+          t_ammeter_usage
+        where
+          ammeter_no = #{ammeterNo}
+          and enprNo = #{enprNo}
     </select>
 
     <select id="getCommunityUsage" resultType="java.math.BigDecimal">
@@ -45,12 +77,40 @@
               t_ammeter
             where
               c_id = #{cid}
+              and is_delete = 0
           )
           and enprNo = #{enprNo}
           <![CDATA[
-            and end_time >= #{startLine}
-            and end_time <= #{endLine}
+            and read_ts >= #{startLine}
+            and read_ts <= #{endLine}
           ]]>
     </select>
+
+    <insert id="save" parameterType="com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterUsage">
+        insert into
+          t_ammeter_usage(
+            ammeter_no,
+            ammeter_usage,
+            sharp_usage,
+            peek_usage,
+            flat_usage,
+            low_usage,
+            read_date,
+            read_ts,
+            read_value,
+            enprNo
+          ) values (
+            #{ammeterNo},
+            #{ammeterUsage},
+            #{sharpUsage},
+            #{peekUsage},
+            #{flatUsage},
+            #{lowUsage},
+            #{readDate},
+            #{readTs}
+            #{readValue},
+            #{enprNo}
+          )
+    </insert>
 
 </mapper>

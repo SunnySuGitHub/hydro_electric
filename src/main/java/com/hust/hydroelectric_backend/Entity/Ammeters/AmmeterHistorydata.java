@@ -11,6 +11,7 @@ public class AmmeterHistorydata {
     private String ammeterNo;
     private BigDecimal readValue;
     private Long readTime;
+    private Integer readType;
     private String enprNo;
 
     public Integer getId() {
@@ -43,6 +44,14 @@ public class AmmeterHistorydata {
 
     public void setReadTime(Long readTime) {
         this.readTime = readTime;
+    }
+
+    public Integer getReadType() {
+        return readType;
+    }
+
+    public void setReadType(Integer readType) {
+        this.readType = readType;
     }
 
     public String getEnprNo() {

@@ -2,10 +2,8 @@ package com.hust.hydroelectric_backend.ScheduledJob;
 
 import com.hust.hydroelectric_backend.Dao.*;
 import com.hust.hydroelectric_backend.Entity.User;
-import com.hust.hydroelectric_backend.Entity.Watermeters.LadderedWaterprice;
-import com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter;
-import com.hust.hydroelectric_backend.Entity.Watermeters.WatermeterCost;
-import com.hust.hydroelectric_backend.Entity.Watermeters.WatermeterUsage;
+import com.hust.hydroelectric_backend.Entity.Watermeters.*;
+import com.hust.hydroelectric_backend.utils.TimeUtils;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -58,25 +56,27 @@ public class WatemeterSchedule {
 
     @Transactional
     public void watermeterProcess(Watermeter watermeter) {
+        BigDecimal dayUsage = watermeter.getReadValue().subtract(watermeter.getPreReadValue());
+        dayUsage = dayUsage.compareTo(BigDecimal.ZERO) == -1 ? BigDecimal.ZERO : dayUsage;
         watermeter.setPreReadValue(watermeter.getReadValue());
         watermeter.setPreReadTime(watermeter.getReadTime());
         watermeter.setState(0);
 
         WatermeterUsage watermeterUsage = new WatermeterUsage();
         watermeterUsage.setWatermeterNo(watermeter.getMeterNo());
-        watermeterUsage.setEndTime(System.currentTimeMillis()/1000);
-        watermeterUsage.setEndValue(watermeter.getReadValue());
+        watermeterUsage.setReadDate(TimeUtils.getYesterday());
+        watermeterUsage.setReadTs(TimeUtils.getUnixTimestamp(watermeterUsage.getReadDate()));
+        watermeterUsage.setReadValue(watermeter.getReadValue());
         watermeterUsage.setEnprNo(watermeter.getEnprNo());
 
         int uid = watermeter.getuId();
         WatermeterCost watermeterCost = new WatermeterCost();
         watermeterCost.setuId(uid);
         watermeterCost.setCostTime(System.currentTimeMillis()/1000);
+        watermeterCost.setCostDate(TimeUtils.getYesterday());
         watermeterCost.setWatermeterNo(watermeter.getMeterNo());
         watermeterCost.setEnprNo(watermeter.getEnprNo());
         if(watermeter.getIsUpdate() == 1) {
-            BigDecimal dayUsage = watermeter.getReadValue().subtract(watermeter.getPreReadValue());
-            dayUsage = dayUsage.compareTo(BigDecimal.ZERO) == -1 ? BigDecimal.ZERO : dayUsage;
             watermeter.setMonthAmount(watermeter.getMonthAmount().add(dayUsage));
 
             watermeterUsage.setWatermeterUsaga(dayUsage);
@@ -91,7 +91,7 @@ public class WatemeterSchedule {
             user.setAccountBalance(user.getAccountBalance().subtract(cost));
             userMapper.saveUser(user);
         } else {
-            if((System.currentTimeMillis()/1000 - watermeter.getReadTime())/24*3600 >= 2){
+            if((System.currentTimeMillis()/1000 - watermeter.getReadTime())/24*3600 >= 2) {
                 watermeter.setState(1);
             }
             watermeterUsage.setWatermeterUsaga(BigDecimal.ZERO);

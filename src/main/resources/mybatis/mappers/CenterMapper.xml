@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.CenterMapper">
+    <!--mapper接口所在包-->
+
+    <insert id="save" parameterType="com.hust.hydroelectric_backend.Entity.Center">
+        insert into
+          t_center(
+            center_no,
+            install_place,
+            create_time,
+            comm_protocal,
+            status,
+            c_id,
+            enprNo
+          ) values (
+            #{centerNo},
+            #{installPlace},
+            #{createTime},
+            #{commProtocal},
+            #{status},
+            #{cId},
+            #{enprNo}
+          )
+    </insert>
+
+    <update id="delete" parameterType="java.lang.Integer">
+        update
+          t_center
+        set
+          is_delete = 1
+        where
+          id = #{id}
+    </update>
+
+    <select id="getCenterByEnprNo" resultType="com.hust.hydroelectric_backend.Entity.Center">
+        select
+          *
+        from
+          t_center
+        where
+          enprNo = #{enprNo}
+          and is_delete = 0
+    </select>
+
+    <select id="getCenterByCid" resultType="com.hust.hydroelectric_backend.Entity.Center">
+        select
+          *
+        from
+          t_center
+        where
+          c_id = #{cId}
+          and is_delete = 0
+    </select>
+
+</mapper>

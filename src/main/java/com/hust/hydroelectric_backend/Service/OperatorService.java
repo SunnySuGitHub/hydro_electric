@@ -57,6 +57,7 @@ public class OperatorService {
         } else {
             String enprNo = operator.getEnprNo();
             jedisUtil.hDel(enprNo, "OperatorList");
+            jedisUtil.sadd("blacklist_"+operator.getOperatorId(), null);
             return Result.success(operatorMapper.addOperator(operator));
         }
     }

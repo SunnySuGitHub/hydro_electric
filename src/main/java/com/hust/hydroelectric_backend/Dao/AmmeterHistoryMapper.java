@@ -12,6 +12,6 @@ import java.util.List;
  */
 @Repository
 public interface AmmeterHistoryMapper {
-    List<AmmeterHistorydata> getAmmeterHistorydata(@Param("meterNo") String meterNo, @Param("enprNo") String enprNo,
+    List<AmmeterHistorydata> getAmmeterHistorydata(@Param("meterNo") String meterNo, @Param("enprNo") String enprNo,@Param("readType") int readType,
                                                    @Param("startLine") long startLine, @Param("endLine") long endLine);
 }

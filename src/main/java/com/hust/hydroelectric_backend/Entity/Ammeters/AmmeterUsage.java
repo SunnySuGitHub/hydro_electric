@@ -10,8 +10,13 @@ public class AmmeterUsage {
     private Integer id;
     private String ammeterNo;
     private BigDecimal ammeterUsage;
-    private Long endTime;
-    private BigDecimal endValue;
+    private BigDecimal sharpUsage;
+    private BigDecimal peekUsage;
+    private BigDecimal flatUsage;
+    private BigDecimal lowUsage;
+    private String readDate;
+    private Long readTs;
+    private BigDecimal readValue;
     private String enprNo;
 
     public Integer getId() {
@@ -38,20 +43,60 @@ public class AmmeterUsage {
         this.ammeterUsage = ammeterUsage;
     }
 
-    public Long getEndTime() {
-        return endTime;
+    public BigDecimal getSharpUsage() {
+        return sharpUsage;
     }
 
-    public void setEndTime(Long endTime) {
-        this.endTime = endTime;
+    public void setSharpUsage(BigDecimal sharpUsage) {
+        this.sharpUsage = sharpUsage;
     }
 
-    public BigDecimal getEndValue() {
-        return endValue;
+    public BigDecimal getPeekUsage() {
+        return peekUsage;
     }
 
-    public void setEndValue(BigDecimal endValue) {
-        this.endValue = endValue;
+    public void setPeekUsage(BigDecimal peekUsage) {
+        this.peekUsage = peekUsage;
+    }
+
+    public BigDecimal getFlatUsage() {
+        return flatUsage;
+    }
+
+    public void setFlatUsage(BigDecimal flatUsage) {
+        this.flatUsage = flatUsage;
+    }
+
+    public BigDecimal getLowUsage() {
+        return lowUsage;
+    }
+
+    public void setLowUsage(BigDecimal lowUsage) {
+        this.lowUsage = lowUsage;
+    }
+
+    public String getReadDate() {
+        return readDate;
+    }
+
+    public void setReadDate(String readDate) {
+        this.readDate = readDate;
+    }
+
+    public Long getReadTs() {
+        return readTs;
+    }
+
+    public void setReadTs(Long readTs) {
+        this.readTs = readTs;
+    }
+
+    public BigDecimal getReadValue() {
+        return readValue;
+    }
+
+    public void setReadValue(BigDecimal readValue) {
+        this.readValue = readValue;
     }
 
     public String getEnprNo() {

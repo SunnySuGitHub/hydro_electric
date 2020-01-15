@@ -9,15 +9,15 @@ import java.util.Date;
  * @DateTme: 2019/11/19 20:10
  */
 public class MeterDailyUsage {
-    private Date dateline;
+    private String dateline;
     private BigDecimal dailyUse;
     private Integer meterType;
 
-    public Date getDateline() {
+    public String getDateline() {
         return dateline;
     }
 
-    public void setDateline(Date dateline) {
+    public void setDateline(String dateline) {
         this.dateline = dateline;
     }
 

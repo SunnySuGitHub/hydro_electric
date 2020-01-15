@@ -14,8 +14,11 @@ import java.util.List;
  */
 @Repository
 public interface AmmeterUsageMapper {
-    List<MeterDailyUsage> getAmmeterDailyUsage(@Param("ammeterNo") String ammeterNo, @Param("enprNo") String enprNo);
-    List<AmmeterUsage> getAmmeterUsageDetail(@Param("ammeterNo") String ammeterNo, @Param("enprNo") String enprNo,
-                                             @Param("startLine") long startLine, @Param("endLine") long endLine);
+    List<MeterDailyUsage> getAmmeterTotalDailyUsage(@Param("ammeterNo") String ammeterNo, @Param("enprNo") String enprNo);
+    List<MeterDailyUsage> getAmmeterSharpDailyUsage(@Param("ammeterNo") String ammeterNo, @Param("enprNo") String enprNo);
+    List<MeterDailyUsage> getAmmeterPeekDailyUsage(@Param("ammeterNo") String ammeterNo, @Param("enprNo") String enprNo);
+    List<MeterDailyUsage> getAmmeterFlatDailyUsage(@Param("ammeterNo") String ammeterNo, @Param("enprNo") String enprNo);
+    List<MeterDailyUsage> getAmmeterLowDailyUsage(@Param("ammeterNo") String ammeterNo, @Param("enprNo") String enprNo);
     BigDecimal getCommunityUsage(@Param("cid") int cid, @Param("startLine") long startLine, @Param("endLine") long endLine, @Param("enprNo") String enprNo);
+    int save(AmmeterUsage ammeterUsage);
 }

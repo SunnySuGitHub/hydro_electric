@@ -60,6 +60,25 @@ public class JedisUtil {
         }
     }
 
+    /**
+     * 清空key
+     */
+    public String flushdb() {
+        Jedis jedis = jedisPool.getResource();
+        if (jedis != null) {
+            try {
+                return jedis.flushDB();
+            } catch (Exception e) {
+                System.err.println("redis client error:" + e);
+                return "";
+            } finally {
+                jedis.close();
+            }
+        } else {
+            return "";
+        }
+    }
+
 
     /**
      * 集合中加入数据
@@ -312,6 +331,39 @@ public class JedisUtil {
             }
         } else {
             return false;
+        }
+    }
+
+    public long sadd(String key, String[] members) {
+        Jedis jedis = jedisPool.getResource();
+        if (jedis != null) {
+            try {
+                jedis.del(key);
+                return jedis.sadd(key, members);
+            } catch (Exception e) {
+                System.err.println("redis client error:" + e);
+                return -1L;
+            } finally {
+                jedis.close();
+            }
+        } else {
+            return -1L;
+        }
+    }
+
+    public boolean sismember(String key, String value) {
+        Jedis jedis = jedisPool.getResource();
+        if (jedis != null) {
+            try {
+                return jedis.sismember(key, value);
+            } catch (Exception e) {
+                System.err.println("redis client error:" + e);
+                return true;
+            } finally {
+                jedis.close();
+            }
+        } else {
+            return true;
         }
     }
 

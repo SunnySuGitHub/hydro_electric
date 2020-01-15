@@ -21,15 +21,11 @@ public class WatermeterHistorydataService {
     WatermeterHistoryMapper watermeterHistoryMapper;
 
 
-    public ResultData getWatermeterHistorydata(String meterNo, String enprNo, long startLine, long endLine){
-        if(StringUtils.isNotBlank(meterNo) && StringUtils.isNotBlank(enprNo)) {
-            return Result.success(watermeterHistoryMapper.getWatermeterHistoryByMeterNo(meterNo, enprNo, startLine, endLine));
-        } else {
-            return Result.error(HttpStatus.BAD_REQUEST, "参数错误");
-        }
+    public ResultData getWatermeterHistorydata(String meterNo, String enprNo, long startLine, long endLine) {
+        return Result.success(watermeterHistoryMapper.getWatermeterHistoryByMeterNo(meterNo, enprNo, startLine, endLine));
     }
 
-    public BigDecimal getLatestRecordByMeterNo(String meterNo, String enprNo){
+    public BigDecimal getLatestRecordByMeterNo(String meterNo, String enprNo) {
         return watermeterHistoryMapper.getLatestRecordByMeterNo(meterNo, enprNo);
     }
 }

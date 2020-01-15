@@ -11,6 +11,7 @@ public class WatermeterCost {
     private Integer uId;
     private BigDecimal watermeterUsage;
     private BigDecimal costMoney;
+    private String costDate;
     private Long costTime;
     private String watermeterNo;
     private String enprNo;
@@ -45,6 +46,14 @@ public class WatermeterCost {
 
     public void setCostMoney(BigDecimal costMoney) {
         this.costMoney = costMoney;
+    }
+
+    public String getCostDate() {
+        return costDate;
+    }
+
+    public void setCostDate(String costDate) {
+        this.costDate = costDate;
     }
 
     public Long getCostTime() {

@@ -2,6 +2,7 @@ package com.hust.hydroelectric_backend.Controller;
 
 import com.hust.hydroelectric_backend.Entity.Operator;
 import com.hust.hydroelectric_backend.Service.OperatorService;
+import com.hust.hydroelectric_backend.Service.PayService;
 import com.hust.hydroelectric_backend.utils.ResponseHandler;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
@@ -22,6 +23,9 @@ public class OperatorController {
 
     @Autowired
     OperatorService operatorService;
+
+    @Autowired
+    PayService payService;
 
     @GetMapping("/Login")
     public ResultData login(@RequestParam("account")String account,
@@ -60,5 +64,26 @@ public class OperatorController {
             return Result.error(HttpStatus.BAD_REQUEST, "公司信息缺失");
         }
     }
+
+    /**
+     * 获取时间段内缴费记录详情
+     */
+    @GetMapping("/GetPayHistory")
+    public ResultData getPayHistory(@RequestParam("enprNo") String enprNo,
+                                    @RequestParam(value = "startDateLine", defaultValue = "-1") long startLine,
+                                    @RequestParam(value = "endDateLine", defaultValue = "-1") long endLine) {
+        return ResponseHandler.doHandle(() -> payService.getPayHistory(enprNo, startLine, endLine));
+    }
+
+    /**
+     * 获取管理员的收费记录
+     */
+    @GetMapping("/GetOperatorPayHistory")
+    public ResultData getOperatorPayHistory(@RequestParam("operatorId") int operatorId,
+                                            @RequestParam(value = "startDateLine", defaultValue = "-1") long startLine,
+                                            @RequestParam(value = "endDateLine", defaultValue = "-1") long endLine) {
+        return ResponseHandler.doHandle(() -> payService.getOperatorPayHistory(operatorId, startLine, endLine));
+    }
+
 
 }

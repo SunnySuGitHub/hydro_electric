@@ -9,16 +9,24 @@
           ammeter_no,
           read_value,
           read_time,
+          read_type,
           enprNo
         from
           t_ammeter_historydata
         where
-          meter_no = #{meterNo}
+          meter_no = #{ammeterNo}
           and enprNo = #{enprNo}
-        <![CDATA[
+          and read_type = #{readType}
+        <if test="startLine !=-1">
+            <![CDATA[
             and read_time >= #{startLine}
+            ]]>
+        </if>
+        <if test="endLine !=-1">
+            <![CDATA[
             and read_time <= #{endLine}
-        ]]>
+            ]]>
+        </if>
     </select>
 
 </mapper>

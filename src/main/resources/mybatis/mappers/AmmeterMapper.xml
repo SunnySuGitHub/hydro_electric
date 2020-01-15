@@ -11,7 +11,19 @@
           t_ammeter
         where
           ammeter_no = #{ammeterNo}
-          and enprNo = #[enprNo]
+          and enprNo = #{enprNo}
+          and is_delete = 0
+    </select>
+
+    <select id="getAllAmmeterDetail" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
+        select
+          *
+        from
+          t_ammeter
+        where
+          enprNo = #{enprNo}
+          and is_delete = 0
+          <if test="state !=-1"> and state = #{state}</if>
     </select>
 
     <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
@@ -19,6 +31,8 @@
           *
         from
           t_ammeter
+        where
+          is_delete = 0
     </select>
 
     <update id="uptAmmeterValue" parameterType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
@@ -32,6 +46,16 @@
           state = #{state}
         where
           ammeter_id = #{ammeterId}
+    </update>
+
+    <update id="delete">
+        update
+          t_ammeter
+        set
+          is_delete = 1
+        where
+          ammeter_no = #{ammeterNo}
+          and enprNo = #{enprNo}
     </update>
 
     <select id="findFailedAmmeters" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
@@ -53,5 +77,15 @@
         where
           is_delete = 0
           and u_id = #{uid}
+    </select>
+
+    <select id="getAmmeterByCenter" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter">
+        select
+          *
+        from
+          t_ammeter
+        where
+          center_id = #{centerId}
+          and is_delete = 0
     </select>
 </mapper>

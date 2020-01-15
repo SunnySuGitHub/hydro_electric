@@ -14,6 +14,8 @@ public class Payhistory {
     private Integer payMethod;
     private Integer payStatus;
     private String transactionId;
+    private Integer operatorId;
+    private String enprNo;
 
     public Integer getId() {
         return id;
@@ -69,5 +71,21 @@ public class Payhistory {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public Integer getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(Integer operatorId) {
+        this.operatorId = operatorId;
+    }
+
+    public String getEnprNo() {
+        return enprNo;
+    }
+
+    public void setEnprNo(String enprNo) {
+        this.enprNo = enprNo;
     }
 }

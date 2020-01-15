@@ -15,6 +15,17 @@
           and is_delete = 0
     </select>
 
+    <select id="getAllWaterMeterDetail" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
+        select
+        *
+        from
+        t_watermeter
+        where
+        enprNo = #{enprNo}
+        and is_delete = 0
+        <if test="state !=-1">and state = #{state}</if>
+    </select>
+
     <select id="findAll" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
         select
           *
@@ -58,7 +69,7 @@
             state,
             enprNo
           ) values (
-            #{meterNo},
+            #{ammeterNo},
             #{uId},
             #{cId},
             #{caliber},
@@ -119,5 +130,25 @@
         set
           is_update = 0;
     </update>
+
+    <update id="delete">
+        update
+          t_watermeter
+        set
+          is_update = 1
+        where
+          meter_no = #{ammeterNo}
+          and enprNo = #{enprNo}
+    </update>
+
+    <select id="getWatermeterByCenter" resultType="com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter">
+        select
+          *
+        from
+          t_watermeter
+        where
+          center_id = #{centerId}
+          and is_delete = 0
+    </select>
 
 </mapper>

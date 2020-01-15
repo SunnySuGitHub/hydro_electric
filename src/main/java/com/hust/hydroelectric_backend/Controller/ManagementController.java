@@ -1,7 +1,10 @@
 package com.hust.hydroelectric_backend.Controller;
 
+import com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterRate;
 import com.hust.hydroelectric_backend.Entity.Notice;
 import com.hust.hydroelectric_backend.Entity.Repair;
+import com.hust.hydroelectric_backend.Service.AmmeterServices.RateService;
+import com.hust.hydroelectric_backend.Service.LadderPriceService;
 import com.hust.hydroelectric_backend.Service.NoticeService;
 import com.hust.hydroelectric_backend.Service.RepairService;
 import com.hust.hydroelectric_backend.utils.ResponseHandler;
@@ -23,6 +26,14 @@ public class ManagementController {
 
     @Autowired
     NoticeService noticeService;
+
+    @Autowired
+    LadderPriceService ladderPriceService;
+
+    @Autowired
+    RateService rateService;
+
+
 
     /**
      * 用户报修
@@ -80,6 +91,53 @@ public class ManagementController {
     public ResultData delNotice(@RequestParam("id") int id,
                                 @RequestParam("enprNo") String enprNo){
         return ResponseHandler.doHandle(() -> noticeService.delNotice(id, enprNo));
+    }
+
+    /**
+     * 获取阶梯水价
+     * @param enprNo
+     * @param waterType
+     * 水表类型
+     * 1 居民生活用水
+     * 2 工业用水
+     * 3 行政事业单位用水
+     * 4 经营用水
+     * 5 特种行业用水
+     */
+    @GetMapping("/ladder/watermeter")
+    public ResultData getWatermeterLadder(@RequestParam("enprNo") String enprNo,
+                                          @RequestParam("waterType") int waterType){
+        return ResponseHandler.doHandle(() -> ladderPriceService.getWatermeterLadder(enprNo, waterType));
+    }
+
+    /**
+     * 获取阶梯电价
+     */
+    @GetMapping("/ladder/ammeter")
+    public ResultData getAmmeterLadder(@RequestParam("enprNo") String enprNo,
+                                       @RequestParam("voltageType") int vType){
+        return ResponseHandler.doHandle(() -> ladderPriceService.getAmmeterLadder(enprNo, vType));
+    }
+
+    /**
+     * 获取电表不同费率
+     * 0：总量
+     * 1：尖峰
+     * 2：峰
+     * 3：平
+     * 4：谷
+     */
+    @GetMapping("/rate/ammeter")
+    public ResultData getAmmeterRate(@RequestParam("enprNo") String enprNo){
+        return ResponseHandler.doHandle(() -> rateService.getRateList(enprNo));
+    }
+
+    /**
+     * 修改电表费率
+     */
+    @PutMapping("/rate/ammeter")
+    public ResultData getAmmeterRate(@RequestBody AmmeterRate ammeterRate){
+        return ResponseHandler.doHandle(() -> rateService.uptRate(ammeterRate));
     }
 
 

@@ -14,7 +14,7 @@
         from
           t_watermeter_historydata
         where
-            meter_no = #{meterNo}
+            meter_no = #{ammeterNo}
             and enprNo = #{enprNo}
         <if test="startLine !=-1">
             <![CDATA[
@@ -34,7 +34,7 @@
         from
           t_watermeter_historydata
         where
-          meter_no = #{meterNo}
+          meter_no = #{ammeterNo}
           and enprNo = #{enprNo}
         order by
           id desc

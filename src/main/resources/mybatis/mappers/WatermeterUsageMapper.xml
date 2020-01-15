@@ -6,16 +6,14 @@
 
     <select id="getWatemeterDailyUsage" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyUsage">
         select
-          sum(watermeter_usage) as daily_use,
-          FROM_UNIXTIME(end_time,'%Y-%m-%d') as dateline,
+          watermeter_usage as daily_use,
+          read_date as dateline,
           0 as meter_type
         from
           t_watermeter_usage
         where
-          watermeter_no = #{meterNo}
+          watermeter_no = #{ammeterNo}
           and enprNo = #{enprNo}
-        group by
-          FROM_UNIXTIME(end_time,'%Y-%m-%d')
     </select>
 
     <select id="getCommunityUsage" resultType="java.math.BigDecimal">
@@ -24,18 +22,19 @@
         from
           t_watermeter_usage
         where
-          watermeter_no in(
+          watermeter_no in (
             select
               meter_no
             from
               t_watermeter
             where
               c_id = #{cid}
+              and is_delete = 0
           )
           and enprNo = #{enprNo}
           <![CDATA[
-            and end_time >= #{startLine}
-            and end_time <= #{endLine}
+            and read_ts >= #{startLine}
+            and read_ts <= #{endLine}
           ]]>
     </select>
 
@@ -44,14 +43,16 @@
           t_watermeter_usage(
             watermeter_no,
             watermeter_usage,
-            end_time,
-            end_value,
+            read_date,
+            read_ts,
+            read_value,
             enprNo
           ) values (
             #{watermeterNo},
             #{watermeterUsaga},
-            #{endTime},
-            #{endValue},
+            #{readDate},
+            #{readTs},
+            #{readValue},
             #{enprNo}
           )
     </insert>

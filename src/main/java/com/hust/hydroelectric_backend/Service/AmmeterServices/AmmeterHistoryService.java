@@ -17,8 +17,8 @@ public class AmmeterHistoryService {
     @Resource
     AmmeterHistoryMapper ammeterHistoryMapper;
 
-    public ResultData getAmmeterHistorydata(String meterNo, String enprNo, long startLine, long endLine){
-        return Result.success(ammeterHistoryMapper.getAmmeterHistorydata(meterNo, enprNo, startLine, endLine));
+    public ResultData getAmmeterHistorydata(String meterNo, String enprNo, int readType, long startLine, long endLine){
+        return Result.success(ammeterHistoryMapper.getAmmeterHistorydata(meterNo, enprNo, readType, startLine, endLine));
     }
 
 

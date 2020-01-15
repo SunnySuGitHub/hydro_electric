@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.LadderedElecpriceMapper">
+    <!--mapper接口所在包-->
+    <select id="getSingleLadder" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.LadderedElecprice">
+        select
+          *
+        from
+          t_laddered_elecprice
+        where
+          cost_type = #{costType}
+          and voltageType = #{voltageType}
+          and enprNo = #{enprNo}
+    </select>
+
+    <select id="getPriceList" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.LadderedElecprice">
+        select
+          *
+        from
+          t_laddered_elecprice
+        where
+          voltageType = #{voltageType}
+          and enprNo = #{enprNo}
+    </select>
+
+</mapper>

@@ -1,7 +1,7 @@
 package com.hust.hydroelectric_backend.Controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.hust.hydroelectric_backend.Dao.WechatpayService;
+import com.hust.hydroelectric_backend.Service.WechatpayService;
 import com.hust.hydroelectric_backend.Entity.Payhistory;
 import com.hust.hydroelectric_backend.Entity.User;
 import com.hust.hydroelectric_backend.Service.PayService;
@@ -34,19 +34,19 @@ public class UserController {
 
     @GetMapping("/user")
     public ResultData getUser(@RequestParam(name = "uId", defaultValue = "-1") int id,
-                              @RequestParam("enprNo") String enprNo){
-        return ResponseHandler.doHandle(()->userService.findByUserId(id, enprNo));
+                              @RequestParam("enprNo") String enprNo) {
+        return ResponseHandler.doHandle(() -> userService.findByUserId(id, enprNo));
     }
 
     @DeleteMapping("/user")
     public ResultData delUser(@RequestParam(name = "uId", defaultValue = "-1") int id,
-                              @RequestParam("enprNo") String enprNo){
-        return ResponseHandler.doHandle(()->userService.delUserById(id, enprNo));
+                              @RequestParam("enprNo") String enprNo) {
+        return ResponseHandler.doHandle(() -> userService.delUserById(id, enprNo));
     }
 
     @PutMapping("/user")
-    public ResultData uptUser(@RequestBody User user){
-        return ResponseHandler.doHandle(()->userService.uptUser(user));
+    public ResultData uptUser(@RequestBody User user) {
+        return ResponseHandler.doHandle(() -> userService.uptUser(user));
     }
 
     /**
@@ -54,7 +54,7 @@ public class UserController {
      */
     @GetMapping("/GetUserInfoByBlockId")
     public ResultData getUserInfoByBlockId(@RequestParam(value = "bId", defaultValue = "-1") int bId,
-                                           @RequestParam("enprNo") String enprNo){
+                                           @RequestParam("enprNo") String enprNo) {
         return ResponseHandler.doHandle(() -> userService.getUserInfoByBlockId(bId, enprNo));
     }
 
@@ -63,7 +63,7 @@ public class UserController {
      */
     @GetMapping("/GetUserInfoByUid")
     public ResultData getUserInfoByUid(@RequestParam(value = "uId", defaultValue = "-1") int uid,
-                                       @RequestParam("enprNo") String enprNo){
+                                       @RequestParam("enprNo") String enprNo) {
         return ResponseHandler.doHandle(() -> userService.getUserInfoByUid(uid, enprNo));
     }
 
@@ -72,8 +72,8 @@ public class UserController {
      */
     @GetMapping("/GetUserInfoByUname")
     public ResultData getUserInfoByUname(@RequestParam(value = "uName") String uname,
-                                         @RequestParam("enprNo") String enprNo){
-        if(StringUtils.isNotBlank(uname) && StringUtils.isNotBlank(enprNo))
+                                         @RequestParam("enprNo") String enprNo) {
+        if (StringUtils.isNotBlank(uname) && StringUtils.isNotBlank(enprNo))
             return ResponseHandler.doHandle(() -> userService.getUserInfoByUname(uname, enprNo));
         return Result.error(HttpStatus.BAD_REQUEST, "参数缺失");
     }
@@ -84,7 +84,7 @@ public class UserController {
     @GetMapping("/GetUserInfoByMeterNo")
     public ResultData getUserInfoByMeterNo(@RequestParam(value = "meterNo", defaultValue = "-1") String meterNo,
                                            @RequestParam("meterType") int meterType,
-                                           @RequestParam("enprNo") String enprNo){
+                                           @RequestParam("enprNo") String enprNo) {
         return ResponseHandler.doHandle(() -> userService.getUserInfoByMeterNo(meterNo, meterType, enprNo));
     }
 
@@ -109,7 +109,7 @@ public class UserController {
      * 微信缴费
      */
     @PostMapping("/wechat/pay")
-    public ResultData wechatPay(@RequestBody String msg){
+    public ResultData wechatPay(@RequestBody String msg) {
         JSONObject jsonObject = JSONObject.parseObject(msg);
         String authcode = jsonObject.getString("authCode");
         String fee = jsonObject.getString("fee");
@@ -117,5 +117,18 @@ public class UserController {
         int uid = jsonObject.getInteger("enprNo");
         return ResponseHandler.doHandle(() -> wechatpayService.doMicroOrder(authcode, fee, uid, enprNo));
     }
+
+    /**
+     * 获得用户缴费记录
+     */
+    @GetMapping("/GetUserPayHistory")
+    public ResultData getUserPayHistory(@RequestParam("uId") int uId,
+                                            @RequestParam(value = "startDateLine", defaultValue = "-1") long startLine,
+                                            @RequestParam(value = "endDateLine", defaultValue = "-1") long endLine) {
+        return ResponseHandler.doHandle(() -> payService.getUserPayHistory(uId, startLine, endLine));
+    }
+
+
+
 
 }

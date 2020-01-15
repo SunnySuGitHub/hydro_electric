@@ -1,8 +1,11 @@
-package com.hust.hydroelectric_backend.Dao;
+package com.hust.hydroelectric_backend.Service;
 
 import com.github.wxpay.sdk.WXPay;
 import com.github.wxpay.sdk.WXPayConstants;
 import com.github.wxpay.sdk.WXPayUtil;
+import com.hust.hydroelectric_backend.Dao.EnprMapper;
+import com.hust.hydroelectric_backend.Dao.PayhistoryMapper;
+import com.hust.hydroelectric_backend.Dao.UserMapper;
 import com.hust.hydroelectric_backend.Entity.Areas.Enpr;
 import com.hust.hydroelectric_backend.Entity.Payhistory;
 import com.hust.hydroelectric_backend.Entity.User;

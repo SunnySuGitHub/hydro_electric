@@ -6,16 +6,14 @@
 
     <select id="getWatermeterDailyCost" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost">
         select
-          sum(cost_money) as daily_cost,
-          FROM_UNIXTIME(cost_time,'%Y-%m-%d') as dateline,
+          cost_money as daily_cost,
+          cost_date as dateline,
           0 as water_type
         from
           t_watermeter_cost
         where
           watermeter_no = #{meterNo}
           and enprNo = #{enprNo}
-        group by
-          FROM_UNIXTIME(cost_time,'%Y-%m-%d')
     </select>
 
     <insert id="save" parameterType="com.hust.hydroelectric_backend.Entity.Watermeters.WatermeterCost">
@@ -25,6 +23,7 @@
             watermeter_usage,
             cost_money,
             cost_time,
+            cost_date,
             watermeter_no,
             enprNo
           ) values (
@@ -32,6 +31,7 @@
             #{watermeterUsage},
             #{costMoney},
             #{costTime},
+            #{costDate}
             #{watermeterNo},
             #{enprNo}
           )

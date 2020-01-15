@@ -11,7 +11,21 @@ public class AmmeterCost {
     private Integer uId;
     private BigDecimal ammeterUsage;
     private BigDecimal costMoney;
+
+    private BigDecimal sharpUsage;
+    private BigDecimal sharpCost;
+
+    private BigDecimal peekUsage;
+    private BigDecimal peekCost;
+
+    private BigDecimal flatUsage;
+    private BigDecimal flatCost;
+
+    private BigDecimal lowUsage;
+    private BigDecimal lowCost;
+
     private Long costTime;
+    private String costDate;
     private String ammeterNo;
     private String enprNo;
 
@@ -47,12 +61,84 @@ public class AmmeterCost {
         this.costMoney = costMoney;
     }
 
+    public BigDecimal getSharpUsage() {
+        return sharpUsage;
+    }
+
+    public void setSharpUsage(BigDecimal sharpUsage) {
+        this.sharpUsage = sharpUsage;
+    }
+
+    public BigDecimal getSharpCost() {
+        return sharpCost;
+    }
+
+    public void setSharpCost(BigDecimal sharpCost) {
+        this.sharpCost = sharpCost;
+    }
+
+    public BigDecimal getPeekUsage() {
+        return peekUsage;
+    }
+
+    public void setPeekUsage(BigDecimal peekUsage) {
+        this.peekUsage = peekUsage;
+    }
+
+    public BigDecimal getPeekCost() {
+        return peekCost;
+    }
+
+    public void setPeekCost(BigDecimal peekCost) {
+        this.peekCost = peekCost;
+    }
+
+    public BigDecimal getFlatUsage() {
+        return flatUsage;
+    }
+
+    public void setFlatUsage(BigDecimal flatUsage) {
+        this.flatUsage = flatUsage;
+    }
+
+    public BigDecimal getFlatCost() {
+        return flatCost;
+    }
+
+    public void setFlatCost(BigDecimal flatCost) {
+        this.flatCost = flatCost;
+    }
+
+    public BigDecimal getLowUsage() {
+        return lowUsage;
+    }
+
+    public void setLowUsage(BigDecimal lowUsage) {
+        this.lowUsage = lowUsage;
+    }
+
+    public BigDecimal getLowCost() {
+        return lowCost;
+    }
+
+    public void setLowCost(BigDecimal lowCost) {
+        this.lowCost = lowCost;
+    }
+
     public Long getCostTime() {
         return costTime;
     }
 
     public void setCostTime(Long costTime) {
         this.costTime = costTime;
+    }
+
+    public String getCostDate() {
+        return costDate;
+    }
+
+    public void setCostDate(String costDate) {
+        this.costDate = costDate;
     }
 
     public String getAmmeterNo() {

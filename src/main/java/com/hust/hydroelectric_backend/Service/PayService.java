@@ -41,6 +41,18 @@ public class PayService {
         }
     }
 
+    public ResultData getPayHistory(String enprNo, long startLine, long endLine) {
+        return Result.success(payhistoryMapper.getPayHistory(enprNo, startLine, endLine));
+    }
+
+    public ResultData getOperatorPayHistory(int operatorId, long startLine, long endLine) {
+        return Result.success(payhistoryMapper.getOperatorPayHistory(operatorId, startLine, endLine));
+    }
+
+    public ResultData getUserPayHistory(int uId, long startLine, long endLine) {
+        return Result.success(payhistoryMapper.getUserPayHistory(uId, startLine, endLine));
+    }
+
 
 
 }

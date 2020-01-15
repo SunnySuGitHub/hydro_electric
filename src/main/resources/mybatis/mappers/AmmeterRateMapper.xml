@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.AmmeterRateMapper">
+    <!--mapper接口所在包-->
+
+    <select id="getRates" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterRate">
+        select
+          *
+        from
+          t_ammeter_rate
+        where
+          enprNo = #{enprNo}
+    </select>
+
+    <select id="getRateList" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterRate">
+        select
+          *
+        from
+          t_ammeter_rate
+        where
+          enprNo = #{enprNo}
+    </select>
+
+    <update id="updateRate" parameterType="com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterRate">
+        update
+        t_ammeter_rate
+        <set>
+            <if test="ratePrice !=null"> ,rate_price = #{ratePrice}</if>
+            <if test="rateTime !=null"> ,rate_time = #{rateTime}</if>
+        </set>
+        where
+        rate_type = #{rateType}
+        and enprNo = #{enprNo}
+    </update>
+
+
+</mapper>

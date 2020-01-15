@@ -32,16 +32,6 @@ public class AreaController {
     @Autowired
     BlockService blockService;
 
-
-    /**
-     * 增加公司
-     */
-    @PostMapping("/enpr")
-    public ResultData addEnpr(@RequestBody Enpr enpr){
-        System.out.println(enpr);
-        return ResponseHandler.doHandle(() -> enprService.addEnpr(enpr));
-    }
-
     /**
      * 获取公司相关信息
      */
@@ -56,14 +46,6 @@ public class AreaController {
     @PutMapping("/enpr")
     public ResultData uptEnprMsg(@RequestBody Enpr enpr){
         return ResponseHandler.doHandle(() -> enprService.uptByEnprNo(enpr));
-    }
-
-    /**
-     * 获取所有公司
-     */
-    @GetMapping("/enpr/list")
-    public ResultData list(){
-        return ResponseHandler.doHandle(() -> enprService.findAll());
     }
 
     /**

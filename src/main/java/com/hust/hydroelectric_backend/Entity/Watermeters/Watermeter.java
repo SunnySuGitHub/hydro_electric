@@ -23,6 +23,7 @@ public class Watermeter {
     private Integer valve;
     private Integer state;
     private String enprNo;
+    private Integer centerId;
     private Integer isDelete;
     private Integer isUpdate;
 
@@ -160,5 +161,13 @@ public class Watermeter {
 
     public void setIsUpdate(Integer isUpdate) {
         this.isUpdate = isUpdate;
+    }
+
+    public Integer getCenterId() {
+        return centerId;
+    }
+
+    public void setCenterId(Integer centerId) {
+        this.centerId = centerId;
     }
 }

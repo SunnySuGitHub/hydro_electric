@@ -8,6 +8,9 @@
           *
         from
           t_laddered_waterprice
+        where
+          water_type = #{waterType}
+          and enprNo = #{enprNo}
         order by cost_level asc
     </select>
 

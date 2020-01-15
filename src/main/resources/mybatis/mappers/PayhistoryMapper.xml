@@ -44,5 +44,62 @@
           id = #{id}
     </select>
 
+    <select id="getPayHistory" resultType="com.hust.hydroelectric_backend.Entity.Payhistory">
+        select
+          *
+        from
+          t_payhistory
+        where
+          enprNo = #{enprNo}
+        <if test="startLine !=-1">
+            <![CDATA[
+            and pay_time >= #{startLine}
+            ]]>
+        </if>
+        <if test="endLine !=-1">
+            <![CDATA[
+            and pay_time <= #{endLine}
+            ]]>
+        </if>
+    </select>
+
+    <select id="getOperatorPayHistory" resultType="com.hust.hydroelectric_backend.Entity.Payhistory">
+        select
+          *
+        from
+          t_payhistory
+        where
+          operator_id = #{operatorId}
+        <if test="startLine !=-1">
+            <![CDATA[
+            and pay_time >= #{startLine}
+            ]]>
+        </if>
+        <if test="endLine !=-1">
+            <![CDATA[
+            and pay_time <= #{endLine}
+            ]]>
+        </if>
+    </select>
+
+    <select id="getUserPayHistory" resultType="com.hust.hydroelectric_backend.Entity.Payhistory">
+        select
+        *
+        from
+        t_payhistory
+        where
+        u_id = #{uId}
+        <if test="startLine !=-1">
+            <![CDATA[
+            and pay_time >= #{startLine}
+            ]]>
+        </if>
+        <if test="endLine !=-1">
+            <![CDATA[
+            and pay_time <= #{endLine}
+            ]]>
+        </if>
+    </select>
+
 
 </mapper>

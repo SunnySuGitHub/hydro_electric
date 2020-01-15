@@ -4,32 +4,101 @@
 <mapper namespace="com.hust.hydroelectric_backend.Dao.AmmeterCostMapper">
     <!--mapper接口所在包-->
 
-    <select id="getAmmeterDailyCost" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost">
+    <select id="getAmmeterTotalDailyCost" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost">
         select
-          sum(cost_money) as daily_cost,
-          FROM_UNIXTIME(cost_time,'%Y-%m-%d') as dateline,
+          cost_money as daily_cost,
+          cost_date as dateline,
           1 as water_type
         from
           t_ammeter_cost
         where
           ammeter_no = #{meterNo}
           and enprNo = #{enprNo}
-        group by
-          FROM_UNIXTIME(cost_time,'%Y-%m-%d')
     </select>
 
-    <select id="getAmmeterCostDetail" resultType="com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterCost">
+  <select id="getAmmeterSharpDailyCost" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost">
         select
-          *
+          sharp_usage as daily_cost,
+          sharp_cost as dateline,
+          1 as water_type
         from
           t_ammeter_cost
         where
           ammeter_no = #{meterNo}
           and enprNo = #{enprNo}
-        <![CDATA[
-            and end_time >= #{startLine}
-            and end_time <= #{endLine}
-        ]]>
     </select>
+
+  <select id="getAmmeterPeekDailyCost" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost">
+        select
+          peek_usage as daily_cost,
+          peek_cost as dateline,
+          1 as water_type
+        from
+          t_ammeter_cost
+        where
+          ammeter_no = #{meterNo}
+          and enprNo = #{enprNo}
+    </select>
+
+  <select id="getAmmeterFlatDailyCost" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost">
+        select
+          flat_usage as daily_cost,
+          flat_cost as dateline,
+          1 as water_type
+        from
+          t_ammeter_cost
+        where
+          ammeter_no = #{meterNo}
+          and enprNo = #{enprNo}
+    </select>
+
+  <select id="getAmmeterLowDailyCost" resultType="com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost">
+        select
+          low_usage as daily_cost,
+          low_cost as dateline,
+          1 as water_type
+        from
+          t_ammeter_cost
+        where
+          ammeter_no = #{meterNo}
+          and enprNo = #{enprNo}
+    </select>
+
+    <insert id="save" parameterType="com.hust.hydroelectric_backend.Entity.Ammeters.AmmeterCost">
+        insert into
+          t_ammeter_cost(
+            u_id,
+            ammeter_usage,
+            cost_money,
+            sharp_usage,
+            sharp_cost,
+            peek_usage,
+            peek_cost,
+            flat_usage,
+            flat_cost,
+            low_usage,
+            low_cost,
+            cost_date,
+            cost_time,
+            ammeter_no,
+            enprNo
+          ) values (
+            #{uId},
+            #{ammeterUsage},
+            #{costMoney},
+            #{sharpUsage},
+            #{sharpCost},
+            #{peekUsage},
+            #{peekCost},
+            #{flatUsage},
+            #{flatCost},
+            #{lowUsage},
+            #{lowCost},
+            #{costDate},
+            #{costTime},
+            #{ammeterNo},
+            #{enprNo}
+          )
+    </insert>
 
 </mapper>

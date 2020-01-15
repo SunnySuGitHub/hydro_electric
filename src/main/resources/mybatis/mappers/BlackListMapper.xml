@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.BlackListMapper">
+    <!--mapper接口所在包-->
+    <select id="getOperator" resultType="com.hust.hydroelectric_backend.Entity.BlackList">
+        select
+          operator_id,
+          black_url
+        from
+          t_blacklist
+        where
+          operator_id = #{operatorId}
+    </select>
+
+    <update id="setOperatorBlackList" parameterType="com.hust.hydroelectric_backend.Entity.BlackList">
+        update
+          t_blacklist
+        set
+          black_url =#{blackUrl}
+        where
+          operator_id = #{operatorId}
+    </update>
+
+</mapper>
