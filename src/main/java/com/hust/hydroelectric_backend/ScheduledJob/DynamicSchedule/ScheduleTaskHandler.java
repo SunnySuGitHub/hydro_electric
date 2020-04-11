@@ -44,9 +44,9 @@ public class ScheduleTaskHandler implements SchedulingConfigurer {
     /**
      * 获取future结合，future代表定时任务加到注册中心的一个载体，利用future来操作定时任务
      */
-    public void addTriggerTask(String taskId, TriggerTask triggerTask) {
-        if (hasTask(taskId)) {
-            String message = "the taskId[" + taskId + "] exists";
+    public void addTriggerTask(String centerId, TriggerTask triggerTask) {
+        if (hasTask(centerId)) {
+            String message = "the taskId[" + centerId + "] exists";
             logger.error(message);
             throw new SchedulingException(message);
         }
@@ -55,7 +55,7 @@ public class ScheduleTaskHandler implements SchedulingConfigurer {
         //被scheduler调度，只要不被scheduler调度就不会执行
         ScheduledFuture<?> future = scheduler.schedule(triggerTask.getRunnable(), triggerTask.getTrigger());
         try {
-            taskFutureMap.put(taskId, future);
+            taskFutureMap.put(centerId, future);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

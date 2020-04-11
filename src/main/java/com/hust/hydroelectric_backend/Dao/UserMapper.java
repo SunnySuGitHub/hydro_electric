@@ -24,4 +24,5 @@ public interface UserMapper {
     List<UserInfoVo> findUserInfoVoByUid(int uid);
     List<Integer> findUidsByUname(@Param("uname") String uname, @Param("enprNo") String enprNo);
     User findByUnameAndTelAndEnprNo(@Param("uName") String uname, @Param("tel") String tel, @Param("enprNo") String enprNo);
+    List<UserInfoVo> test();
 }

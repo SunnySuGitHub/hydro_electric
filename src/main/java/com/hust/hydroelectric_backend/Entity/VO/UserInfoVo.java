@@ -18,6 +18,19 @@ public class UserInfoVo {
     private BigDecimal readValue;
     private Integer state;
 
+//    public UserInfoVo(Integer uId, String uName, String uTel, String address, BigDecimal accountBalance, Integer meterType, String meterNo, Long readTime, BigDecimal readValue, Integer state) {
+//        this.uId = uId;
+//        this.uName = uName;
+//        this.uTel = uTel;
+//        this.address = address;
+//        this.accountBalance = accountBalance;
+//        this.meterType = meterType;
+//        this.meterNo = meterNo;
+//        this.readTime = readTime;
+//        this.readValue = readValue;
+//        this.state = state;
+//    }
+
     public Integer getuId() {
         return uId;
     }

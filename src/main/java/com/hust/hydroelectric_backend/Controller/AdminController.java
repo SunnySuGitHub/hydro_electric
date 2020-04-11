@@ -7,8 +7,12 @@ import com.hust.hydroelectric_backend.Service.BlackService;
 import com.hust.hydroelectric_backend.utils.ResponseHandler;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author: suxinyu
@@ -17,13 +21,34 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @CrossOrigin("*")
-public class AdminController {
+public class AdminController implements BeanPostProcessor {
+
+    public AdminController() {
+        System.out.println("admin controller init");
+    }
 
     @Autowired
     EnprService enprService;
 
     @Autowired
     BlackService blackService;
+
+    @PostConstruct
+    public void init() {
+        System.err.println("PostConstruct...");
+    }
+
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        System.err.println("postProcessorBefore..." + beanName + "==>" + bean.getClass());
+        return bean;
+    }
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        System.err.println("postProcessorAfter..." + beanName + "==>" + bean.getClass());
+        return bean;
+    }
 
     /**
      * 增加公司

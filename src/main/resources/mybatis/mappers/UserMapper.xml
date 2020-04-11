@@ -161,4 +161,21 @@
           and is_delete = 0
     </select>
 
+    <select id="test" resultType="com.hust.hydroelectric_backend.Entity.VO.UserInfoVo">
+        select
+          u.u_id as u_id,
+          u.u_name as u_name,
+          u.u_tel as u_tel,
+          u.address as address,
+          u.account_balance as account_balance,
+          w.meter_no as meter_no,
+          w.read_time as read_time,
+          w.read_value as read_value,
+          w.state as state,
+          w.meter_type as meter_type
+        from t_users u
+        join t_watermeter w
+        on u.u_id = w.u_id
+    </select>
+
 </mapper>

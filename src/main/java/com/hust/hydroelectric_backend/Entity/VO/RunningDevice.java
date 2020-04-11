@@ -13,6 +13,15 @@ public class RunningDevice {
     private Integer ammeterCnt;
     private Integer ammeterSucCnt;
 
+    public RunningDevice(Integer cId, String cName, Integer waterMeterCnt, Integer waterMeterSucCnt, Integer ammeterCnt, Integer ammeterSucCnt) {
+        this.cId = cId;
+        this.cName = cName;
+        this.waterMeterCnt = waterMeterCnt;
+        this.waterMeterSucCnt = waterMeterSucCnt;
+        this.ammeterCnt = ammeterCnt;
+        this.ammeterSucCnt = ammeterSucCnt;
+    }
+
     public Integer getcId() {
         return cId;
     }

@@ -12,10 +12,13 @@ import com.hust.hydroelectric_backend.utils.Constants;
 import com.hust.hydroelectric_backend.utils.JedisUtil;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +46,8 @@ public class UserService {
     @Autowired
     JedisUtil jedisUtil;
 
+    private static Logger logger = LoggerFactory.getLogger(UserService.class);
+
     public ResultData findByUserId(int uid, String enprNo){
         if(jedisUtil.hGet(enprNo, "Uid"+uid) == null) {
             User user = userMapper.findByUid(uid);
@@ -67,19 +72,39 @@ public class UserService {
         return Result.success(userMapper.uptUser(user));
     }
 
+    public ResultData test() {
+        try{
+            List<UserInfoVo> res = new ArrayList<>();
+            if(jedisUtil.get("test") == null) {
+                res = userMapper.test();
+                jedisUtil.set("test", JSONArray.toJSONString(res), Integer.MAX_VALUE);
+            } else {
+                res = JSONArray.parseArray(jedisUtil.get("test"), UserInfoVo.class);
+            }
+            return Result.success(res);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return null;
+//        List<UserInfoVo> res = userMapper.test();
+//        return Result.success(res);
+    }
+
     public ResultData getUserInfoByBlockId(int bId, String enprNo){
         List<Integer> uids = userMapper.findUidsByBid(bId);
         List<UserInfoVo> res = new ArrayList<>();
-        for(int uid : uids){
-            if(jedisUtil.hGet(enprNo, "UserInfoUid"+uid) == null) {
-                List<UserInfoVo> infoVo = userMapper.findUserInfoVoByUid(uid);
-                jedisUtil.hSet(enprNo, "UserInfoUid"+uid, JSONArray.toJSONString(infoVo));
-                res.addAll(infoVo);
-            } else {
-                List<UserInfoVo> infoVo = JSONArray.parseArray(jedisUtil.hGet(enprNo, "UserInfoUid"+uid), UserInfoVo.class);
-                res.addAll(infoVo);
-            }
-        }
+//        res.add(new UserInfoVo(1,"温权亮","16671083561","沿江村一组",BigDecimal.ZERO,0,"00231908000008",1581741487L,new BigDecimal("4.5"), 0));
+//        res.add(new UserInfoVo(1,"温权亮","16671083561","沿江村一组",BigDecimal.ZERO,1,"00231908000152",1581749584L,new BigDecimal("68.9"), 0));
+//        for(int uid : uids){
+//            if(jedisUtil.hGet(enprNo, "UserInfoUid"+uid) == null) {
+//                List<UserInfoVo> infoVo = userMapper.findUserInfoVoByUid(uid);
+//                jedisUtil.hSet(enprNo, "UserInfoUid"+uid, JSONArray.toJSONString(infoVo));
+//                res.addAll(infoVo);
+//            } else {
+//                List<UserInfoVo> infoVo = JSONArray.parseArray(jedisUtil.hGet(enprNo, "UserInfoUid"+uid), UserInfoVo.class);
+//                res.addAll(infoVo);
+//            }
+//        }
         return Result.success(res);
     }
 

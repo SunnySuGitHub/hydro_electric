@@ -46,14 +46,15 @@ public class WaterMeterService {
     public ResultData getAllWaterMeterDetail(String enprNo, int state) {
         switch (state) {
             case -1:
-                if (jedisUtil.hGet(enprNo, "Watetermeter_all") == null) {
-                    List<Watermeter> data = waterMeterMapper.getAllWaterMeterDetail(enprNo, state);
-                    jedisUtil.hSet(enprNo, "Watetermeter_all", JSONArray.toJSONString(data));
-                    return Result.success(data);
-                } else {
-                    List<Watermeter> data = JSONArray.parseArray(jedisUtil.hGet(enprNo, "Watetermeter_all"), Watermeter.class);
-                    return Result.success(data);
-                }
+//                if (jedisUtil.hGet(enprNo, "Watetermeter_all") == null) {
+//                    List<Watermeter> data = waterMeterMapper.getAllWaterMeterDetail(enprNo, state);
+//                    jedisUtil.hSet(enprNo, "Watetermeter_all", JSONArray.toJSONString(data));
+//                    return Result.success(data);
+//                } else {
+//                    List<Watermeter> data = JSONArray.parseArray(jedisUtil.hGet(enprNo, "Watetermeter_all"), Watermeter.class);
+//                    return Result.success(data);
+//                }
+                return Result.success(waterMeterMapper.getAllWaterMeterDetail(enprNo, state));
             case 0:
                 if (jedisUtil.hGet(enprNo, "Watermeter_success") == null) {
                     List<Watermeter> data = waterMeterMapper.getAllWaterMeterDetail(enprNo, state);

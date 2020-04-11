@@ -68,7 +68,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/del")
-    public void resetTaskCron(@RequestParam(name = "centerId") String taskId) {
+    public void delTaskCron(@RequestParam(name = "centerId") String taskId) {
         handler.cancelTriggerTask(taskId);
     }
 }

@@ -14,7 +14,8 @@ import javax.annotation.PostConstruct;
 @Component
 public class JedisUtil {
 
-    private static String HOST = "222.20.81.50";
+//    private static String HOST = "222.20.81.50";
+    private static String HOST = "127.0.0.1";
 
     private static int PORT = 6379;
 
