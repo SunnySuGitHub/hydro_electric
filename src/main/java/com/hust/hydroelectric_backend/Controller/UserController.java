@@ -59,14 +59,6 @@ public class UserController {
     }
 
     /**
-     * redis测试 双表联查
-     */
-    @GetMapping("/RedisTest")
-    public ResultData test() {
-        return ResponseHandler.doHandle(() -> userService.test());
-    }
-
-    /**
      * 根据用户id获取用户相关信息
      */
     @GetMapping("/GetUserInfoByUid")

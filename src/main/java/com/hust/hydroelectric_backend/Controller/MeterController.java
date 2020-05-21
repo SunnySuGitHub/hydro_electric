@@ -65,21 +65,6 @@ public class MeterController {
     }
 
     /**
-     * 更新表记数据
-     * 0为水表  1为电表
-     */
-    @GetMapping("/refreshMeter")
-    public ResultData refreshMeter(@RequestParam("enprNo") String enprNo,
-                                   @RequestParam("meterType") int meterType) {
-        if (meterType == Constants.TYPE_WATERMETER) {
-            return ResponseHandler.doHandle(() -> waterMeterService.refreshMeter(enprNo));
-        } else {
-            return ResponseHandler.doHandle(() -> ammeterService.refreshMeter(enprNo));
-        }
-    }
-
-
-    /**
      * 运行设备统计
      */
     @GetMapping("/RunningCnt")
