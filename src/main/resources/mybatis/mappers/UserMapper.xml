@@ -173,7 +173,7 @@
           w.read_value as read_value,
           w.state as state,
           w.meter_type as meter_type
-        from t_users u
+        from t_user u
         join t_watermeter w
         on u.u_id = w.u_id
     </select>

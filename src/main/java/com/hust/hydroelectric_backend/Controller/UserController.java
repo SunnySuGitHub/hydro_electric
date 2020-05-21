@@ -12,12 +12,21 @@ import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author: suxinyu
  * @DateTme: 2019/11/18 15:42
  * 用户相关操作
+ * 要返回前端数据
+ *      1、@RestController
+ *      2、@Controller + 方法前标注@ResponseBody
  */
 @RestController
 @CrossOrigin("*")

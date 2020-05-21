@@ -31,10 +31,6 @@ public class ScheduleTaskHandler implements SchedulingConfigurer {
     /**
      * SchedulingConfigurer接口需要实现的方法，初始化任务注册中心
      */
-    @Override
-    public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
-        this.taskRegistrar = scheduledTaskRegistrar;
-    }
 
     /**
      * 添加任务
@@ -44,6 +40,12 @@ public class ScheduleTaskHandler implements SchedulingConfigurer {
     /**
      * 获取future结合，future代表定时任务加到注册中心的一个载体，利用future来操作定时任务
      */
+
+    @Override
+    public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
+        this.taskRegistrar = scheduledTaskRegistrar;
+    }
+    // 添加定时任务
     public void addTriggerTask(String centerId, TriggerTask triggerTask) {
         if (hasTask(centerId)) {
             String message = "the taskId[" + centerId + "] exists";
@@ -52,7 +54,7 @@ public class ScheduleTaskHandler implements SchedulingConfigurer {
         }
 
         TaskScheduler scheduler = taskRegistrar.getScheduler();
-        //被scheduler调度，只要不被scheduler调度就不会执行
+        //只有被scheduler调度才会执行
         ScheduledFuture<?> future = scheduler.schedule(triggerTask.getRunnable(), triggerTask.getTrigger());
         try {
             taskFutureMap.put(centerId, future);
@@ -61,9 +63,7 @@ public class ScheduleTaskHandler implements SchedulingConfigurer {
         }
     }
 
-    /**
-     * 取消任务
-     */
+    // 取消定时任务
     public void cancelTriggerTask(String taskId) {
         ScheduledFuture<?> future = taskFutureMap.get(taskId);
         if (future != null) {
@@ -75,9 +75,7 @@ public class ScheduleTaskHandler implements SchedulingConfigurer {
         taskFutureMap.remove(taskId);
     }
 
-    /**
-     * 重置任务
-     */
+    // 修改定时任务
     public void resetTriggerTask(String taskId, TriggerTask triggerTask) {
         cancelTriggerTask(taskId);
         addTriggerTask(taskId, triggerTask);

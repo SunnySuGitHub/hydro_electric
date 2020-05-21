@@ -87,13 +87,13 @@ public class OperatorService {
     }
 
     public ResultData operatorList(String enprNo){
-        if(jedisUtil.hGet(enprNo, "OperatorList") == null) {
+        if(jedisUtil.hGet(enprNo, "Operator_List") == null) {
             List<Operator> operatorList = operatorMapper.operatorList(enprNo);
             String operatorDetailList = JSONArray.toJSONString(operatorList);
-            jedisUtil.hSet(enprNo, "OperatorList", operatorDetailList);
+            jedisUtil.hSet(enprNo, "Operator_List", operatorDetailList);
             return Result.success(operatorList);
         } else {
-            String res = jedisUtil.hGet(enprNo, "OperatorList");
+            String res = jedisUtil.hGet(enprNo, "Operator_List");
             List<Operator> operators = JSONArray.parseArray(res, Operator.class);
             return Result.success(operators);
         }

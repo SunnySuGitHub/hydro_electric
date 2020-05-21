@@ -41,7 +41,7 @@ public class WaterImportService extends ImportBase {
     public ResultData read(InputStream is, boolean isExcel2003, String enprNo, int communityId) {
         System.out.println("开始导入");
         Object[] obs = ExcelImportUtil.readSheets(is, isExcel2003);
-        List<List<String>>[] data = (List<List<String>>[]) obs[0];
+        List<List<String>> [] data = (List<List<String>>[]) obs[0];
         String[] blockNames = (String[]) obs[1];
         if (data.length != blockNames.length) return Result.error(HttpStatus.BAD_REQUEST, "sheet数目错误");
         for (int k = 0; k < data.length; k++) {

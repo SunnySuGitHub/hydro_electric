@@ -19,13 +19,11 @@ public class Config {
     public TaskScheduler taskScheduler() {
         ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
         threadPoolTaskScheduler.setPoolSize(10);
-        // 线程名前缀
-        threadPoolTaskScheduler.setThreadNamePrefix("task-dispatch-");
+        threadPoolTaskScheduler.setThreadNamePrefix("task-dispatch-");// 线程名前缀
         threadPoolTaskScheduler.setAwaitTerminationSeconds(600);
         // 当调度器shutdown被调用时等待当前被调度的任务完成
         threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(false);
-        // 设置当任务被取消的同时从当前调度器移除的策略
-        threadPoolTaskScheduler.setRemoveOnCancelPolicy(true);
+        threadPoolTaskScheduler.setRemoveOnCancelPolicy(true);// 设置当任务被取消的同时从当前调度器移除的策略
         return threadPoolTaskScheduler;
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 
 /**
  * @author: suxinyu
@@ -24,6 +25,7 @@ public class DataSourceConfig {
 
     private DataSource getDataSource(String url, String username, String password){
         BasicDataSource dataSource = new BasicDataSource();
+        Arrays.asList();
         dataSource.setUrl(url);
         dataSource.setUsername(username);
         dataSource.setPassword(password);

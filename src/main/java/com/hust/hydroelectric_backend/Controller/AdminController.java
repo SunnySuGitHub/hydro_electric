@@ -11,6 +11,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.PostConstruct;
 
@@ -21,34 +22,13 @@ import javax.annotation.PostConstruct;
  */
 @RestController
 @CrossOrigin("*")
-public class AdminController implements BeanPostProcessor {
-
-    public AdminController() {
-        System.out.println("admin controller init");
-    }
+public class AdminController {
 
     @Autowired
     EnprService enprService;
 
     @Autowired
     BlackService blackService;
-
-    @PostConstruct
-    public void init() {
-        System.err.println("PostConstruct...");
-    }
-
-    @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.err.println("postProcessorBefore..." + beanName + "==>" + bean.getClass());
-        return bean;
-    }
-
-    @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.err.println("postProcessorAfter..." + beanName + "==>" + bean.getClass());
-        return bean;
-    }
 
     /**
      * 增加公司
