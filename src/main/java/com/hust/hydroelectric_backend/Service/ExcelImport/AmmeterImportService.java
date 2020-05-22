@@ -13,11 +13,13 @@ import java.io.InputStream;
 @Service
 public class AmmeterImportService extends ImportBase {
 
+    // todo 待完善
     @Override
     public ResultData read(InputStream is, boolean isExcel2003, String enprNo, int communityId) {
         return null;
     }
 
+    //todo 待完善
     @Override
     public ResultData check(InputStream is, boolean isExcel2003, String enprNo, int communityId) {
         return null;

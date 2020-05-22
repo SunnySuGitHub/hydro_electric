@@ -38,33 +38,39 @@ public class CenterController {
     /**
      * 获取公司下所有集中器
      */
-    @GetMapping("/GetCenterByEnprNo")
-    public ResultData getCenterByEnprNo(@RequestParam("enprNo") String enprNo){
-        return ResponseHandler.doHandle(() -> centerService.getCenterByEnprNo(enprNo));
+    @GetMapping("/GetCenterByEnprNo/{enprNo}")
+    public ResultData getCenterByEnprNo(@PathVariable("enprNo") String enprNo,
+                                        @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                        @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        return ResponseHandler.doHandle(() -> centerService.getCenterByEnprNo(enprNo,pageNum, pageSize));
     }
 
     /**
      * 获取小区下所有集中器
      */
-    @GetMapping("/GetCenterByCid")
-    public ResultData getCenterByCid(@RequestParam("cId") int cId){
+    @GetMapping("/GetCenterByCid/{cId}")
+    public ResultData getCenterByCid(@PathVariable("cId") int cId){
         return ResponseHandler.doHandle(() -> centerService.getCenterByCid(cId));
     }
 
     /**
      * 根据集中器获取下面所有水表
      */
-    @GetMapping("/GetWatermeterByCenter")
-    public ResultData getWatermeterByCenter(@RequestParam("centerId") int centerId){
-        return ResponseHandler.doHandle(() -> centerService.getWatermeterByCenter(centerId));
+    @GetMapping("/GetWatermeterByCenter/{centerId}")
+    public ResultData getWatermeterByCenter(@PathVariable("centerId") int centerId,
+                                            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        return ResponseHandler.doHandle(() -> centerService.getWatermeterByCenter(centerId, pageNum, pageSize));
     }
 
     /**
      * 根据集中器获取下面所有电表
      */
-    @GetMapping("/GetAmmeterByCenter")
-    public ResultData getAmmeterByCenter(@RequestParam("centerId") int centerId){
-        return ResponseHandler.doHandle(() -> centerService.getAmmeterByCenter(centerId));
+    @GetMapping("/GetAmmeterByCenter/{centerId}")
+    public ResultData getAmmeterByCenter(@PathVariable("centerId") int centerId,
+                                         @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                         @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        return ResponseHandler.doHandle(() -> centerService.getAmmeterByCenter(centerId, pageNum, pageSize));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.hust.hydroelectric_backend.Service;
 
+import com.github.pagehelper.Page;
 import com.hust.hydroelectric_backend.Dao.*;
 import com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter;
 import com.hust.hydroelectric_backend.Entity.User;
@@ -7,6 +8,8 @@ import com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost;
 import com.hust.hydroelectric_backend.Entity.VO.UserInfoVo;
 import com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter;
 import com.hust.hydroelectric_backend.utils.Constants;
+import com.hust.hydroelectric_backend.utils.result.PageQuery;
+import com.hust.hydroelectric_backend.utils.result.PageUtils;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.slf4j.Logger;
@@ -59,28 +62,21 @@ public class UserService {
         return Result.success(res);
     }
 
-    public ResultData getUserInfoByBlockId(int bId, String enprNo) {
+    public ResultData getUserInfoByBlockId(int bId, int pageNum, int pageSize) {
         List<Integer> uids = userMapper.findUidsByBid(bId);
-        List<UserInfoVo> res = new ArrayList<>();
-        for (int uid : uids) {
-            List<UserInfoVo> infoVo = userMapper.findUserInfoVoByUid(uid);
-            res.addAll(infoVo);
-        }
-        return Result.success(res);
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
+        return Result.success(userMapper.findUserInfoVoByUids(uids));
     }
 
-    public ResultData getUserInfoByUid(int uid, String enprNo) {
+    public ResultData getUserInfoByUid(int uid) {
         List<UserInfoVo> infoVos = userMapper.findUserInfoVoByUid(uid);
         return Result.success(infoVos);
     }
 
-    public ResultData getUserInfoByUname(String uname, String enprNo) {
+    public ResultData getUserInfoByUname(String uname, String enprNo, int pageNum, int pageSize) {
         List<Integer> uids = userMapper.findUidsByUname(uname, enprNo);
-        List<UserInfoVo> res = new ArrayList<>();
-        for (int uid : uids) {
-            res.addAll(userMapper.findUserInfoVoByUid(uid));
-        }
-        return Result.success(res);
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
+        return Result.success(userMapper.findUserInfoVoByUids(uids));
     }
 
     public ResultData getUserInfoByMeterNo(String meterNo, int meterType, String enprNo) {

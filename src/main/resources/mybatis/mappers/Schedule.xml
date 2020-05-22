@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.hydroelectric_backend.Dao.ScheduleMapper">
+    <!--mapper接口所在包-->
+
+    <select id="getScheduleJobs" resultType="com.hust.hydroelectric_backend.Entity.ScheduleJob">
+        select
+          *
+        from
+          t_schedule
+        where
+          enprNo = #{enprNo}
+    </select>
+
+    <select id="getCenterId" resultType="java.lang.Integer">
+        select
+          job_id
+        from
+          t_schedule
+        where
+          center_no = #{centerNo}
+          and enprNo = #{enprNo}
+    </select>
+
+    <delete id="deleteScheduleJob">
+        delete from t_schedule where job_id = #{id}
+    </delete>
+
+    <insert id="addScheduleJob" parameterType="com.hust.hydroelectric_backend.Entity.ScheduleJob" useGeneratedKeys="true" keyProperty="id">
+        insert into
+          t_schedule (
+            center_no,
+            job_type,
+            enprNo,
+            cron
+          ) values (
+            #{#centerNo},
+            #{#jobType},
+            #{#enprNo},
+            #{#cron}
+          )
+    </insert>
+
+</mapper>

@@ -1,5 +1,6 @@
 package com.hust.hydroelectric_backend.Dao;
 
+import com.github.pagehelper.Page;
 import com.hust.hydroelectric_backend.Entity.Areas.Community;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,6 @@ public interface CommunityMapper {
 
     int uptCommunity(Community community);
 
-    List<Community> communityList(@Param("enprNo") String enprNo);
+    Page<Community> communityList(@Param("enprNo") String enprNo);
 
 }

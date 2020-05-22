@@ -27,6 +27,9 @@ public class OperatorController {
     @Autowired
     PayService payService;
 
+    /**
+     * 登录
+     */
     @GetMapping("/Login")
     public ResultData login(@RequestParam("account")String account,
                             @RequestParam("password")String password,
@@ -34,30 +37,45 @@ public class OperatorController {
         return ResponseHandler.doHandle(() -> operatorService.login(account, password, enprNo));
     }
 
+    /**
+     * 获取管理员详细信息
+     */
     @GetMapping("/operator")
     public ResultData getOprator(@RequestParam(value = "operatorId", defaultValue = "-1") int id,
                                  @RequestParam("enprNo") String enprNo){
         return ResponseHandler.doHandle(() -> operatorService.getOperator(id, enprNo));
     }
 
+    /**
+     * 添加管理员
+     */
     @PostMapping("/operator")
     public ResultData addOperator(@RequestBody Operator operator){
         return ResponseHandler.doHandle(() -> operatorService.addOperator(operator));
     }
 
+    /**
+     * 删除管理员
+     */
     @DeleteMapping("/operator")
     public ResultData delOperator(@RequestParam(value = "operatorId", defaultValue = "-1") int id,
                                   @RequestParam("enprNo") String enprNo){
         return ResponseHandler.doHandle(() -> operatorService.delOperator(id, enprNo));
     }
 
+    /**
+     * 修改管理员信息
+     */
     @PutMapping("/operator")
     public ResultData uptOperator(@RequestBody Operator operator){
         return ResponseHandler.doHandle(() -> operatorService.uptOperator(operator));
     }
 
-    @GetMapping("/operator/list")
-    public ResultData operatorList(@RequestParam("enprNo") String enprNo){
+    /**
+     * 查看企业下所有管理员
+     */
+    @GetMapping("/operator/list/{enprNo}")
+    public ResultData operatorList(@PathVariable("enprNo") String enprNo){
         if(StringUtils.isNotBlank(enprNo)) {
             return ResponseHandler.doHandle(() -> operatorService.operatorList(enprNo));
         } else {
@@ -71,8 +89,10 @@ public class OperatorController {
     @GetMapping("/GetPayHistory")
     public ResultData getPayHistory(@RequestParam("enprNo") String enprNo,
                                     @RequestParam(value = "startDateLine", defaultValue = "-1") long startLine,
-                                    @RequestParam(value = "endDateLine", defaultValue = "-1") long endLine) {
-        return ResponseHandler.doHandle(() -> payService.getPayHistory(enprNo, startLine, endLine));
+                                    @RequestParam(value = "endDateLine", defaultValue = "-1") long endLine,
+                                    @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                    @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
+        return ResponseHandler.doHandle(() -> payService.getPayHistory(enprNo, startLine, endLine, pageNum, pageSize));
     }
 
     /**
@@ -81,8 +101,10 @@ public class OperatorController {
     @GetMapping("/GetOperatorPayHistory")
     public ResultData getOperatorPayHistory(@RequestParam("operatorId") int operatorId,
                                             @RequestParam(value = "startDateLine", defaultValue = "-1") long startLine,
-                                            @RequestParam(value = "endDateLine", defaultValue = "-1") long endLine) {
-        return ResponseHandler.doHandle(() -> payService.getOperatorPayHistory(operatorId, startLine, endLine));
+                                            @RequestParam(value = "endDateLine", defaultValue = "-1") long endLine,
+                                            @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                            @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
+        return ResponseHandler.doHandle(() -> payService.getOperatorPayHistory(operatorId, startLine, endLine, pageNum, pageSize));
     }
 
 

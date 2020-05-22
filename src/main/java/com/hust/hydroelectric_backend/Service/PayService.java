@@ -5,6 +5,8 @@ import com.hust.hydroelectric_backend.Dao.UserMapper;
 import com.hust.hydroelectric_backend.Entity.Payhistory;
 import com.hust.hydroelectric_backend.Entity.User;
 import com.hust.hydroelectric_backend.utils.Constants;
+import com.hust.hydroelectric_backend.utils.result.PageQuery;
+import com.hust.hydroelectric_backend.utils.result.PageUtils;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;
@@ -41,15 +43,18 @@ public class PayService {
         }
     }
 
-    public ResultData getPayHistory(String enprNo, long startLine, long endLine) {
+    public ResultData getPayHistory(String enprNo, long startLine, long endLine, int pageNum, int pageSize) {
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
         return Result.success(payhistoryMapper.getPayHistory(enprNo, startLine, endLine));
     }
 
-    public ResultData getOperatorPayHistory(int operatorId, long startLine, long endLine) {
+    public ResultData getOperatorPayHistory(int operatorId, long startLine, long endLine, int pageNum, int pageSize) {
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
         return Result.success(payhistoryMapper.getOperatorPayHistory(operatorId, startLine, endLine));
     }
 
-    public ResultData getUserPayHistory(int uId, long startLine, long endLine) {
+    public ResultData getUserPayHistory(int uId, long startLine, long endLine, int pageNum, int pageSize) {
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
         return Result.success(payhistoryMapper.getUserPayHistory(uId, startLine, endLine));
     }
 

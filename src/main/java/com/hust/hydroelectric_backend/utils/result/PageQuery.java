@@ -1,4 +1,4 @@
-package com.hust.hydroelectric_backend.Entity;
+package com.hust.hydroelectric_backend.utils.result;
 
 /**
  * @author: suxinyu
@@ -9,6 +9,11 @@ public class PageQuery {
     private int pageNum = 0;
     private String order;
     private boolean noPage = false;
+
+    public PageQuery(int pageNum, int pageSize) {
+        this.pageSize = pageSize;
+        this.pageNum = pageNum;
+    }
 
     public int getPageSize() {
         return pageSize;

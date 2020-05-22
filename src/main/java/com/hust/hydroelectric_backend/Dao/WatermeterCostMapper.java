@@ -1,5 +1,6 @@
 package com.hust.hydroelectric_backend.Dao;
 
+import com.github.pagehelper.Page;
 import com.hust.hydroelectric_backend.Entity.VO.MeterDailyCost;
 import com.hust.hydroelectric_backend.Entity.Watermeters.WatermeterCost;
 import org.apache.ibatis.annotations.Param;
@@ -13,6 +14,6 @@ import java.util.List;
  */
 @Repository
 public interface WatermeterCostMapper {
-    List<MeterDailyCost> getWatermeterDailyCost(@Param("meterNo") String meterNo, @Param("enprNo") String enprNo);
+    Page<MeterDailyCost> getWatermeterDailyCost(@Param("meterNo") String meterNo, @Param("enprNo") String enprNo);
     int save(WatermeterCost watermeterCost);
 }

@@ -1,7 +1,9 @@
 package com.hust.hydroelectric_backend.Service.WatermeterServices;
 
 import com.hust.hydroelectric_backend.Dao.WaterMeterMapper;
+import com.hust.hydroelectric_backend.utils.result.PageQuery;
 import com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter;
+import com.hust.hydroelectric_backend.utils.result.PageUtils;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,9 @@ public class WaterMeterService {
         return Result.success(waterMeterMapper.delete(meterNo, enprNo));
     }
 
-    public ResultData getAllWaterMeterDetail(String enprNo, int state) {
+    public ResultData getAllWaterMeterDetail(String enprNo, int state, int pageNum, int pageSize) {
+        // 分页查询
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
         List<Watermeter> data = null;
         switch (state) {
             case -1:

@@ -89,54 +89,97 @@
 
     <select id="findUserInfoVoByUid" resultType="com.hust.hydroelectric_backend.Entity.VO.UserInfoVo">
         select
-          u.u_id as u_id,
-          u.u_name as u_name,
-          u.u_tel as u_tel,
-          u.address as address,
-          u.account_balance as account_balance,
-          tmp.meter_no as meter_no,
-          tmp.read_time as read_time,
-          tmp.read_value as read_value,
-          tmp.state as state,
-          tmp.meter_type as meter_type
+            u.u_id as u_id,
+            u.u_name as u_name,
+            u.u_tel as u_tel,
+            u.address as address,
+            u.account_balance as account_balance,
+            tmp.meter_no as meter_no,
+            tmp.read_time as read_time,
+            tmp.read_value as read_value,
+            tmp.state as state,
+            tmp.meter_type as meter_type
         from (
-          select
-            u_id,
-            u_name,
-            u_tel,
-            address,
-            account_balance
-          from
-            t_user u
-          where
-            u_id = #{uid}
-        ) u
-        left join(
-          select
-            meter_no as meter_no,
-            read_time as read_time,
-            read_value as read_value,
-            state as state,
-            0 as meter_type,
-            u_id as u_id
-          from
-            t_watermeter
-          where
-            u_id = #{uid}
-          union all
-          select
-            ammeter_no as meter_no,
-            read_time as read_time,
-            read_value as read_value,
-            state as state,
-            1 as meter_type,
-            u_id as u_id
-          from
-            t_ammeter
-          where
-            u_id = #{uid}
+            select
+                u_id,
+                u_name,
+                u_tel,
+                address,
+                account_balance
+            from
+                t_user
+        ) u join (
+            select
+                meter_no as meter_no,
+                read_time as read_time,
+                read_value as read_value,
+                state as state,
+                0 as meter_type,
+                u_id as u_id
+            from
+                t_watermeter
+            union all
+            select
+                ammeter_no as meter_no,
+                read_time as read_time,
+                read_value as read_value,
+                state as state,
+                1 as meter_type,
+                u_id as u_id
+            from
+                t_ammeter
         ) tmp
         on u.u_id = tmp.u_id
+        where u.u_id = #{uid}
+    </select>
+
+    <select id="findUserInfoVoByUids" resultType="com.hust.hydroelectric_backend.Entity.VO.UserInfoVo" parameterType="java.util.List">
+        select
+            u.u_id as u_id,
+            u.u_name as u_name,
+            u.u_tel as u_tel,
+            u.address as address,
+            u.account_balance as account_balance,
+            tmp.meter_no as meter_no,
+            tmp.read_time as read_time,
+            tmp.read_value as read_value,
+            tmp.state as state,
+            tmp.meter_type as meter_type
+        from (
+            select
+                u_id,
+                u_name,
+                u_tel,
+                address,
+                account_balance
+            from
+                t_user
+        ) u join (
+            select
+                meter_no as meter_no,
+                read_time as read_time,
+                read_value as read_value,
+                state as state,
+                0 as meter_type,
+                u_id as u_id
+            from
+                t_watermeter
+            union all
+            select
+                ammeter_no as meter_no,
+                read_time as read_time,
+                read_value as read_value,
+                state as state,
+                1 as meter_type,
+                u_id as u_id
+            from
+                t_ammeter
+        ) tmp
+        on u.u_id = tmp.u_id
+        where u.u_id in
+        <foreach collection="uids" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 
     <select id="findUidsByUname" resultType="java.lang.Integer">

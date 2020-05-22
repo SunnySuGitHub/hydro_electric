@@ -32,18 +32,27 @@ public class UserController {
     @Autowired
     WechatpayService wechatpayService;
 
+    /**
+     * 获取用户详细信息
+     */
     @GetMapping("/user")
     public ResultData getUser(@RequestParam(name = "uId", defaultValue = "-1") int id,
                               @RequestParam("enprNo") String enprNo) {
         return ResponseHandler.doHandle(() -> userService.findByUserId(id, enprNo));
     }
 
+    /**
+     * 删除用户
+     */
     @DeleteMapping("/user")
     public ResultData delUser(@RequestParam(name = "uId", defaultValue = "-1") int id,
                               @RequestParam("enprNo") String enprNo) {
         return ResponseHandler.doHandle(() -> userService.delUserById(id, enprNo));
     }
 
+    /**
+     * 修改用户信息
+     */
     @PutMapping("/user")
     public ResultData uptUser(@RequestBody User user) {
         return ResponseHandler.doHandle(() -> userService.uptUser(user));
@@ -54,17 +63,17 @@ public class UserController {
      */
     @GetMapping("/GetUserInfoByBlockId")
     public ResultData getUserInfoByBlockId(@RequestParam(value = "bId", defaultValue = "-1") int bId,
-                                           @RequestParam("enprNo") String enprNo) {
-        return ResponseHandler.doHandle(() -> userService.getUserInfoByBlockId(bId, enprNo));
+                                           @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                           @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
+        return ResponseHandler.doHandle(() -> userService.getUserInfoByBlockId(bId, pageNum, pageSize));
     }
 
     /**
      * 根据用户id获取用户相关信息
      */
     @GetMapping("/GetUserInfoByUid")
-    public ResultData getUserInfoByUid(@RequestParam(value = "uId", defaultValue = "-1") int uid,
-                                       @RequestParam("enprNo") String enprNo) {
-        return ResponseHandler.doHandle(() -> userService.getUserInfoByUid(uid, enprNo));
+    public ResultData getUserInfoByUid(@RequestParam(value = "uId", defaultValue = "-1") int uid) {
+        return ResponseHandler.doHandle(() -> userService.getUserInfoByUid(uid));
     }
 
     /**
@@ -72,9 +81,11 @@ public class UserController {
      */
     @GetMapping("/GetUserInfoByUname")
     public ResultData getUserInfoByUname(@RequestParam(value = "uName") String uname,
-                                         @RequestParam("enprNo") String enprNo) {
+                                         @RequestParam("enprNo") String enprNo,
+                                         @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                         @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
         if (StringUtils.isNotBlank(uname) && StringUtils.isNotBlank(enprNo))
-            return ResponseHandler.doHandle(() -> userService.getUserInfoByUname(uname, enprNo));
+            return ResponseHandler.doHandle(() -> userService.getUserInfoByUname(uname, enprNo, pageNum, pageSize));
         return Result.error(HttpStatus.BAD_REQUEST, "参数缺失");
     }
 
@@ -123,9 +134,11 @@ public class UserController {
      */
     @GetMapping("/GetUserPayHistory")
     public ResultData getUserPayHistory(@RequestParam("uId") int uId,
-                                            @RequestParam(value = "startDateLine", defaultValue = "-1") long startLine,
-                                            @RequestParam(value = "endDateLine", defaultValue = "-1") long endLine) {
-        return ResponseHandler.doHandle(() -> payService.getUserPayHistory(uId, startLine, endLine));
+                                        @RequestParam(value = "startDateLine", defaultValue = "-1") long startLine,
+                                        @RequestParam(value = "endDateLine", defaultValue = "-1") long endLine,
+                                        @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                        @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
+        return ResponseHandler.doHandle(() -> payService.getUserPayHistory(uId, startLine, endLine, pageNum, pageSize));
     }
 
 

@@ -1,6 +1,8 @@
 package com.hust.hydroelectric_backend.Service.AmmeterServices;
 
 import com.hust.hydroelectric_backend.Dao.AmmeterUsageMapper;
+import com.hust.hydroelectric_backend.utils.result.PageQuery;
+import com.hust.hydroelectric_backend.utils.result.PageUtils;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,8 @@ public class AmmeterUsageService {
     @Resource
     AmmeterUsageMapper ammeterUsageMapper;
 
-    public ResultData getAmmeterDailyUsage(String ammeterNo, String enprNo, int readType){
+    public ResultData getAmmeterDailyUsage(String ammeterNo, String enprNo, int readType,int pageNum, int pageSize){
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
         switch (readType) {
             case 0: return Result.success(ammeterUsageMapper.getAmmeterTotalDailyUsage(ammeterNo, enprNo));
             case 1: return Result.success(ammeterUsageMapper.getAmmeterSharpDailyUsage(ammeterNo, enprNo));

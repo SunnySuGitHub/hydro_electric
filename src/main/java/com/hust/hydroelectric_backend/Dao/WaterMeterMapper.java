@@ -1,5 +1,6 @@
 package com.hust.hydroelectric_backend.Dao;
 
+import com.github.pagehelper.Page;
 import com.hust.hydroelectric_backend.Entity.Watermeters.Watermeter;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Repository
 public interface WaterMeterMapper {
     Watermeter getWaterMeterDetail(@Param("meterNo") String meterNo, @Param("enprNo") String enprNo);
-    List<Watermeter> getAllWaterMeterDetail(@Param("enprNo") String enprNo, @Param("state") int state);
+    Page<Watermeter> getAllWaterMeterDetail(@Param("enprNo") String enprNo, @Param("state") int state);
     List<Watermeter> findAll();
     int uptWatermeterValue(Watermeter watermeter);
     int saveMeter(Watermeter watermeter);
@@ -24,5 +25,5 @@ public interface WaterMeterMapper {
     void monthlyRefresh();
     void dailyRefresh();
     int delete(@Param("meterNo") String meterNo, @Param("enprNo") String enprNo);
-    List<Watermeter> getWatermeterByCenter(@Param("centerId") int centerId);
+    Page<Watermeter> getWatermeterByCenter(@Param("centerId") int centerId);
 }

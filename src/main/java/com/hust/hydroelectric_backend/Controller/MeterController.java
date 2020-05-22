@@ -78,10 +78,10 @@ public class MeterController {
      */
     @GetMapping("/GetCommunityUsage")
     public ResultData getCommunityUsage(@RequestParam("cId") int cId,
+                                        @RequestParam("enprNo") String enprNo,
                                         @RequestParam(value = "meterType", defaultValue = "1") int meterType,
                                         @RequestParam("startDateLine") long startLine,
-                                        @RequestParam("endDateLine") long endLine,
-                                        @RequestParam("enprNo") String enprNo) {
+                                        @RequestParam("endDateLine") long endLine) {
         if (meterType == Constants.TYPE_WATERMETER) {
             return ResponseHandler.doHandle(() -> watermeterUsageService.getCommunityUsage(cId, startLine, endLine, enprNo));
         } else {
@@ -116,12 +116,14 @@ public class MeterController {
     @GetMapping("/GetAllMeterDetailByEnprNoAndState")
     public ResultData getMeterDetail(@RequestParam("enprNo") String enprNo,
                                      @RequestParam(value = "meterType", defaultValue = "1") int meterType,
-                                     @RequestParam(value = "state", defaultValue = "-1") int state) {
+                                     @RequestParam(value = "state", defaultValue = "-1") int state,
+                                     @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                     @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
         if (StringUtils.isNotBlank(enprNo)) {
             if (meterType == Constants.TYPE_WATERMETER) {
-                return ResponseHandler.doHandle(() -> waterMeterService.getAllWaterMeterDetail(enprNo, state));
+                return ResponseHandler.doHandle(() -> waterMeterService.getAllWaterMeterDetail(enprNo, state, pageNum, pageSize));
             } else {
-                return ResponseHandler.doHandle(() -> ammeterService.getAllAmmeterDetail(enprNo, state));
+                return ResponseHandler.doHandle(() -> ammeterService.getAllAmmeterDetail(enprNo, state, pageNum, pageSize));
             }
         } else {
             return Result.error(HttpStatus.BAD_REQUEST, "参数缺失");
@@ -134,7 +136,7 @@ public class MeterController {
      * 0为水表  1为电表
      */
     @GetMapping("/GetMeterDetailByUid")
-    public ResultData getMeterDetailByUsernameAndEnprNo(@RequestParam(value = "uId", defaultValue = "1") int uid,
+    public ResultData getMeterDetailByUsernameAndEnprNo(@RequestParam(value = "uId") int uid,
                                                         @RequestParam(value = "meterType", defaultValue = "1") int meterType) {
         if (meterType == Constants.TYPE_WATERMETER) {
             return ResponseHandler.doHandle(() -> waterMeterService.getWatermeterByUid(uid));
@@ -150,7 +152,9 @@ public class MeterController {
     public ResultData getWatermeterHistorydata(@RequestParam("meterNo") String meterNo,
                                                @RequestParam("enprNo") String enprNo,
                                                @RequestParam(value = "startDateLine", defaultValue = "-1") long startDateLine,
-                                               @RequestParam(value = "endDateLine", defaultValue = "-1") long endDateLine) {
+                                               @RequestParam(value = "endDateLine", defaultValue = "-1") long endDateLine,
+                                               @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                               @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
 
         if (StringUtils.isNotBlank(meterNo) && StringUtils.isNotBlank(enprNo)) {
             return ResponseHandler.doHandle(() -> watermeterHistorydataService.getWatermeterHistorydata(meterNo, enprNo, startDateLine, endDateLine));
@@ -173,9 +177,11 @@ public class MeterController {
                                             @RequestParam("enprNo") String enprNo,
                                             @RequestParam("readType") int readType,
                                             @RequestParam(value = "startDateLine", defaultValue = "-1") long startDateLine,
-                                            @RequestParam(value = "endDateLine", defaultValue = "-1") long endDateLine) {
+                                            @RequestParam(value = "endDateLine", defaultValue = "-1") long endDateLine,
+                                            @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                            @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
         if (StringUtils.isNotBlank(meterNo) && StringUtils.isNotBlank(enprNo)) {
-            return ResponseHandler.doHandle(() -> ammeterHistoryService.getAmmeterHistorydata(meterNo, enprNo, readType, startDateLine, endDateLine));
+            return ResponseHandler.doHandle(() -> ammeterHistoryService.getAmmeterHistorydata(meterNo, enprNo, readType, startDateLine, endDateLine, pageNum, pageSize));
         } else {
             return Result.error(HttpStatus.BAD_REQUEST, "参数错误");
         }
@@ -188,9 +194,11 @@ public class MeterController {
      */
     @GetMapping("/GetWatermeterDailyUsage")
     public ResultData getWatermeterDailyUsage(@RequestParam("meterNo") String meterNo,
-                                              @RequestParam("enprNo") String enprNo) {
+                                              @RequestParam("enprNo") String enprNo,
+                                              @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                              @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
         if (StringUtils.isNotBlank(meterNo) && StringUtils.isNotBlank(enprNo)) {
-            return ResponseHandler.doHandle(() -> watermeterUsageService.getWatemeterDailyUsage(meterNo, enprNo));
+            return ResponseHandler.doHandle(() -> watermeterUsageService.getWatemeterDailyUsage(meterNo, enprNo, pageNum, pageSize));
         } else {
             return Result.error(HttpStatus.BAD_REQUEST, "参数缺失");
         }
@@ -208,9 +216,11 @@ public class MeterController {
     @GetMapping("/GetAmmeterDailyUsage")
     public ResultData getAmmeterDailyUsage(@RequestParam("meterNo") String meterNo,
                                            @RequestParam("enprNo") String enprNo,
-                                           @RequestParam("readType") int readType) {
+                                           @RequestParam("readType") int readType,
+                                           @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                           @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
         if (StringUtils.isNotBlank(meterNo) && StringUtils.isNotBlank(enprNo)) {
-            return ResponseHandler.doHandle(() -> ammeterUsageService.getAmmeterDailyUsage(meterNo, enprNo, readType));
+            return ResponseHandler.doHandle(() -> ammeterUsageService.getAmmeterDailyUsage(meterNo, enprNo, readType, pageNum, pageSize));
         } else {
             return Result.error(HttpStatus.BAD_REQUEST, "参数缺失");
         }
@@ -221,9 +231,11 @@ public class MeterController {
      */
     @GetMapping("/GetWatermeterDailyCost")
     public ResultData getWatermeterDailyCost(@RequestParam("meterNo") String meterNo,
-                                             @RequestParam("enprNo") String enprNo) {
+                                             @RequestParam("enprNo") String enprNo,
+                                             @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                             @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
         if (StringUtils.isNotBlank(meterNo) && StringUtils.isNotBlank(enprNo)) {
-            return ResponseHandler.doHandle(() -> watermeterCostService.getWatermeterDailyCost(meterNo, enprNo));
+            return ResponseHandler.doHandle(() -> watermeterCostService.getWatermeterDailyCost(meterNo, enprNo, pageNum, pageSize));
         } else {
             return Result.error(HttpStatus.BAD_REQUEST, "参数缺失");
         }
@@ -239,10 +251,12 @@ public class MeterController {
      */
     @GetMapping("/GetAmmeterDailyCost")
     public ResultData getAmmeterDailyCost(@RequestParam("ammeterNo") String ammeterNo,
-                                           @RequestParam("enprNo") String enprNo,
-                                          @RequestParam("readType") int readType) {
+                                          @RequestParam("enprNo") String enprNo,
+                                          @RequestParam("readType") int readType,
+                                          @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                          @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
         if (StringUtils.isNotBlank(ammeterNo) && StringUtils.isNotBlank(enprNo)) {
-            return ResponseHandler.doHandle(() -> ammeterCostService.getAmmeterDailyCost(ammeterNo, enprNo, readType));
+            return ResponseHandler.doHandle(() -> ammeterCostService.getAmmeterDailyCost(ammeterNo, enprNo, readType, pageNum, pageSize));
         } else {
             return Result.error(HttpStatus.BAD_REQUEST, "参数缺失");
         }

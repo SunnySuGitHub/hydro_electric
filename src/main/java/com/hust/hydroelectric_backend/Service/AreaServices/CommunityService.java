@@ -2,6 +2,8 @@ package com.hust.hydroelectric_backend.Service.AreaServices;
 
 import com.hust.hydroelectric_backend.Dao.CommunityMapper;
 import com.hust.hydroelectric_backend.Entity.Areas.Community;
+import com.hust.hydroelectric_backend.utils.result.PageQuery;
+import com.hust.hydroelectric_backend.utils.result.PageUtils;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.http.HttpStatus;
@@ -35,7 +37,8 @@ public class CommunityService {
         return Result.success(communityMapper.delCommunity(id));
     }
 
-    public ResultData communityList(String enprNo){
+    public ResultData communityList(String enprNo, int pageNum, int pageSize){
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
         return Result.success(communityMapper.communityList(enprNo));
     }
 

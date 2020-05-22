@@ -2,6 +2,8 @@ package com.hust.hydroelectric_backend.Service.AmmeterServices;
 
 import com.hust.hydroelectric_backend.Dao.AmmeterMapper;
 import com.hust.hydroelectric_backend.Entity.Ammeters.Ammeter;
+import com.hust.hydroelectric_backend.utils.result.PageQuery;
+import com.hust.hydroelectric_backend.utils.result.PageUtils;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,8 @@ public class AmmeterService {
         return Result.success(ammeterMapper.delete(meterNo, enprNo));
     }
 
-    public ResultData getAllAmmeterDetail(String enprNo, int state) {
+    public ResultData getAllAmmeterDetail(String enprNo, int state, int pageNum, int pageSize) {
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
         List<Ammeter> data = null;
         switch (state) {
             case -1:

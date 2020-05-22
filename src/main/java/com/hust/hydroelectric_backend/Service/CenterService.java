@@ -4,6 +4,8 @@ import com.hust.hydroelectric_backend.Dao.AmmeterMapper;
 import com.hust.hydroelectric_backend.Dao.CenterMapper;
 import com.hust.hydroelectric_backend.Dao.WaterMeterMapper;
 import com.hust.hydroelectric_backend.Entity.Center;
+import com.hust.hydroelectric_backend.utils.result.PageQuery;
+import com.hust.hydroelectric_backend.utils.result.PageUtils;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;
@@ -35,7 +37,8 @@ public class CenterService {
         return Result.success(centerMapper.delete(id));
     }
 
-    public ResultData getCenterByEnprNo(String enprNo) {
+    public ResultData getCenterByEnprNo(String enprNo, int pageNum, int pageSize) {
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
         return Result.success(centerMapper.getCenterByEnprNo(enprNo));
     }
 
@@ -43,11 +46,13 @@ public class CenterService {
         return Result.success(centerMapper.getCenterByCid(cId));
     }
 
-    public ResultData getWatermeterByCenter(int centerId) {
+    public ResultData getWatermeterByCenter(int centerId, int pageNum, int pagSize) {
+        PageUtils.startPage(new PageQuery(pageNum, pagSize));
         return Result.success(waterMeterMapper.getWatermeterByCenter(centerId));
     }
 
-    public ResultData getAmmeterByCenter(int centerId) {
+    public ResultData getAmmeterByCenter(int centerId, int pageNum, int pagSize) {
+        PageUtils.startPage(new PageQuery(pageNum, pagSize));
         return Result.success(ammeterMapper.getAmmeterByCenter(centerId));
     }
 

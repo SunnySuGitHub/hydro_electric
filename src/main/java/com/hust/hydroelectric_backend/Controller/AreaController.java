@@ -35,8 +35,8 @@ public class AreaController {
     /**
      * 获取公司相关信息
      */
-    @GetMapping("/enpr")
-    public ResultData getEnprMsg(@RequestParam("enprNo") String enprNo){
+    @GetMapping("/enpr/{epnrNo}")
+    public ResultData getEnprMsg(@PathVariable("enprNo") String enprNo){
         return ResponseHandler.doHandle(() -> enprService.getByEnprNo(enprNo));
     }
 
@@ -52,7 +52,7 @@ public class AreaController {
      * 获取小区信息
      */
     @GetMapping("/community")
-    public ResultData getCommunity(@RequestParam(value = "cId", defaultValue = "-1") int id) {
+    public ResultData getCommunity(@RequestParam(value = "cId") int id) {
         return ResponseHandler.doHandle(() -> communityService.getCommunity(id));
     }
 
@@ -68,7 +68,7 @@ public class AreaController {
      * 删除小区信息
      */
     @DeleteMapping("/community")
-    public ResultData delCommunity(@RequestParam(value = "cId", defaultValue = "-1") int id) {
+    public ResultData delCommunity(@RequestParam(value = "cId") int id) {
         return ResponseHandler.doHandle(() -> communityService.delCommunity(id));
     }
 
@@ -83,18 +83,20 @@ public class AreaController {
     /**
      * 获取公司下所有小区信息
      */
-    @GetMapping("/community/list")
-    public ResultData communityList(@RequestParam("enprNo") String enprNo) {
+    @GetMapping("/community/list/{enprNo}")
+    public ResultData communityList(@PathVariable("enprNo") String enprNo,
+                                    @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                    @RequestParam(value = "pageSize",defaultValue = "10") int pageSize) {
         if(StringUtils.isNotBlank(enprNo))
-            return ResponseHandler.doHandle(() -> communityService.communityList(enprNo));
+            return ResponseHandler.doHandle(() -> communityService.communityList(enprNo, pageNum, pageSize));
         return Result.error(HttpStatus.BAD_REQUEST, "缺失公司编码");
     }
 
     /**
      * 获取小区下的所有楼栋信息
      */
-    @GetMapping("/block/list")
-    public ResultData getBlockList(@RequestParam(value = "cId", defaultValue = "-1") int cid) {
+    @GetMapping("/block/list/{cId}")
+    public ResultData getBlockList(@PathVariable(value = "cId") int cid) {
         return ResponseHandler.doHandle(() -> blockService.getBlockByCid(cid));
     }
 
@@ -102,7 +104,7 @@ public class AreaController {
      * 获取楼栋信息
      */
     @GetMapping("/block")
-    public ResultData getBlock(@RequestParam(value = "bId", defaultValue = "-1") int bid) {
+    public ResultData getBlock(@RequestParam(value = "bId") int bid) {
         return ResponseHandler.doHandle(() -> blockService.getBlock(bid));
     }
 
@@ -110,7 +112,7 @@ public class AreaController {
      * 删除楼栋信息
      */
     @DeleteMapping("/block")
-    public ResultData delBlock(@RequestParam(value = "bId", defaultValue = "-1") int bid) {
+    public ResultData delBlock(@RequestParam(value = "bId") int bid) {
         return ResponseHandler.doHandle(() -> blockService.delBlock(bid));
     }
 

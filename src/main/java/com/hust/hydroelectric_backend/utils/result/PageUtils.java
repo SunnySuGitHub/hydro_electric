@@ -2,7 +2,6 @@ package com.hust.hydroelectric_backend.utils.result;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.hust.hydroelectric_backend.Entity.PageQuery;
 import org.apache.commons.lang3.StringUtils;
 
 /**

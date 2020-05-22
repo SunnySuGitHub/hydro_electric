@@ -33,8 +33,6 @@ public class ManagementController {
     @Autowired
     RateService rateService;
 
-
-
     /**
      * 用户报修
      */
@@ -46,10 +44,12 @@ public class ManagementController {
     /**
      * 查看公司报修单
      */
-    @GetMapping("/repair/list")
-    public ResultData list(@RequestParam("enprNo") String enprNo,
-                             @RequestParam(value = "state", defaultValue = "-1") int state){
-        return ResponseHandler.doHandle(() -> repairService.list(enprNo, state));
+    @GetMapping("/repair/list/{enprNo}")
+    public ResultData list(@PathVariable("enprNo") String enprNo,
+                           @RequestParam(value = "state", defaultValue = "-1") int state,
+                           @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                           @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+        return ResponseHandler.doHandle(() -> repairService.list(enprNo, state, pageNum, pageSize));
     }
 
     /**
@@ -71,9 +71,11 @@ public class ManagementController {
     /**
      * 查看公告发布历史
      */
-    @GetMapping("/notice/list")
-    public ResultData noticeList(@RequestParam("enprNo") String enprNo){
-        return ResponseHandler.doHandle(() -> noticeService.noticeList(enprNo));
+    @GetMapping("/notice/list/{enprNo}")
+    public ResultData noticeList(@PathVariable("enprNo") String enprNo,
+                                 @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                 @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+        return ResponseHandler.doHandle(() -> noticeService.noticeList(enprNo, pageNum, pageSize));
     }
 
     /**
@@ -88,9 +90,8 @@ public class ManagementController {
      * 删除公告
      */
     @DeleteMapping("/notice")
-    public ResultData delNotice(@RequestParam("id") int id,
-                                @RequestParam("enprNo") String enprNo){
-        return ResponseHandler.doHandle(() -> noticeService.delNotice(id, enprNo));
+    public ResultData delNotice(@RequestParam("id") int id){
+        return ResponseHandler.doHandle(() -> noticeService.delNotice(id));
     }
 
     /**
@@ -104,8 +105,8 @@ public class ManagementController {
      * 4 经营用水
      * 5 特种行业用水
      */
-    @GetMapping("/ladder/watermeter")
-    public ResultData getWatermeterLadder(@RequestParam("enprNo") String enprNo,
+    @GetMapping("/ladder/watermeter/{enprNo}")
+    public ResultData getWatermeterLadder(@PathVariable("enprNo") String enprNo,
                                           @RequestParam("waterType") int waterType){
         return ResponseHandler.doHandle(() -> ladderPriceService.getWatermeterLadder(enprNo, waterType));
     }
@@ -113,8 +114,8 @@ public class ManagementController {
     /**
      * 获取阶梯电价
      */
-    @GetMapping("/ladder/ammeter")
-    public ResultData getAmmeterLadder(@RequestParam("enprNo") String enprNo,
+    @GetMapping("/ladder/ammeter/{enprNo}")
+    public ResultData getAmmeterLadder(@PathVariable("enprNo") String enprNo,
                                        @RequestParam("voltageType") int vType){
         return ResponseHandler.doHandle(() -> ladderPriceService.getAmmeterLadder(enprNo, vType));
     }
@@ -127,8 +128,8 @@ public class ManagementController {
      * 3：平
      * 4：谷
      */
-    @GetMapping("/rate/ammeter")
-    public ResultData getAmmeterRate(@RequestParam("enprNo") String enprNo){
+    @GetMapping("/rate/ammeter/{enprNo}")
+    public ResultData getAmmeterRate(@PathVariable("enprNo") String enprNo){
         return ResponseHandler.doHandle(() -> rateService.getRateList(enprNo));
     }
 

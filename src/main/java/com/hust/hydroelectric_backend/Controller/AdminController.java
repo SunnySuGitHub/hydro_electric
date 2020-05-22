@@ -21,34 +21,13 @@ import javax.annotation.PostConstruct;
  */
 @RestController
 @CrossOrigin("*")
-public class AdminController implements BeanPostProcessor {
-
-    public AdminController() {
-        System.out.println("admin controller init");
-    }
+public class AdminController {
 
     @Autowired
     EnprService enprService;
 
     @Autowired
     BlackService blackService;
-
-    @PostConstruct
-    public void init() {
-        System.err.println("PostConstruct...");
-    }
-
-    @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.err.println("postProcessorBefore..." + beanName + "==>" + bean.getClass());
-        return bean;
-    }
-
-    @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.err.println("postProcessorAfter..." + beanName + "==>" + bean.getClass());
-        return bean;
-    }
 
     /**
      * 增加公司
@@ -70,8 +49,8 @@ public class AdminController implements BeanPostProcessor {
     /**
      * 获取管理员的黑名单信息
      */
-    @GetMapping("/blacklist/operator")
-    public ResultData getOperatorBlacklist(@RequestParam("operatorId") int operatorId){
+    @GetMapping("/blacklist/operator/{operatorId}")
+    public ResultData getOperatorBlacklist(@PathVariable("operatorId") int operatorId){
         return ResponseHandler.doHandle(() -> blackService.getOperator(operatorId));
     }
 
@@ -82,15 +61,4 @@ public class AdminController implements BeanPostProcessor {
     public ResultData setOperatorBlacklist(@RequestBody BlackList blackList){
         return ResponseHandler.doHandle(() -> blackService.setOperatorBlackList(blackList));
     }
-
-    /**
-     * 生效
-     */
-    @GetMapping("/blacklist/active")
-    public ResultData activeBlacklist(@RequestParam("operatorId") int operatorId){
-        return ResponseHandler.doHandle(() -> blackService.active(operatorId));
-    }
-
-
-
 }

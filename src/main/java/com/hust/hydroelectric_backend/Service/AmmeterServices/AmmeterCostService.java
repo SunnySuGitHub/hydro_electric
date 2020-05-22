@@ -1,6 +1,8 @@
 package com.hust.hydroelectric_backend.Service.AmmeterServices;
 
 import com.hust.hydroelectric_backend.Dao.AmmeterCostMapper;
+import com.hust.hydroelectric_backend.utils.result.PageQuery;
+import com.hust.hydroelectric_backend.utils.result.PageUtils;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,8 @@ public class AmmeterCostService {
     @Resource
     AmmeterCostMapper ammeterCostMapper;
 
-    public ResultData getAmmeterDailyCost(String meterNo, String enprNo, int readType){
+    public ResultData getAmmeterDailyCost(String meterNo, String enprNo, int readType, int pageNum, int pageSize){
+        PageUtils.startPage(new PageQuery(pageNum, pageSize));
         switch (readType) {
             case 0: return Result.success(ammeterCostMapper.getAmmeterTotalDailyCost(meterNo, enprNo));
             case 1: return Result.success(ammeterCostMapper.getAmmeterSharpDailyCost(meterNo, enprNo));

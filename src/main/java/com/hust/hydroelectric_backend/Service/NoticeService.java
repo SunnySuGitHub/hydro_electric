@@ -2,6 +2,8 @@ package com.hust.hydroelectric_backend.Service;
 
 import com.hust.hydroelectric_backend.Dao.NoticeMapper;
 import com.hust.hydroelectric_backend.Entity.Notice;
+import com.hust.hydroelectric_backend.utils.result.PageQuery;
+import com.hust.hydroelectric_backend.utils.result.PageUtils;
 import com.hust.hydroelectric_backend.utils.result.Result;
 import com.hust.hydroelectric_backend.utils.result.ResultData;
 import org.springframework.stereotype.Service;
@@ -25,17 +27,16 @@ public class NoticeService {
         return Result.success(noticeMapper.addNotice(notice));
     }
 
-    public ResultData noticeList(String enprNo) {
-        List<Notice> noticeList = noticeMapper.noticeList(enprNo);
-        return Result.success(noticeList);
+    public ResultData noticeList(String enprNo, int pagNum, int pageSize) {
+        PageUtils.startPage(new PageQuery(pagNum, pageSize));
+        return Result.success(noticeMapper.noticeList(enprNo));
     }
 
     public ResultData uptNotice(Notice notice) {
-        String enprNo = notice.getEnprNo();
         return Result.success(noticeMapper.uptNotice(notice));
     }
 
-    public ResultData delNotice(int id, String enprNo) {
+    public ResultData delNotice(int id) {
         return Result.success(noticeMapper.delNotice(id));
     }
 
