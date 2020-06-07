@@ -19,8 +19,7 @@
           from
             t_community
           where c_id = #{cId}
-        ) com
-        left join (
+        ) com join (
              select
               a.water_total as water_meter_cnt,
               b.water_suc_total as water_meter_suc_cnt,

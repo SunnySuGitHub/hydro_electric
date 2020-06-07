@@ -13,22 +13,9 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @EnableScheduling
-public class HydroelectricBackendApplication extends SpringBootServletInitializer implements CommandLineRunner {
+public class HydroelectricBackendApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(HydroelectricBackendApplication.class, args);
-    }
-
-    @Autowired
-    private ApplicationContext appContext;
-
-    @Override
-    public void run(String... args) throws Exception {
-        String[] beans = appContext.getBeanDefinitionNames();
-        Arrays.sort(beans);
-        for (String bean : beans)
-        {
-//            System.out.println(bean + " of Type :: " + appContext.getBean(bean).getClass());
-        }
     }
 }
